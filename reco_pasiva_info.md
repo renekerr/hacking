@@ -5,7 +5,7 @@ La recopilación pasiva de información implica obtener datos sobre un objetivo 
 Este tipo de recopilación se lleva a cabo accediendo a información pública disponible en diversas fuentes, sin ninguna interacción directa con el objetivo.
 
 ### Herramientas
-  - Google hacking. [GHDB](https://www.exploit-db.com/google-hacking-database)
+  - [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
   - Shodan
   - Censys
   - Whois
