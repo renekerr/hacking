@@ -6,6 +6,7 @@ Este tipo de recopilación se lleva a cabo accediendo a información pública di
 
 ### Herramientas
   - [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
+    [Comandos y operadores de Google](comandos_google.md)
   - Shodan
   - Censys
   - Whois
