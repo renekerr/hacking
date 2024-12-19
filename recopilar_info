@@ -1,1 +1,27 @@
-ejemplo
+# Encabezado 1
+## Encabezado 2
+### Encabezado 3
+#### Encabezado 4
+##### Encabezado 5
+###### Encabezado 6
+
+**Negrita** o __negrita__
+
+*Cursiva* o _cursiva_
+
+***Negrita y cursiva*** o ___negrita y cursiva___
+
+- Elemento de lista no ordenada 1
+- Elemento de lista no ordenada 2
+* Elemento de lista no ordenada 3
+* Elemento de lista no ordenada 4
++ Elemento de lista no ordenada 5
+
+1. Primer elemento de lista ordenada
+2. Segundo elemento de lista ordenada
+3. Tercer elemento de lista ordenada
+
+> Esta es una cita.
+>> Esta es una cita anidada.
+
+`código en línea`
