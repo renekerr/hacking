@@ -1,10 +1,9 @@
 ## Recopilación Pasiva de Información
 
-La recopilación pasiva de información en hacking ético consiste en investigar discretamente al objetivo utilizando fuentes como registros públicos, redes sociales y bases de datos en línea, sin interactuar directamente con él, con el fin de identificar posibles vulnerabilidades sin alertarlo. Esta información puede resultar poco concluyente debido a su posible desactualización.
 
+La recolección pasiva de información implica obtener datos sobre un objetivo sin interactuar directamente con él. Este método utiliza motores de búsqueda, redes sociales y fuentes públicas como registros y bases de datos abiertas. Aunque es una técnica segura que minimiza el riesgo de detección, la información obtenida puede ser superficial, poco concluyente y desactualizada.
 
-### Método
-Este tipo de recopilación se lleva a cabo accediendo a información pública disponible en diversas fuentes, sin ninguna interacción directa con el objetivo.
+Para mitigar estas limitaciones, es fundamental complementar la recolección pasiva con métodos semi-pasivos y activos. Estos permiten contrastar y verificar la información desde diferentes perspectivas, mejorando la precisión y fiabilidad de los datos recolectados. Esta combinación de técnicas es esencial para establecer una base sólida para las siguientes etapas del proceso de penetración y evaluación de seguridad.
 
 ### Herramientas
   - [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
