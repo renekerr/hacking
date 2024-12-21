@@ -6,6 +6,7 @@ La recolección pasiva de información implica obtener datos sobre un objetivo s
 Para mitigar estas limitaciones, es fundamental complementar la recolección pasiva con métodos semi-pasivos y activos. Estos permiten contrastar y verificar la información desde diferentes perspectivas, mejorando la precisión y fiabilidad de los datos recolectados. Esta combinación de técnicas es esencial para establecer una base sólida para las siguientes etapas del proceso de penetración y evaluación de seguridad.
 
 ### Herramientas
+Estas con algunas de las herramientas que se suelen utilizar en la recolección pasiva de información. 
   - [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
     [Comandos y operadores de Google](comandos_google.md)
   - Shodan
