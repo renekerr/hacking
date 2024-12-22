@@ -3,11 +3,7 @@
 # Google Search Commands (Google Dorks)
 Los Google Dorks son búsquedas avanzadas en Google que permiten localizar información, archivos específicos y páginas vulnerables en sitios web. Aunque no son herramientas de hacking, pueden ser utilizadas para detectar sitios web expuestos a riesgos como inyecciones SQL o accesos no autorizados. Es fundamental emplearlos de forma ética y responsable, especialmente en el campo de la seguridad informática.
 
-## Tabla de Comandos
-
-# Google Hacking: Comandos y Operadores Booleanos
-
-## Tabla de Comandos
+## Comandos
 
 | Comando   | Ejemplo                                     | Descripción                                                                 |
 |-----------|---------------------------------------------|-----------------------------------------------------------------------------|
