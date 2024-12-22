@@ -14,7 +14,7 @@ Estas con algunas de las herramientas que se suelen utilizar en la recolección 
     * [Comandos de Shodan](comando_shodan.md)
   - [IntelligenceX](https://intelx.io/tools)
   - [Censys Search](https://search.censys.io/)
-  - Whois
+  - [Whois](https://who.is/)
   - Archive.org
   - The Harvester
 
