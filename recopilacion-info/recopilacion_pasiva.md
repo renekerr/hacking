@@ -11,7 +11,7 @@ Estas con algunas de las herramientas que se suelen utilizar en la recolección 
     * [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
     * [Comandos y operadores de Google](comandos_google.md)
   - [Shodan](https://www.shodan.io/)
-    * [Comandos de Shodan]()
+    * [Comandos de Shodan](recopilacion-info/comando_shodan.md)
   - Censys
   - Whois
   - Archive.org
