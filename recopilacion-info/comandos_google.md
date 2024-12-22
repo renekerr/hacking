@@ -5,7 +5,7 @@ Los Google Dorks son búsquedas avanzadas en Google que permiten localizar infor
 
 ## Tabla de Comandos
 
-| Comando | Ejemplo | Descripción (basado en el ejemplo) |
+| Comando | Ejemplo | Descripción |
 |---------|---------|------------------------------------|
 | `intitle` | `intitle:"Index of" password.txt` | Muestra directorios que contienen archivos de texto con nombres como "password.txt". |
 | `intitle` | `intitle:"Index of" /admin` | Muestra directorios de administración en sitios web. |
@@ -52,8 +52,11 @@ Los Google Dorks son búsquedas avanzadas en Google que permiten localizar infor
 
 
 ## Operadores Booleanos
+| Operador   | Descripción                                          | Ejemplo                                 |
+|----------------|----------------------------------------------------------|---------------------------------------------|
+| `""`           | Busca palabras exactas                                   | `"seguridad informática"`                   |
+| `AND` o `+`    | Busca uno y otro término                                  | `"seguridad informática" AND "ciberseguridad"` |
+| `OR` o `\|`     | Busca uno u otro término                                  | `"seguridad informática" OR "ciberseguridad"` |
+| `+`            | Incluye palabras comunes o distingue caracteres           | `+seguridad +informática`                   |
+| `*`            | Comodín para reemplazar palabras o parte de ellas        | `"segur* informática"`                      |
 
-`" "`: Busca palabras exactas.  
-`OR` o `|`: Busca uno u otro término.  
-`+`: Incluye palabras comunes o distingue caracteres.  
-`*`: Comodín para reemplazar palabras.
