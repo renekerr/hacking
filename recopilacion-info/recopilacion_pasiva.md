@@ -10,7 +10,7 @@ Estas con algunas de las herramientas que se suelen utilizar en la recolección 
   - Google Hacking or Google Dorking.
     * [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
     * [Comandos y operadores de Google](comandos_google.md)
-  - Shodan
+  - [Shodan](https://www.shodan.io/)
   - Censys
   - Whois
   - Archive.org
