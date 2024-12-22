@@ -9,7 +9,7 @@ Para mitigar estas limitaciones, es fundamental complementar la recolección pas
 Estas con algunas de las herramientas que se suelen utilizar en la recolección pasiva de información. 
   - Google Hacking or Google Dorking.    
    +info: [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
-   [Comandos y operadores de Google](comandos_google.md)
+    [Comandos y operadores de Google](comandos_google.md)
   - Shodan
   - Censys
   - Whois
