@@ -30,7 +30,7 @@ Estas herramientas son fundamentales en la fase de reconocimiento pasivo, ya que
 
 - [Recon-ng](https://github.com/lanmaster53/recon-ng): Framework para realizar recopilación de inteligencia y análisis de información a partir de fuentes abiertas (OSINT).
 
-- [IntelligenceX](https://intelx.io/tools)
+- [IntelligenceX](https://intelx.io/tools): Plataforma de investigación e inteligencia de datos que recopila y analiza información de la web abierta, la web oscura (dark web) y otras bases de datos.
   
   
 
