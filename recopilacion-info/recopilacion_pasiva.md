@@ -11,7 +11,8 @@ Estas herramientas son fundamentales en la fase de reconocimiento pasivo, ya que
 - [Whois](https://who.is/): Utilizado para obtener información sobre la propiedad de un dominio, como la organización, los contactos administrativos, los servidores de nombres, etc.
 
 - [Shodan](https://www.shodan.io/): Motor de búsqueda que indexa dispositivos conectados a Internet. Permite obtener información sobre servicios, sistemas operativos, puertos abiertos y vulnerabilidades de dispositivos expuestos.
-  *[Comnandos Shodan](recopilacion-info/comando_shodan.md)
+
+  * [Comnandos de Shodan](recopilacion-info/comando_shodan.md)
 
 - Google Dorks (Google Hacking): Utiliza búsquedas avanzadas en Google para localizar información sensible o expuesta en sitios web.
    * [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
