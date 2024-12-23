@@ -6,7 +6,7 @@ La recolección pasiva de información implica obtener datos sobre un objetivo s
 Para mitigar estas limitaciones, es fundamental complementar la recolección pasiva con métodos semi-pasivos y activos. Estos permiten contrastar y verificar la información desde diferentes perspectivas, mejorando la precisión y fiabilidad de los datos recolectados. Esta combinación de técnicas es esencial para establecer una base sólida para las siguientes etapas del proceso de penetración y evaluación de seguridad.
 
 ### Herramientas 
-Estas herramientas son fundamentales en la fase de reconocimiento pasivo, ya que permiten recopilar información vital sin la necesidad de realizar interacciones activas con los sistemas de destino.
+Estas son algunas herramientas que se utilizan en la fase de reconocimiento pasivo y permiten recopilar información vital sin la necesidad de realizar interacciones activas con los sistemas de destino.
 
 - [Whois](https://who.is/): Utilizado para obtener información sobre la propiedad de un dominio, como la organización, los contactos administrativos, los servidores de nombres, etc.
 
@@ -33,7 +33,7 @@ Estas herramientas son fundamentales en la fase de reconocimiento pasivo, ya que
 - [IntelligenceX](https://intelx.io/tools): Plataforma de investigación e inteligencia de datos que recopila y analiza información de la web abierta, la web oscura (dark web) y otras bases de datos.
 
 - [OSINT Framework](http://osintframework.com): Reune herramientas y recursos gratuitos para facilitar la búsqueda de información OSINT.
-  
+
   
 
 
