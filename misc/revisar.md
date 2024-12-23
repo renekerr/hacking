@@ -35,32 +35,39 @@
 
 # Comandos útiles para instalación y configuración de entornos
 
+Modificar lenguaje
 
-# Modificar lenguaje
-sudo dpkg-reconfigure locales
-sudo reboot
+`sudo dpkg-reconfigure locales`
 
-# Actualizar Kali Linux
-sudo apt update && sudo apt upgrade -y
+`sudo reboot`
 
-# Instalar kalipwm
-git clone https://github.com/afsh4ck/kalipwm.git
-cd kalipwm
-bash kalipwm.sh
-sudo reboot
 
-# Habilitar shared folder en Ubuntu
-mkdir /mnt/hgfs
 
-# Editar fstab
-vi /etc/fstab
-# Añadir la línea:
-# .host:/ /mnt/hgfs fuse.vmhgfs-fuse auto,allow_other 0 0
 
-sudo reboot
-cd /mnt/hgfs
-ls  # Debería mostrarse la carpeta compartida previamente, PRUEBAS
+Actualizar Kali Linux
 
+`sudo apt update && sudo apt upgrade -y`
+
+
+
+Habilitar shared folder en Ubuntu
+`mkdir /mnt/hgfs`
+
+Editar fstab
+`vi /etc/fstab`
+
+Añadir la línea:
+`.host:/ /mnt/hgfs fuse.vmhgfs-fuse auto,allow_other 0 0`
+
+`sudo reboot`
+`cd /mnt/hgfs`
+`ls`  Debería mostrarse la carpeta compartida previamente, PRUEBAS
+
+Instalar kalipwm
+`git clone https://github.com/afsh4ck/kalipwm.git`
+`cd kalipwm`
+`bash kalipwm.sh`
+`sudo reboot`
 
 
 
