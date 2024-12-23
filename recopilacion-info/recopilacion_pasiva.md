@@ -12,7 +12,7 @@ Estas herramientas son fundamentales en la fase de reconocimiento pasivo, ya que
 
 - [Shodan](https://www.shodan.io/): Motor de búsqueda que indexa dispositivos conectados a Internet. Permite obtener información sobre servicios, sistemas operativos, puertos abiertos y vulnerabilidades de dispositivos expuestos.
 
-  * [Comnandos de Shodan](recopilacion-info/comando_shodan.md)
+  * [Comnandos de Shodan](comando_shodan.md)
 
 - Google Dorks (Google Hacking): Utiliza búsquedas avanzadas en Google para localizar información sensible o expuesta en sitios web.
    * [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
