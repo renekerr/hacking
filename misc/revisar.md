@@ -1,57 +1,66 @@
-▪ [Definición del alcance del test de penetración]
+-------------
+# Test de Penetración
 
-▪ Recopilación de información
- + Recopilación pasiva
- + Reocpilación semi-pasiva
- + + Recopilación activa
-	
-▪ Identificación y análisis de vulnerabilidades
-▪ Explotación de las vulnerabilidades
-▪ Post-explotación
-▪ [Elaboración de un documento de reporte]
+## 1. Definición del alcance del test de penetración
 
---------------
+## 2. Recopilación de información
+- **Recopilación pasiva**
+- **Recopilación semi-pasiva**
+- **Recopilación activa**
 
-METODOLOGÍAS PRINCIPALES
-▪ OSSTMM (Open-Source Security Testing Methodology Manual):
-https://www.isecom.org/OSSTMM.3.pdf
-▪ The Penetration Testing Execution Standard: http://www.pentest-
-standard.org/index.php/Main_Page
-▪ ISSAF (Information Systems Security Assessment Framework)
-▪ OTP (OWASP Testitng Project)
+## 3. Identificación y análisis de vulnerabilidades
 
-----------------
+## 4. Explotación de las vulnerabilidades
 
-Useful commands
+## 5. Post-explotación
+
+## 6. Elaboración de un documento de reporte
+
+-------------
 
 
--- Modificar lenguaje 
+# Metodologías Principales
+
+## 1. OSSTMM (Open-Source Security Testing Methodology Manual)
+[Enlace al documento](https://www.isecom.org/OSSTMM.3.pdf)
+
+## 2. The Penetration Testing Execution Standard
+[Enlace al sitio web](http://www.pentest-standard.org/index.php/Main_Page)
+
+## 3. ISSAF (Information Systems Security Assessment Framework)
+
+## 4. OTP (OWASP Testing Project)
+
+-------------
+
+# Comandos útiles para instalación y configuración de entornos
+
+
+# Modificar lenguaje
 sudo dpkg-reconfigure locales
 sudo reboot
 
-
--- Actualizar Kali Linux
+# Actualizar Kali Linux
 sudo apt update && sudo apt upgrade -y
 
--- Install kalipwn
+# Instalar kalipwm
 git clone https://github.com/afsh4ck/kalipwm.git
 cd kalipwm
 bash kalipwm.sh
 sudo reboot
 
--- Habilitar shared folder Ubuntu
-En VMWare > Sharing > [añadir carpeta, e.g: PRUEBAS]
-
-En Ubuntu:
+# Habilitar shared folder en Ubuntu
 mkdir /mnt/hgfs
 
-vi /etc/fstab 
-añadir: 
-.host:/ /mnt/hgfs fuse.vmhgfs-fuse auto,allow_other 0 0
+# Editar fstab
+vi /etc/fstab
+# Añadir la línea:
+# .host:/ /mnt/hgfs fuse.vmhgfs-fuse auto,allow_other 0 0
 
 sudo reboot
 cd /mnt/hgfs
-ls (debería mostrarse la carpeta compartida previamente, PRUEBAS)
+ls  # Debería mostrarse la carpeta compartida previamente, PRUEBAS
+
 
 
 
