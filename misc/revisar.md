@@ -601,5 +601,12 @@ tercero.
 
 
 
+    Penetration Tester - Responsible for testing technology products for finding exploitable security vulnerabilities.
+    Red Teamer - Plays the role of an adversary, attacking an organization and providing feedback from an enemy's perspective.
+    Security Engineer - Design, monitor, and maintain security controls, networks, and systems to help prevent cyberattacks.
+
+
+
+
 
 
