@@ -10,7 +10,7 @@ Estas son algunas herramientas que se utilizan en la fase de reconocimiento pasi
 
 - [Whois](https://who.is/): Utilizado para obtener información sobre la propiedad de un dominio, como la organización, los contactos administrativos, los servidores de nombres, etc.
 
-- [Shodan](https://www.shodan.io/): Motor de búsqueda que indexa dispositivos conectados a Internet. Permite obtener información sobre servicios, sistemas operativos, puertos abiertos y vulnerabilidades de dispositivos expuestos.
+- [Shodan](https://www.shodan.io/): Motor de búsqueda que indexa dispositivos conectados a Internet, proporcionando información sobre servicios, sistemas operativos, puertos abiertos, vulnerabilidades y tipos específicos de dispositivos como servidores, equipos de red y sistemas IoT.
 
   * [Comnandos de Shodan](comando_shodan.md)
 
@@ -26,7 +26,7 @@ Estas son algunas herramientas que se utilizan en la fase de reconocimiento pasi
    * https://dnsdumpster.com/
    * https://github.com/nmmapper/dnsdumpster
 
-- [Censys Search](https://search.censys.io/): Motor de búsqueda que permite descubrir dispositivos y servidores conectados a la red de forma pública.
+- [Censys Search](https://search.censys.io/): Motor de búsqueda que se especializa en identificar hosts, sitios web, certificados y activos conectados públicamente a Internet, permitiendo auditar puertos, servicios y descubrir activos no autorizados en una red.
 
 - [Recon-ng](https://github.com/lanmaster53/recon-ng): Framework para realizar recopilación de inteligencia y análisis de información a partir de fuentes abiertas (OSINT).
 
