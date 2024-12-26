@@ -84,6 +84,10 @@ Para eliminar (base) del prompt, ejecutamos: `conda config --set auto_activate_b
 Para crear un nuevo entorno (añadiendo el canal conda-forge , que tiene un soporte más amplio para paquetes)
 `conda create -n "old_harvester" python=3.8.0 -c conda-forge`
 
+Instalar una version anterior de theHarvester, (3.2.2 incluye Google)
+mkdir old_harvester (/home/kali/)
+wget 
+
 
 
 
