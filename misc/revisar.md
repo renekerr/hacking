@@ -69,6 +69,15 @@ Instalar kalipwm
 `bash kalipwm.sh`
 `sudo reboot`
 
+Intalar miniconda para crear un entorno virtual y mantener varias versiones de una misma herramienta
+https://docs.anaconda.com/miniconda/install/
+
+Después de instalar Miniconda, debemos cerrar la terminal y abrirla nuevamente.
+Aparecerá `(base)` en el prompt.
+Para deshacernos de él, ejecutamos: `conda config --set auto_activate_base false`.
+Tenemos que ejecutar este comando: `conda config --set auto_activate_base false`.
+
+
 
 
 Listado de atajos para la shell de Linux
