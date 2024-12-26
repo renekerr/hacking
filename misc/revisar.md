@@ -74,8 +74,12 @@ https://docs.anaconda.com/miniconda/install/
 
 Después de instalar Miniconda, debemos cerrar la terminal y abrirla nuevamente.
 Aparecerá `(base)` en el prompt.
-Para deshacernos de él, ejecutamos: `conda config --set auto_activate_base false`.
-Tenemos que ejecutar este comando: `conda config --set auto_activate_base false`.
+
+Si no aparece (base), ejecutaremos lo siguiente:
+`echo 'export PATH="$HOME/miniconda3/bin:$PATH"' >> ~/.zshrc`
+`source miniconda3/bin/activate`
+
+Para eliminar (base) del prompt, ejecutamos: `conda config --set auto_activate_base false`.
 
 
 
