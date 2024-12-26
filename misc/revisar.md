@@ -81,6 +81,10 @@ Si no aparece (base), ejecutaremos lo siguiente:
 
 Para eliminar (base) del prompt, ejecutamos: `conda config --set auto_activate_base false`.
 
+Para crear un nuevo entorno (añadiendo el canal conda-forge , que tiene un soporte más amplio para paquetes)
+`conda create -n "old_harvester" python=3.8.0 -c conda-forge`
+
+
 
 
 
