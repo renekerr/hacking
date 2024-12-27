@@ -12,32 +12,29 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 | > | **Redirección de salida:** Redirige la salida estándar (generalmente, lo que se muestra en pantalla) de un comando a un archivo, sobreescribiéndolo. |
 | >> | **Anexar a un archivo:** Redirige la salida estándar de un comando a un archivo, pero agrega la nueva información al final del archivo existente. |
 
-**Ejemplo:**
-```markdown
-# Crear un archivo y escribir algo en él
-echo "Hola, mundo!" > mi_archivo.txt
+# Ejemplos de comandos en la terminal
 
-# Añadir una nueva línea al archivo
-echo "Esta es una nueva línea." >> mi_archivo.txt
+## Crear un archivo y escribir algo en él
+`echo "Hola, mundo!" > mi_archivo.txt`
+
+## Añadir una nueva línea al archivo
+`echo "Esta es una nueva línea." >> mi_archivo.txt`
+
+## Ejemplos de Uso
+
+`# Proceso en segundo plano con &`
+`long-running-command &`
+
+`# Encadenamiento de comandos con &&`
+`cd /ruta/del/directorio && ls -la`
+
+`# Redirección de salida con >`
+`echo "Hola" > archivo.txt`
+
+`# Añadir salida con >>`
+`echo "Mundo" >> archivo.txt`
 
 
-
-## Usage Examples
-
-```text
-# Background process with &
-long-running-command &
-
-# Command chaining with &&
-cd /path/to/directory && ls -la
-
-# Output redirection with >
-echo "Hello" > file.txt
-
-# Output appending with >>
-echo "World" >> file.txt
-
-```
 # Atajos de Linux
 
 ## Tabla de Atajos de Teclado
