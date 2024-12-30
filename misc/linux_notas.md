@@ -172,6 +172,15 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 ### Crea una estructura de directorios para los años 2020 a 2024, con subdirectorios para cada mes de enero a diciembre en cada año.
 `mkdir {2020..2024}-{01..12}`
 
+----------
+## Sustitución de comandos
+
+### Muestra el contenido de los archivos listados por el comando `which cat`.
+`ls -la $(which cat)`
+
+### Ejecuta el comando Python para imprimir "Hola" y muestra el resultado.
+`echo $(python3 -c 'print("Hola")')`
+
 
 
 
