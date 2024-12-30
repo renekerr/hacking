@@ -172,7 +172,6 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 ### Crea una estructura de directorios para los años 2020 a 2024, con subdirectorios para cada mes de enero a diciembre en cada año.
 `mkdir {2020..2024}-{01..12}`
 
-----------
 ## Sustitución de comandos
 
 ### Muestra el contenido de los archivos listados por el comando `which cat`.
@@ -181,11 +180,30 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 ### Ejecuta el comando Python para imprimir "Hola" y muestra el resultado.
 `echo $(python3 -c 'print("Hola")')`
 
+## Uso de comillas
 
+### Muestra el listado de archivos en el directorio actual utilizando sustitución de comandos.
+`echo $(ls)`
 
+### Muestra la cadena "S(ls)" literalmente, sin ejecución de sustitución de comandos.
+`echo "S(ls)"`
 
+### Muestra la ruta del comando `cat` utilizando sustitución de comandos.
+`echo "la ruta de cat es $(which cat)"`
 
+### Muestra la cadena literal `$(which cat)` sin ejecutar el comando.
+`echo 'la ruta de cat es $(which cat)'`
 
+### Muestra el texto "estas son comillas simples ''".
+`echo "estas son comillas simples ''"`
 
+### Muestra el texto "estas son comillas dobles "" ".
+`echo 'estas son comillas dobles ""'`
 
+## Escapado de caracteres especiales
 
+### Muestra el texto con comillas dobles dentro de una cadena usando `\"` para escaparlas.
+`echo "Este es un texto con comillas dobles \"entre comillas\"."`
+
+### Muestra el texto con una barra invertida (`\`) antes de un espacio para evitar su interpretación.
+`echo "Esto es un texto con espacio\ dentro\ de\ la\ cadena."`
