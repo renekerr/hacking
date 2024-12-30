@@ -61,18 +61,36 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 
 
 ## Comandos:
+### Encuentra la ubicación del comando `ls` en el sistema utilizando `find`, y suprime los mensajes de error por permisos denegados.
 
-### Buscar archivos en `/usr/bin` que terminan en un número
+`find / -name ls 2> /dev/null`
+
+### Localiza los directorios de configuración de `firefox` instalados en Ubuntu, asegurándote de que el nombre del directorio sea `firefox`.
+
+`find / -name firefox -type d 2> /dev/null`
+
+### Identifica al propietario del archivo `shadow` en el sistema de archivos, excluyendo aquellos ubicados en `/snap`.
+
+`find / -name shadow ! -path "/snap/*" -ls 2> /dev/null`
+
+### Busca archivos en `/usr/bin` cuyos nombres terminen en un dígito.
+
 `find /usr/bin -type f -name "*[[:digit:]]" 2>/dev/null`
 
-### Buscar archivos en todo el sistema de archivos que contienen dos caracteres `_` y terminan en `.txt`
+### Encuentra archivos en el sistema que contengan dos guiones bajos en sus nombres y terminen con `.txt`.
+
 `find / -type f -name "*_*_*.txt" 2>/dev/null`
 
-### Buscar archivos en `/var/log` que no terminan en `.log`
+### Busca archivos en `/var/log` que no tengan la extensión `.log`.
+
 `find /var/log/ -type f -not -name "*.log" 2>/dev/null`
 
-### Usando `!` en lugar de `-not`
-`find /var/log/ -type f ! -name "*.log" 2>/dev/null` <br>
-`find /var/log/ -type f -name "*[!.log]"`
+### Alternativamente, busca archivos en `/var/log` excluyendo aquellos que terminen en `.log` usando `!`.
+
+`find /var/log/ -type f ! -name "*.log" 2>/dev/null`
+
+
+
+
 
 
