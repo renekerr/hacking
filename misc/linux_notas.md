@@ -59,3 +59,18 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 | Alt + l/u | Convertir a mayúsculas/minúsculas |
 | Tab | Autocompletar archivos y carpetas |
 
+
+## Comandos:
+
+### Buscar archivos en `/usr/bin` que terminan en un número
+`find /usr/bin -type f -name "*[[:digit:]]" 2>/dev/null`
+
+### Buscar archivos en todo el sistema de archivos que contienen dos caracteres `_` y terminan en `.txt`
+`find / -type f -name "*_*_*.txt" 2>/dev/null`
+
+### Buscar archivos en `/var/log` que no terminan en `.log`
+`find /var/log/ -type f -not -name "*.log" 2>/dev/null`
+
+### Usando `!` en lugar de `-not`
+`find /var/log/ -type f ! -name "*.log" 2>/dev/null`
+
