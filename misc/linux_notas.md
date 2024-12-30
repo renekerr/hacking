@@ -34,10 +34,8 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 `# Añadir salida con >>`
 `echo "Mundo" >> archivo.txt`
 
-
+--------
 # Atajos de Linux
-
-## Tabla de Atajos de Teclado
 
 | Atajo | Descripción |
 |-------|-------------|
@@ -59,7 +57,7 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 | Alt + l/u | Convertir a mayúsculas/minúsculas |
 | Tab | Autocompletar archivos y carpetas |
 
-
+----------
 ## Comandos
 
 ### Encuentra la ubicación del comando `ls` en el sistema utilizando `find`, y suprime los mensajes de error por permisos denegados.
@@ -145,6 +143,35 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 
 ### Lista archivos en el directorio actual cuyo nombre contiene un carácter de puntuación antes de la extensión `.md`, como `archivo!.md`, `archivo#.md`, `archivo@.md`, pero no `archivoA.md` o `archivo1.md`.
 `ls archivo[[:punct:]].md`
+
+---------
+
+## Expansiones en bash
+
+### Muestra coincidencias de directorios en el nivel raíz del sistema de archivos que contienen una carpeta "log".
+`echo /*/log`
+
+### Lista el contenido de los directorios que contienen una carpeta "log" en el nivel superior del sistema de archivos.
+`ls /*/log`
+
+### Evalúa la expresión aritmética 2 + 2 y muestra el resultado, que es 4.
+`echo $((2+2))`
+
+### Intenta listar un archivo llamado "fichero4.txt", asumiendo que el cálculo de $((2+2)) da 4.
+`ls fichero$((2+2)).txt`
+
+### Crea diez directorios numerados del "dir1" al "dir10".
+`mkdir dir{1..10}`
+
+### Crea cinco archivos numerados del "fichero1.txt" al "fichero5.txt".
+`touch fichero{1..5}.txt`
+
+### Crea cuatro archivos con nombres específicos: "ficheroA1", "ficheroA2", "ficheroB3", y "ficheroB4".
+`touch fichero{A{1,2},B{3,4}}`
+
+### Crea una estructura de directorios para los años 2020 a 2024, con subdirectorios para cada mes de enero a diciembre en cada año.
+`mkdir {2020..2024}-{01..12}`
+
 
 
 
