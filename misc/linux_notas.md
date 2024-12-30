@@ -73,4 +73,6 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 
 ### Usando `!` en lugar de `-not`
 `find /var/log/ -type f ! -name "*.log" 2>/dev/null`
+`find /var/log/ -type f -name "*[!.log]"`
+
 
