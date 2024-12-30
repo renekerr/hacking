@@ -89,6 +89,28 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 
 `find /var/log/ -type f ! -name "*.log" 2>/dev/null`
 
+--------
+## Wildcards. Comodines y algunas clases de caracteres POSIX utilizados en Linux
+
+| Wildcard      | Descripción                                                                                           | Ejemplo                        | Coincide con                                    | No coincide con         |
+|---------------|-------------------------------------------------------------------------------------------------------|--------------------------------|-------------------------------------------------|-------------------------|
+| `*`           | Coincide con cero o más caracteres.                                                                   | `*.txt`                        | `file.txt`, `document.txt`, `notes.txt`         | `file.doc`, `image.jpg` |
+| `?`           | Coincide con un solo carácter.                                                                        | `file?.txt`                    | `file1.txt`, `fileA.txt`, `file_.txt`           | `files.txt`, `file12.txt`|
+| `[]`          | Coincide con cualquiera de los caracteres individuales listados entre los corchetes.                  | `file[12].txt`                 | `file1.txt`, `file2.txt`                        | `file3.txt`, `fileA.txt`|
+| `[! ]`        | Coincide con cualquier carácter que no esté listado entre los corchetes.                              | `file[!12].txt`                | `fileA.txt`, `fileB.txt`                        | `file1.txt`, `file2.txt`|
+| `[a-z]`       | Coincide con cualquier carácter en el rango especificado (minúsculas de `a` a `z`).                   | `file[a-z].txt`                | `filea.txt`, `filem.txt`, `filez.txt`           | `fileA.txt`, `file1.txt`|
+| `[A-Z]`       | Coincide con cualquier carácter en el rango especificado (mayúsculas de `A` a `Z`).                   | `file[A-Z].txt`                | `fileA.txt`, `fileM.txt`, `fileZ.txt`           | `filea.txt`, `file1.txt`|
+| `[0-9]`       | Coincide con cualquier carácter en el rango especificado (dígitos de `0` a `9`).                      | `file[0-9].txt`                | `file0.txt`, `file5.txt`, `file9.txt`           | `filea.txt`, `fileA.txt`|
+| `{}`          | Coincide con cualquiera de los patrones especificados separados por comas.                            | `file{1,2,3}.txt`              | `file1.txt`, `file2.txt`, `file3.txt`           | `file4.txt`, `fileA.txt`|
+| `[[:alnum:]]` | Coincide con cualquier carácter alfanumérico.                                                         | `file[[:alnum:]].txt`          | `file1.txt`, `fileA.txt`, `file9.txt`           | `file_.txt`, `file!.txt`|
+| `[[:alpha:]]` | Coincide con cualquier carácter alfabético.                                                           | `file[[:alpha:]].txt`          | `filea.txt`, `fileM.txt`, `fileZ.txt`           | `file1.txt`, `file9.txt`|
+| `[[:digit:]]` | Coincide con cualquier dígito.                                                                        | `file[[:digit:]].txt`          | `file0.txt`, `file5.txt`, `file9.txt`           | `fileA.txt`, `file_.txt`|
+| `[[:lower:]]` | Coincide con cualquier carácter en minúscula.                                                         | `file[[:lower:]].txt`          | `filea.txt`, `filem.txt`, `filez.txt`           | `fileA.txt`, `fileM.txt`|
+| `[[:upper:]]` | Coincide con cualquier carácter en mayúscula.                                                         | `file[[:upper:]].txt`          | `fileA.txt`, `fileM.txt`, `fileZ.txt`           | `filea.txt`, `filem.txt`|
+| `[[:space:]]` | Coincide con cualquier carácter de espacio en blanco (espacios, tabuladores, etc.).                   | `file[[:space:]].txt`          | `file .txt`, `file\t.txt`                       | `fileA.txt`, `file1.txt`|
+| `[[:punct:]]` | Coincide con cualquier carácter de puntuación.                                                        | `file[[:punct:]].txt`          | `file!.txt`, `file@.txt`, `file#.txt`           | `fileA.txt`, `file1.txt`|
+
+
 
 
 
