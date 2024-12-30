@@ -60,34 +60,28 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 | Tab | Autocompletar archivos y carpetas |
 
 
-## Comandos:
-### Encuentra la ubicación del comando `ls` en el sistema utilizando `find`, y suprime los mensajes de error por permisos denegados.
+## Comandos
 
+### Encuentra la ubicación del comando `ls` en el sistema utilizando `find`, y suprime los mensajes de error por permisos denegados.
 `find / -name ls 2> /dev/null`
 
 ### Localiza los directorios de configuración de `firefox` instalados en Ubuntu, asegurándote de que el nombre del directorio sea `firefox`.
-
 `find / -name firefox -type d 2> /dev/null`
 
 ### Identifica al propietario del archivo `shadow` en el sistema de archivos, excluyendo aquellos ubicados en `/snap`.
-
 `find / -name shadow ! -path "/snap/*" -ls 2> /dev/null`
 
 ### Busca archivos en `/usr/bin` cuyos nombres terminen en un dígito.
-
 `find /usr/bin -type f -name "*[[:digit:]]" 2>/dev/null`
 
 ### Encuentra archivos en el sistema que contengan dos guiones bajos en sus nombres y terminen con `.txt`.
-
 `find / -type f -name "*_*_*.txt" 2>/dev/null`
 
 ### Busca archivos en `/var/log` que no tengan la extensión `.log`.
-
 `find /var/log/ -type f -not -name "*.log" 2>/dev/null`
 
 ### Alternativamente, busca archivos en `/var/log` excluyendo aquellos que terminen en `.log` usando `!`.
-
-`find /var/log/ -type f ! -name "*.log" 2>/dev/null`
+`find /var/log/ -type f -name "*[!.log]"`
 
 --------
 ## Wildcards. Comodines y algunas clases de caracteres POSIX utilizados en Linux
@@ -109,6 +103,49 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 | `[[:upper:]]` | Coincide con cualquier carácter en mayúscula.                                                         | `file[[:upper:]].txt`          | `fileA.txt`, `fileM.txt`, `fileZ.txt`           | `filea.txt`, `filem.txt`|
 | `[[:space:]]` | Coincide con cualquier carácter de espacio en blanco (espacios, tabuladores, etc.).                   | `file[[:space:]].txt`          | `file .txt`, `file\t.txt`                       | `fileA.txt`, `file1.txt`|
 | `[[:punct:]]` | Coincide con cualquier carácter de puntuación.                                                        | `file[[:punct:]].txt`          | `file!.txt`, `file@.txt`, `file#.txt`           | `fileA.txt`, `file1.txt`|
+
+### Lista archivos en el directorio actual donde el nombre tiene un solo carácter adicional antes de la extensión `.txt`, como `archivo1.txt`, `archivoA.txt`, `archivo_.txt`, pero no `archivos.txt` o `archivo12.txt`.
+`ls archivo?.txt`
+
+### Lista archivos en el directorio actual donde el nombre del archivo contiene `fotoa.jpg` o `fotob.jpg`, pero no `fotoc.jpg` o `foto1.jpg`.
+`ls foto[ab].jpg`
+
+### Busca archivos en `/var/log/` que terminan en `.log` y cuyo nombre no termina en `a`, como `file1.log`, `file2.log`, pero no `filea.log`.
+`find /var/log/ -type f -name *[!a].log`
+
+### Lista archivos en el directorio actual donde el nombre del archivo contiene una letra minúscula entre `a` y `z` antes de la extensión `.pdf`, como `reportea.pdf`, `reportex.pdf`, `reportez.pdf`, pero no `reporteA.pdf` o `reporte1.pdf`.
+`ls reporte[a-z].pdf`
+
+### Busca archivos en `/data` cuyo nombre contiene una letra mayúscula entre `A` y `Z` antes de la extensión `.csv`, como `dataA.csv`, `dataM.csv`, `dataZ.csv`, pero no `dataa.csv` o `data1.csv`.
+`find /data -name 'data[A-Z].csv'`
+
+### Lista archivos en el directorio actual donde el nombre del archivo contiene un dígito entre `0` y `9` antes de la extensión `.png`, como `imagen0.png`, `imagen5.png`, `imagen9.png`, pero no `imagena.png` o `imagenA.png`.
+`ls imagen[0-9].png`
+
+### Lista archivos en el directorio actual que terminan en `foto1.jpg`, `foto2.jpg`, `foto3.jpg`, pero no `foto4.jpg` o `fotoA.jpg`.
+`ls foto{1,2,3}.jpg`
+
+### Busca archivos en el directorio actual cuyo nombre contiene un carácter alfanumérico antes de la extensión `.txt`, como `archivo1.txt`, `archivoA.txt`, `archivo9.txt`, pero no `archivo!.txt` o `archivo .txt`.
+`find . -name 'archivo[[:alnum:]].txt'`
+
+### Lista archivos en el directorio actual cuyo nombre contiene una letra antes de la extensión `.md`, como `nombrea.md`, `nombreZ.md`, `nombref.md`, pero no `nombre1.md` o `nombre!.md`.
+`ls nombre[[:alpha:]].md`
+
+### Busca archivos en el directorio actual cuyo nombre contiene un dígito antes de la extensión `.pdf`, como `reporte1.pdf`, `reporte5.pdf`, `reporte9.pdf`, pero no `reporteA.pdf` o `reporte!.pdf`.
+`find . -name 'reporte[[:digit:]].pdf'`
+
+### Lista archivos en el directorio actual cuyo nombre contiene una letra minúscula antes de la extensión `.csv`, como `archivox.csv`, `archivoy.csv`, `archivoz.csv`, pero no `archivoA.csv` o `archivo1.csv`.
+`ls archivo[[:lower:]].csv`
+
+### Busca archivos en `/images` cuyo nombre contiene una letra mayúscula antes de la extensión `.png`, como `imagenA.png`, `imagenZ.png`, `imagenM.png`, pero no `imagena.png` o `imagen1.png`.
+`find /images -name 'imagen[[:upper:]].png'`
+
+### Busca archivos en el directorio actual cuyo nombre contiene un espacio en blanco antes de la extensión `.txt`, como `documento .txt`, `documento	.txt` (con tabuladores), pero no `documentoA.txt` o `documento1.txt`.
+`find . -name 'documento[[:space:]].txt'`
+
+### Lista archivos en el directorio actual cuyo nombre contiene un carácter de puntuación antes de la extensión `.md`, como `archivo!.md`, `archivo#.md`, `archivo@.md`, pero no `archivoA.md` o `archivo1.md`.
+`ls archivo[[:punct:]].md`
+
 
 
 
