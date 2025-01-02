@@ -71,6 +71,7 @@ Instalar kalipwm
 
 Intalar miniconda para crear un entorno virtual y mantener varias versiones de una misma herramienta
 https://docs.anaconda.com/miniconda/install/
+https://repo.anaconda.com/miniconda/
 
 Después de instalar Miniconda, debemos cerrar la terminal y abrirla nuevamente.
 Aparecerá `(base)` en el prompt.
