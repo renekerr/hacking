@@ -1,3 +1,8 @@
+# DNS Zones  
+
+Esta tabla describe los diferentes tipos de registros DNS que se utilizan para configurar y gestionar zonas DNS. Cada tipo de registro cumple una función específica, como asociar nombres de dominio con direcciones IP, gestionar el enrutamiento de correos electrónicos o garantizar la seguridad de las consultas DNS.
+
+
 | **Tipo**   | **Descripción**                                                                                   | **Significado**                                                          |
 |------------|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | **A**      | Asocia un nombre de dominio con una dirección IPv4.                                               | Address Record                                                           |
