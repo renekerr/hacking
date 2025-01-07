@@ -34,6 +34,29 @@ Estas son algunas herramientas que se utilizan en la fase de reconocimiento pasi
 
 - [OSINT Framework](http://osintframework.com): Reune herramientas y recursos gratuitos para facilitar la búsqueda de información OSINT.
 
+# Recopilación Semi-Pasiva de Información
+
+La recopilación semi-pasiva de información se diferencia de la recopilación pasiva en que sí genera tráfico o interacción con el objetivo, pero de manera que este no detecte dicha actividad como inusual. Las técnicas utilizadas imitan el comportamiento normal de un usuario o cliente legítimo.
+
+## Actividades Incluidas
+1. **Consultas DNS**
+   - Resolver nombres de dominio.
+   - Buscar dominios registrados en un servidor DNS.
+
+2. **Acceso a Recursos Internos**
+   - Interactuar con aplicaciones web de la organización.
+   - Registrarse y descargar archivos.
+
+3. **Análisis de Metadatos**
+   - Revisar documentos que requieren un intercambio previo de tráfico de red.
+
+## Exclusiones
+- Actividades que generen tráfico anómalo, como escaneos de puertos o vulnerabilidades, y fuerza bruta, ya que entrarían en la recopilación activa de información.
+
+La recopilación semi-pasiva sigue siendo parte del proceso de obtención de información, buscando datos útiles para las fases siguientes del proceso de análisis cinético.
+
+
+
   
 
 
