@@ -1,87 +1,70 @@
-## Referencia Rápida de Operadores y Atajos de Teclado en Linux
+# Guía Completa de Comandos y Conceptos de Linux
 
-### Operadores de Linux
+## 1. Operadores y Redirecciones
 
-**¿Qué hacen los operadores de Linux?**
-Permiten combinar y dirigir el flujo de comandos en tu terminal.
+### Operadores Básicos
+| Símbolo | Descripción |
+|---------|-------------|
+| & | Ejecución en segundo plano |
+| && | Ejecución condicional |
+| > | Redirección de salida (sobreescribe) |
+| >> | Redirección de salida (añade) |
 
-| Símbolo/Operador | Descripción |
-|---|---|
-| & | **Ejecución en segundo plano:** Envía un comando a ejecutarse en segundo plano, permitiendo continuar con otras tareas en el terminal. |
-| && | **Ejecución condicional:** Ejecuta el siguiente comando solo si el anterior se completó exitosamente. |
-| > | **Redirección de salida:** Redirige la salida estándar (generalmente, lo que se muestra en pantalla) de un comando a un archivo, sobreescribiéndolo. |
-| >> | **Anexar a un archivo:** Redirige la salida estándar de un comando a un archivo, pero agrega la nueva información al final del archivo existente. |
+### Ejemplos de Redirección
+- `echo "Hola, mundo!" > mi_archivo.txt`
+- `echo "Esta es una nueva línea." >> mi_archivo.txt`
+- `long-running-command &`
+- `cd /ruta/del/directorio && ls -la`
 
-# Ejemplos de comandos en la terminal
+### Stdout y Stderr
+- `ls -lah > fichero_salida_ls.txt`
+- `ls -lah fditufy >> fichero_salida_ls.txt`
+- `ls -lah > fichero_salida_2.txt 2>&1`
+- `ls -lah &>> fichero_salida_moderna.txt`
 
-## Crear un archivo y escribir algo en él
-`echo "Hola, mundo!" > mi_archivo.txt`
+## 2. Stdin y Pipelines
 
-## Añadir una nueva línea al archivo
-`echo "Esta es una nueva línea." >> mi_archivo.txt`
+### Stdin
+- `cat > file_stdin.txt`
+- `cat file1.txt file2.txt > file12.txt`
 
-## Ejemplos de Uso
+### Pipelines
+- `ls -lah /usr/bin/ | less`
+- `ls /usr/bin/ /var/log | sort | less`
 
-`# Proceso en segundo plano con &`
-`long-running-command &`
-
-`# Encadenamiento de comandos con &&`
-`cd /ruta/del/directorio && ls -la`
-
-`# Redirección de salida con >`
-`echo "Hola" > archivo.txt`
-
-`# Añadir salida con >>`
-`echo "Mundo" >> archivo.txt`
-
---------
-# Atajos de Linux
+## 3. Atajos de Teclado
 
 | Atajo | Descripción |
 |-------|-------------|
 | Ctrl + A | Ir al principio de la línea |
 | Ctrl + E | Ir al final de la línea |
-| Ctrl + L | Limpiar pantalla (similar a clear) |
+| Ctrl + L | Limpiar pantalla |
 | Ctrl + U | Borrar línea anterior al cursor |
-| Ctrl + H | Borrar carácter anterior (retroceso) |
 | Ctrl + R | Buscar comandos anteriores |
 | Ctrl + C | Interrumpir programa en ejecución |
 | Ctrl + D | Cerrar shell actual |
-| Ctrl + W | Cortar palabra anterior |
-| Ctrl + K | Cortar línea siguiente |
-| Ctrl + T | Intercambiar últimos dos caracteres |
-| Esc + T | Intercambiar últimas dos palabras |
 | Alt + . o !$ | Referenciar último argumento |
-| Alt + F | Avanzar una palabra |
-| Alt + B | Retroceder una palabra |
-| Alt + l/u | Convertir a mayúsculas/minúsculas |
 | Tab | Autocompletar archivos y carpetas |
 
-----------
-## Comandos
+## 4. Comandos de Búsqueda y Filtrado
 
-### Encuentra la ubicación del comando `ls` en el sistema utilizando `find`, y suprime los mensajes de error por permisos denegados.
-`find / -name ls 2> /dev/null`
+### find
+- `find / -name ls 2> /dev/null`
+- `find / -name firefox -type d 2> /dev/null`
+- `find / -name shadow ! -path "/snap/*" -ls 2> /dev/null`
+- `find /usr/bin -type f -name "*[[:digit:]]" 2>/dev/null`
+- `find / -type f -name "*_*_*.txt" 2>/dev/null`
+- `find /var/log/ -type f -not -name "*.log" 2>/dev/null`
 
-### Localiza los directorios de configuración de `firefox` instalados en Ubuntu, asegurándote de que el nombre del directorio sea `firefox`.
-`find / -name firefox -type d 2> /dev/null`
+### Filtros
+- `sort`: Ordena líneas de texto
+- `uniq`: Elimina o cuenta líneas repetidas
+- `wc`: Cuenta líneas, palabras y caracteres
+- `grep`: Busca patrones en texto
+- `head`: Muestra las primeras líneas de un archivo
+- `tail`: Muestra las últimas líneas de un archivo
+- `tee`: Escribe la salida a un archivo y también la muestra en pantalla
 
-### Identifica al propietario del archivo `shadow` en el sistema de archivos, excluyendo aquellos ubicados en `/snap`.
-`find / -name shadow ! -path "/snap/*" -ls 2> /dev/null`
-
-### Busca archivos en `/usr/bin` cuyos nombres terminen en un dígito.
-`find /usr/bin -type f -name "*[[:digit:]]" 2>/dev/null`
-
-### Encuentra archivos en el sistema que contengan dos guiones bajos en sus nombres y terminen con `.txt`.
-`find / -type f -name "*_*_*.txt" 2>/dev/null`
-
-### Busca archivos en `/var/log` que no tengan la extensión `.log`.
-`find /var/log/ -type f -not -name "*.log" 2>/dev/null`
-
-### Alternativamente, busca archivos en `/var/log` excluyendo aquellos que terminen en `.log` usando `!`.
-`find /var/log/ -type f -name "*[!.log]"`
-
---------
 ## Wildcards. Comodines y algunas clases de caracteres POSIX utilizados en Linux
 
 | Wildcard      | Descripción                                                                                           | Ejemplo                        | Coincide con                                    | No coincide con         |
@@ -102,108 +85,62 @@ Permiten combinar y dirigir el flujo de comandos en tu terminal.
 | `[[:space:]]` | Coincide con cualquier carácter de espacio en blanco (espacios, tabuladores, etc.).                   | `file[[:space:]].txt`          | `file .txt`, `file\t.txt`                       | `fileA.txt`, `file1.txt`|
 | `[[:punct:]]` | Coincide con cualquier carácter de puntuación.                                                        | `file[[:punct:]].txt`          | `file!.txt`, `file@.txt`, `file#.txt`           | `fileA.txt`, `file1.txt`|
 
-### Lista archivos en el directorio actual donde el nombre tiene un solo carácter adicional antes de la extensión `.txt`, como `archivo1.txt`, `archivoA.txt`, `archivo_.txt`, pero no `archivos.txt` o `archivo12.txt`.
-`ls archivo?.txt`
 
-### Lista archivos en el directorio actual donde el nombre del archivo contiene `fotoa.jpg` o `fotob.jpg`, pero no `fotoc.jpg` o `foto1.jpg`.
-`ls foto[ab].jpg`
+### Ejemplos de Uso
+- `ls archivo?.txt`
+- `ls foto[ab].jpg`
+- `find /var/log/ -type f -name *[!a].log`
+- `ls reporte[a-z].pdf`
+- `find /data -name 'data[A-Z].csv'`
+- `ls imagen[0-9].png`
+- `ls foto{1,2,3}.jpg`
 
-### Busca archivos en `/var/log/` que terminan en `.log` y cuyo nombre no termina en `a`, como `file1.log`, `file2.log`, pero no `filea.log`.
-`find /var/log/ -type f -name *[!a].log`
+## 6. Expansiones en Bash
 
-### Lista archivos en el directorio actual donde el nombre del archivo contiene una letra minúscula entre `a` y `z` antes de la extensión `.pdf`, como `reportea.pdf`, `reportex.pdf`, `reportez.pdf`, pero no `reporteA.pdf` o `reporte1.pdf`.
-`ls reporte[a-z].pdf`
+### Expansión de Rutas
+- `echo /*/log`
+- `ls /*/log`
 
-### Busca archivos en `/data` cuyo nombre contiene una letra mayúscula entre `A` y `Z` antes de la extensión `.csv`, como `dataA.csv`, `dataM.csv`, `dataZ.csv`, pero no `dataa.csv` o `data1.csv`.
-`find /data -name 'data[A-Z].csv'`
+### Expansión Aritmética
+- `echo $((2+2))`
+- `ls fichero$((2+2)).txt`
 
-### Lista archivos en el directorio actual donde el nombre del archivo contiene un dígito entre `0` y `9` antes de la extensión `.png`, como `imagen0.png`, `imagen5.png`, `imagen9.png`, pero no `imagena.png` o `imagenA.png`.
-`ls imagen[0-9].png`
+### Expansión de Llaves
+- `mkdir dir{1..10}`
+- `touch fichero{1..5}.txt`
+- `touch fichero{A{1,2},B{3,4}}`
+- `mkdir {2020..2024}-{01..12}`
 
-### Lista archivos en el directorio actual que terminan en `foto1.jpg`, `foto2.jpg`, `foto3.jpg`, pero no `foto4.jpg` o `fotoA.jpg`.
-`ls foto{1,2,3}.jpg`
+## 7. Sustitución de Comandos
 
-### Busca archivos en el directorio actual cuyo nombre contiene un carácter alfanumérico antes de la extensión `.txt`, como `archivo1.txt`, `archivoA.txt`, `archivo9.txt`, pero no `archivo!.txt` o `archivo .txt`.
-`find . -name 'archivo[[:alnum:]].txt'`
+- `ls -la $(which cat)`
+- `echo $(python3 -c 'print("Hola")')`
 
-### Lista archivos en el directorio actual cuyo nombre contiene una letra antes de la extensión `.md`, como `nombrea.md`, `nombreZ.md`, `nombref.md`, pero no `nombre1.md` o `nombre!.md`.
-`ls nombre[[:alpha:]].md`
+## 8. Uso de Comillas y Escapado
 
-### Busca archivos en el directorio actual cuyo nombre contiene un dígito antes de la extensión `.pdf`, como `reporte1.pdf`, `reporte5.pdf`, `reporte9.pdf`, pero no `reporteA.pdf` o `reporte!.pdf`.
-`find . -name 'reporte[[:digit:]].pdf'`
+### Comillas
+- `echo $(ls)` vs `echo "S(ls)"`
+- `echo "la ruta de cat es $(which cat)"`
+- `echo 'la ruta de cat es $(which cat)'`
+- `echo "estas son comillas simples ''"`
+- `echo 'estas son comillas dobles ""'`
 
-### Lista archivos en el directorio actual cuyo nombre contiene una letra minúscula antes de la extensión `.csv`, como `archivox.csv`, `archivoy.csv`, `archivoz.csv`, pero no `archivoA.csv` o `archivo1.csv`.
-`ls archivo[[:lower:]].csv`
+### Escapado
+- `echo "Este es un texto con comillas dobles \"entre comillas\"."`
+- `echo "Esto es un texto con espacio\ dentro\ de\ la\ cadena."`
 
-### Busca archivos en `/images` cuyo nombre contiene una letra mayúscula antes de la extensión `.png`, como `imagenA.png`, `imagenZ.png`, `imagenM.png`, pero no `imagena.png` o `imagen1.png`.
-`find /images -name 'imagen[[:upper:]].png'`
+## 9. Comando sed
 
-### Busca archivos en el directorio actual cuyo nombre contiene un espacio en blanco antes de la extensión `.txt`, como `documento .txt`, `documento	.txt` (con tabuladores), pero no `documentoA.txt` o `documento1.txt`.
-`find . -name 'documento[[:space:]].txt'`
+### Ejemplos Prácticos
+1. `sed 's/vieja_palabra/nueva_palabra/g' archivo.txt`
+2. `sed '/^$/d' archivo.txt`
+3. `sed -n '5,10p' archivo.txt`
+4. `sed 's/^/PREFIJO: /' archivo.txt`
+5. `sed 's/^...//' archivo.txt`
+6. `sed 's/ */ /g' archivo.txt`
 
-### Lista archivos en el directorio actual cuyo nombre contiene un carácter de puntuación antes de la extensión `.md`, como `archivo!.md`, `archivo#.md`, `archivo@.md`, pero no `archivoA.md` o `archivo1.md`.
-`ls archivo[[:punct:]].md`
+## 10. Ejemplos Adicionales
 
----------
-
-## Expansiones en bash
-
-### Muestra coincidencias de directorios en el nivel raíz del sistema de archivos que contienen una carpeta "log".
-`echo /*/log`
-
-### Lista el contenido de los directorios que contienen una carpeta "log" en el nivel superior del sistema de archivos.
-`ls /*/log`
-
-### Evalúa la expresión aritmética 2 + 2 y muestra el resultado, que es 4.
-`echo $((2+2))`
-
-### Intenta listar un archivo llamado "fichero4.txt", asumiendo que el cálculo de $((2+2)) da 4.
-`ls fichero$((2+2)).txt`
-
-### Crea diez directorios numerados del "dir1" al "dir10".
-`mkdir dir{1..10}`
-
-### Crea cinco archivos numerados del "fichero1.txt" al "fichero5.txt".
-`touch fichero{1..5}.txt`
-
-### Crea cuatro archivos con nombres específicos: "ficheroA1", "ficheroA2", "ficheroB3", y "ficheroB4".
-`touch fichero{A{1,2},B{3,4}}`
-
-### Crea una estructura de directorios para los años 2020 a 2024, con subdirectorios para cada mes de enero a diciembre en cada año.
-`mkdir {2020..2024}-{01..12}`
-
-## Sustitución de comandos
-
-### Muestra el contenido de los archivos listados por el comando `which cat`.
-`ls -la $(which cat)`
-
-### Ejecuta el comando Python para imprimir "Hola" y muestra el resultado.
-`echo $(python3 -c 'print("Hola")')`
-
-## Uso de comillas
-
-### Muestra el listado de archivos en el directorio actual utilizando sustitución de comandos.
-`echo $(ls)`
-
-### Muestra la cadena "S(ls)" literalmente, sin ejecución de sustitución de comandos.
-`echo "S(ls)"`
-
-### Muestra la ruta del comando `cat` utilizando sustitución de comandos.
-`echo "la ruta de cat es $(which cat)"`
-
-### Muestra la cadena literal `$(which cat)` sin ejecutar el comando.
-`echo 'la ruta de cat es $(which cat)'`
-
-### Muestra el texto "estas son comillas simples ''".
-`echo "estas son comillas simples ''"`
-
-### Muestra el texto "estas son comillas dobles "" ".
-`echo 'estas son comillas dobles ""'`
-
-## Escapado de caracteres especiales
-
-### Muestra el texto con comillas dobles dentro de una cadena usando `\"` para escaparlas.
-`echo "Este es un texto con comillas dobles \"entre comillas\"."`
-
-### Muestra el texto con una barra invertida (`\`) antes de un espacio para evitar su interpretación.
-`echo "Esto es un texto con espacio\ dentro\ de\ la\ cadena."`
+- `ls -lh | sort -k5 -h`: Ordena archivos por tamaño
+- `sort -t, -k2 -n fichero.csv`: Ordena CSV por segundo campo
+- `head -n 55 /var/log/auth.log | tail -n 1`: Muestra línea específica
