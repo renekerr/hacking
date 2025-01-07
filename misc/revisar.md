@@ -5,7 +5,6 @@
 
 ## 2. Recopilación de información
 - **Recopilación pasiva**
-- **Recopilación semi-pasiva**
 - **Recopilación activa**
 
 ## 3. Identificación y análisis de vulnerabilidades
