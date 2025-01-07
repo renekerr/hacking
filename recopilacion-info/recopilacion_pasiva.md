@@ -1,67 +1,71 @@
-## Recopilación Pasiva de Información
+# Recopilación Pasiva de Información y OSINT
 
+La recopilación pasiva de información y la Inteligencia de Fuentes Abiertas (OSINT) están estrechamente relacionadas, siendo el OSINT un marco más amplio que integra la recopilación pasiva como uno de sus componentes fundamentales. La recopilación pasiva se enfoca en obtener datos sobre un objetivo sin interactuar directamente con él, utilizando fuentes públicamente disponibles.
 
-La recolección pasiva de información implica obtener datos sobre un objetivo sin interactuar directamente con él. Este método utiliza motores de búsqueda, redes sociales y fuentes públicas como registros y bases de datos abiertas. Aunque es una técnica segura que minimiza el riesgo de detección, la información obtenida puede ser superficial, poco concluyente y desactualizada.
+## Características de la Recopilación Pasiva
 
-Para mitigar estas limitaciones, es fundamental complementar la recolección pasiva con métodos semi-pasivos y activos. Estos permiten contrastar y verificar la información desde diferentes perspectivas, mejorando la precisión y fiabilidad de los datos recolectados. Esta combinación de técnicas es esencial para establecer una base sólida para las siguientes etapas del proceso de penetración y evaluación de seguridad.
+- No genera tráfico hacia el objetivo
+- Utiliza información públicamente disponible
+- Menor riesgo de detección
+- Puede proporcionar información limitada o desactualizada
 
-### Herramientas 
-Estas son algunas herramientas que se utilizan en la fase de reconocimiento pasivo y permiten recopilar información vital sin la necesidad de realizar interacciones activas con los sistemas de destino.
+## Herramientas y Técnicas
 
-- [Whois](https://who.is/): Utilizado para obtener información sobre la propiedad de un dominio, como la organización, los contactos administrativos, los servidores de nombres, etc.
+### Motores de Búsqueda Especializados
 
 - [Shodan](https://www.shodan.io/): Motor de búsqueda que indexa dispositivos conectados a Internet, proporcionando información sobre servicios, sistemas operativos, puertos abiertos, vulnerabilidades y tipos específicos de dispositivos como servidores, equipos de red y sistemas IoT.
 
-  * [Comnandos de Shodan](comando_shodan.md)
+- [Censys Search](https://search.censys.io/): Motor de búsqueda que se especializa en identificar hosts, sitios web, certificados y activos conectados públicamente a Internet, permitiendo auditar puertos, servicios y descubrir activos no autorizados en una red.
+
+- [IntelligenceX](https://intelx.io/tools): Plataforma de investigación e inteligencia de datos que recopila y analiza información de la web abierta, la web oscura (dark web) y otras bases de datos.
+
+### Análisis de Dominio y DNS
+
+- [Whois](https://who.is/): Utilizado para obtener información sobre la propiedad de un dominio, como la organización, los contactos administrativos, los servidores de nombres, etc.
+
+- [DNSdumpster](https://dnsdumpster.com/): Herramienta que permite obtener información detallada sobre la infraestructura DNS de un dominio.
+
+### Búsqueda Avanzada
 
 - Google Dorks (Google Hacking): Utiliza búsquedas avanzadas en Google para localizar información sensible o expuesta en sitios web.
    * [Google Hacking DataBase](https://www.exploit-db.com/google-hacking-database)
-   * [Comandos y operadores de Google](comandos_google.md)
+
+### Herramientas OSINT Integrales
 
 - [theHarvester](https://github.com/laramies/theHarvester): Herramienta para recopilar información de fuentes públicas, como direcciones de correo electrónico, subdominios, hosts, servidores DNS, entre otros.
 
 - [Maltego](https://www.maltego.com/): Herramienta de inteligencia que permite realizar análisis visual de redes y relaciones entre personas, grupos, sitios web, infraestructura, etc.
 
-- DNSdumpster: Herramienta que permite obtener información detallada sobre la infraestructura DNS de un dominio.
-   * https://dnsdumpster.com/
-   * https://github.com/nmmapper/dnsdumpster
-
-- [Censys Search](https://search.censys.io/): Motor de búsqueda que se especializa en identificar hosts, sitios web, certificados y activos conectados públicamente a Internet, permitiendo auditar puertos, servicios y descubrir activos no autorizados en una red.
-
 - [Recon-ng](https://github.com/lanmaster53/recon-ng): Framework para realizar recopilación de inteligencia y análisis de información a partir de fuentes abiertas (OSINT).
-
-- [IntelligenceX](https://intelx.io/tools): Plataforma de investigación e inteligencia de datos que recopila y analiza información de la web abierta, la web oscura (dark web) y otras bases de datos.
 
 - [OSINT Framework](http://osintframework.com): Reune herramientas y recursos gratuitos para facilitar la búsqueda de información OSINT.
 
-# Recopilación Semi-Pasiva de Información
+- [Intel Techniques](https://inteltechniques.com/tools/): Conjunto de herramientas y recursos para la investigación de OSINT, que ofrece una variedad de utilidades para búsquedas en redes sociales, análisis de correo electrónico, y más.
 
-La recopilación semi-pasiva de información se diferencia de la recopilación pasiva en que sí genera tráfico o interacción con el objetivo, pero de manera que este no detecte dicha actividad como inusual. Las técnicas utilizadas imitan el comportamiento normal de un usuario o cliente legítimo.
+### Servicios Especializados
 
-## Actividades Incluidas
-1. **Consultas DNS**
-   - Resolver nombres de dominio.
-   - Buscar dominios registrados en un servidor DNS.
+- [Have I Been Pwned](https://haveibeenpwned.com/): Servicio que permite verificar si una cuenta de correo electrónico ha sido comprometida en una brecha de datos.
 
-2. **Acceso a Recursos Internos**
-   - Interactuar con aplicaciones web de la organización.
-   - Registrarse y descargar archivos.
+- [TinEye](https://tineye.com/): Motor de búsqueda inversa de imágenes que permite rastrear el origen y uso de una imagen en internet.
 
-3. **Análisis de Metadatos**
-   - Revisar documentos que requieren un intercambio previo de tráfico de red.
+- [Wayback Machine](https://archive.org/web/): Servicio que permite ver versiones archivadas de páginas web a través del tiempo.
 
-## Exclusiones
-- Actividades que generen tráfico anómalo, como escaneos de puertos o vulnerabilidades, y fuerza bruta, ya que entrarían en la recopilación activa de información.
+- [WebCheck](https://web-check.xyz/): Herramienta para verificar la disponibilidad y la integridad de sitios web, proporcionando información sobre el estado del servidor, certificados SSL, y otros detalles técnicos.
 
-La recopilación semi-pasiva sigue siendo parte del proceso de obtención de información, buscando datos útiles para las fases siguientes del proceso de análisis cinético.
+## Recopilación Semi-Pasiva
 
+La recopilación semi-pasiva genera tráfico o interacción con el objetivo, pero de manera que simula el comportamiento de un usuario legítimo.
 
+### Herramientas
 
-  
+#### Análisis de Red
+- [Wireshark](https://www.wireshark.org/): Analizador de protocolos de red que permite capturar y examinar detalladamente el tráfico de red en tiempo real.
+- [TCPdump](https://www.tcpdump.org/): Herramienta de línea de comandos para analizar el tráfico de red, capturando y mostrando paquetes transmitidos o recibidos en una interfaz de red.
 
+#### Escaneo y Enumeración
+- [F.O.C.A](https://github.com/ElevenPaths/FOCA): Herramienta para encontrar metadatos y información oculta en documentos.
+- [Central Ops](https://centralops.net/): Conjunto de herramientas en línea para realizar investigaciones de red y dominio.
 
+## Consideraciones Finales
 
-
-
-
-
+La combinación de técnicas pasivas y semi-pasivas es esencial para obtener una visión completa y precisa del objetivo. Estas técnicas permiten recopilar información valiosa de manera discreta, minimizando el riesgo de detección. Aunque la información obtenida puede ser limitada en comparación con métodos más activos, la recopilación pasiva ofrece una base sólida para el análisis de OSINT, permitiendo construir una imagen inicial del objetivo de manera legal y ética.
