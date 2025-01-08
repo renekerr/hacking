@@ -1,6 +1,6 @@
 # Identificación de tecnologías
 
-En el contexto de análisis de seguridad, herramientas como **WhatWeb** y **Web Analyzer** son útiles para identificar tecnologías empleadas en sitios web. A continuación, se presenta un breve resumen sobre su uso.
+En el contexto de análisis de seguridad, una herramienta como **WhatWeb** peude ser útil para identificar tecnologías empleadas en sitios web.
 
 ---
 
@@ -27,7 +27,7 @@ sudo apt update && sudo apt install whatweb
 2. **Análisis más detallado:**
    Utiliza el modo "verbose" para obtener más información:
    ```
-   whatweb -v https://ejemplo.com
+   whatweb https://udemy.com | awk '{gsub(/], /, "],\n"); print}'
    ```
 
 3. **Escaneo de múltiples URLs:**
@@ -44,37 +44,3 @@ sudo apt update && sudo apt install whatweb
 
 ---
 
-## **Web Analyzer**
-Web Analyzer es otra herramienta poderosa para identificar tecnologías web. Ofrece una interfaz gráfica y también puede ser utilizada desde la línea de comandos.
-
-### **Instalación**
-Web Analyzer es un port de Wappalyzer en Go, diseñado para ser eficiente y analizar grandes listas de hosts.
-
-1. Instala Web Analyzer con Go:
-   ```
-   go install -v github.com/rverton/webanalyze/cmd/webanalyze@latest
-   ```
-
-2. Copia el ejecutable al directorio `/usr/bin` para facilitar su uso:
-   ```
-   cp go/bin/webanalyze /usr/bin
-   ```
-
-### **Uso Básico**
-1. **Mostrar opciones de ayuda:**
-   ```
-   webanalyze -h
-   ```
-
-2. **Análisis de un sitio web:**
-   ```
-   webanalyze -host https://ejemplo.com
-   ```
-
-3. **Escaneo de múltiples URLs desde un archivo:**
-   ```
-   webanalyze -hosts urls.txt
-   ```
----
-
-Estas herramientas son fundamentales en fases de reconocimiento durante pruebas de penetración. Con ellas, puedes obtener una visión clara de las tecnologías en uso, facilitando la identificación de posibles vulnerabilidades.
