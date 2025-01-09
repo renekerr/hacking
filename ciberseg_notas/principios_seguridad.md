@@ -1,77 +1,72 @@
-# Principios Fundamentales en Seguridad
+-----
+# Fundamentos y Principios de Seguridad en Sistemas
 
-## Principios Generales
+La seguridad en sistemas de información se basa en principios y modelos que protegen la **confidencialidad**, **integridad** y **disponibilidad** (CIA) de los datos, mitigando riesgos y enfrentando amenazas.
 
-Los **principios de seguridad** son fundamentos esenciales para proteger la confidencialidad, integridad y disponibilidad (CIA) de la información y sistemas. Estos principios guían el diseño, implementación y gestión de controles para mitigar riesgos.
+## Tríada CIA y su opuesto DAD
 
-## CIA
+### Componentes CIA
+- **Confidencialidad**: Protege los datos contra accesos no autorizados
+- **Integridad**: Garantiza que los datos no sean alterados sin autorización
+- **Disponibilidad**: Asegura que los sistemas estén accesibles cuando se necesiten
 
-El triángulo CIA representa:
-- **Confidencialidad**: Evita la divulgación no autorizada.
-- **Integridad**: Garantiza que los datos no sean alterados sin autorización.
-- **Disponibilidad**: Asegura acceso a datos cuando sea necesario.
+### Opuesto DAD
+- **Divulgación**: Ataque contra la confidencialidad
+- **Alteración**: Ataque contra la integridad
+- **Destrucción/Denegación**: Ataque contra la disponibilidad
 
-## DAD
+## Principios Adicionales
 
-El triángulo opuesto CIA es DAD:
-- **Divulgación**: Ataque contra confidencialidad.
-- **Alteración**: Ataque contra integridad.
-- **Destrucción/Denegación**: Ataque contra disponibilidad.
+### Elementos Extendidos
+- **Autenticidad**: Verifica que los datos provienen de la fuente declarada
+- **No repudio**: Garantiza que la fuente no pueda negar su participación
 
-## Modelos Fundamentales
+### Héxada de Parker
+- **Utilidad**: Garantiza que los datos sean útiles y accesibles
+- **Posesión**: Protege contra el acceso o control no autorizado
 
-Los modelos son marcos teóricos que ayudan a aplicar principios en sistemas informáticos:
+## Modelos Fundamentales de Seguridad
 
-### Modelo Bell-LaPadula
-Enfocado en confidencialidad:
-1. "No leer hacia arriba".
-2. "No escribir hacia abajo".
-3. Uso discrecional mediante matriz.
+### Modelos Teóricos
+1. **Bell-LaPadula** (confidencialidad)
+   - "No leer hacia arriba"
+   - "No escribir hacia abajo"
 
-### Modelo Biba
-Enfocado en integridad:
-1. "No leer hacia abajo".
-2. "No escribir hacia arriba".
+2. **Biba** (integridad)
+   - "No leer hacia abajo"
+   - "No escribir hacia arriba"
 
-### Modelo Clark-Wilson
-Asegura integridad mediante elementos restringidos (CDI) y procedimientos programados (TP).
+3. **Clark-Wilson**
+   - Protege integridad mediante elementos restringidos
+   - Usa procedimientos programados
 
-### Otros Modelos
-Incluyen Brewer-Nash, Goguen-Meseguer, Sutherland, Graham-Denning, Harrison-Ruzzo-Ullman.
+## Principios Arquitectónicos (ISO/IEC 19249)
 
----
+### Elementos Clave
+- Separación de dominios
+- Capas
+- Encapsulación
+- Redundancia
+- Virtualización
 
-## ISO/IEC 19249
+## Estrategias de Seguridad
 
-La norma ISO/IEC 19249 describe principios arquitectónicos para productos seguros:
+### Enfoques Principales
+1. **Defensa en Profundidad**
+   - Múltiples capas de protección
 
-1. Separación de Dominios
-2. Capas
-3. Encapsulación
-4. Redundancia
-5. Virtualización
+2. **Confianza Cero**
+   - Autenticación constante
+   - Verificación antes del acceso
 
-Principios adicionales incluyen Privilegio Mínimo, Minimización Superficie Ataque, Validación Centralizada, Servicios Centralizados, Preparación Manejo Errores.
+3. **Confía pero Verifica**
+   - Revisión continua
+   - Validación permanente
 
----
+## Conceptos de Riesgo
 
-## Defensa en Profundidad
-
-La Defensa en Profundidad implica múltiples niveles para asegurar un sistema.
-
-## Confianza Cero
-
-El principio considera que la confianza es una vulnerabilidad; se requiere autenticación antes del acceso a recursos.
-
-## Confía pero Verifica
-
-Siempre se debe verificar incluso cuando se confía; esto implica revisar registros adecuados.
-
----
-
-## Amenazas y Riesgos
-
-Conceptos clave:
-- **Vulnerabilidad**: Debilidad que puede ser explotada.
-- **Amenaza**: Potencial peligro que explota vulnerabilidades.
-- **Riesgo**: Probabilidad e impacto del daño causado por amenazas.
+### Elementos Fundamentales
+- **Vulnerabilidad**: Debilidad explotable
+- **Amenaza**: Potencial peligro que explota vulnerabilidades
+- **Riesgo**: Probabilidad e impacto del daño potencial
+-----
