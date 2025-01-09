@@ -144,3 +144,25 @@
 - `ls -lh | sort -k5 -h`: Ordena archivos por tamaño
 - `sort -t, -k2 -n fichero.csv`: Ordena CSV por segundo campo
 - `head -n 55 /var/log/auth.log | tail -n 1`: Muestra línea específica
+
+-----
+# Permisos en Directorios
+
+### Descripción de Permisos
+
+- **Ejecución (`x`)**: Permite acceder a los archivos dentro del directorio.
+- **Lectura (`r`)**: Permite enumerar las entradas del directorio.
+- **Escritura (`w`)**: Permite crear y eliminar entradas en el directorio.
+
+### Consideraciones
+
+- **Lectura o escritura sin ejecución**: No son útiles.
+- **Ejecución sin lectura**: Permite acceder a archivos si se conoce su nombre exacto (protección rudimentaria).
+
+### Permisos Útiles
+
+- `---`: Sin acceso.
+- `--x`: Acceso a archivos conocidos por nombre.
+- `r-x`: Acceso normal de sólo lectura.
+- `rwx`: Acceso normal de lectura y escritura.
+
