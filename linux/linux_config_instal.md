@@ -1,5 +1,3 @@
-Aquí está el documento reorganizado con la instalación de **Kalipwm** al final:
-
 ---
 
 # Documentación de Comandos para Instalación y Configuración de Entornos
