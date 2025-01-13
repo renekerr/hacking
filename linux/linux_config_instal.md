@@ -38,25 +38,25 @@ Tras la instalación de Kali Linux, es recomendable crear un usuario personaliza
 **Pasos para crear un nuevo usuario:**
 
 ```bash
-sudo adduser rkh
-sudo adduser rkh sudo
-sudo adduser rkh kali-trusted
+sudo adduser newuser
+sudo adduser newuser sudo
+sudo adduser newuser kali-trusted
 ```
 
 **Descripción:**  
-- `adduser rkh`: Crea el usuario `rkh`.  
-- `adduser rkh sudo`: Añade `rkh` al grupo `sudo`, permitiéndole ejecutar comandos con privilegios de administrador.  
-- `adduser rkh kali-trusted`: Agrega `rkh` al grupo `kali-trusted`, habilitando el acceso a herramientas propias de Kali.  
+- `adduser newuser`: Crea el usuario `newuser`.  
+- `adduser newuser sudo`: Añade `newuser` al grupo `sudo`, permitiéndole ejecutar comandos con privilegios de administrador.  
+- `adduser newuser kali-trusted`: Agrega `newuser` al grupo `kali-trusted`, habilitando el acceso a herramientas propias de Kali.  
 
 Para verificar la creación del usuario y su pertenencia a los grupos, ejecuta:  
 
 ```bash
-id rkh
+id newuser
 ```
 
 Salida esperada:  
 ```bash
-uid=1001(rkh) gid=1001(rkh) groups=1001(rkh),27(sudo),100(users),133(kali-trusted)
+uid=1001(newuser) gid=1001(newuser) groups=1001(newuser),27(sudo),100(users),133(kali-trusted)
 ```
 
 ---
@@ -133,17 +133,61 @@ pip install -r requirements/base.txt
 
 ---
 
-### 7. Instalación de hackerpwm
+### 7. Instalación de kalipwm
 
 ```bash
-git clone https://github.com/thegoodhackertv/hackerpwm.git
-cd hackerpwm
-./hackerpwm.sh
+git clone https://github.com/afsh4ck/kalipwm.git
+cd kalipwm
+bash kalipwm.sh
 sudo reboot
 ```
 
-**Descripción:** Clona el repositorio de Kalipwm desde GitHub, accede al directorio clonado y ejecuta el script de instalación. Reinicia el sistema para completar la instalación. Una vez reiniciado, es necesario cambiar a 'bspwn' en la pantalla de inicio de sesión.
+**Descripción:**  
+Clona el repositorio de Kalipwm desde GitHub, accede al directorio clonado y ejecuta el script de instalación. Reinicia el sistema para completar la instalación. Una vez reiniciado, en la pantalla de inicio de sesión, selecciona el entorno de ventana `bspwm` para comenzar a utilizarlo.
 
-Fuente: https://github.com/thegoodhackertv/hackerpwm
+Fuente: [https://github.com/afsh4ck/kalipwm](https://github.com/afsh4ck/kalipwm)
+
+---
+
+### Personalización de `bspwm` tras la instalación
+
+Las siguientes modificaciones se realizan para optimizar el entorno de trabajo en `bspwm`: la primera elimina el padding entre ventanas ajustando los márgenes y bordes, lo que maximiza el uso del espacio en pantalla y crea un diseño más compacto. La segunda asegura que el atajo para abrir la terminal utilice `qterminal` en lugar de `kitty`, proporcionando acceso a menús, preferencias y opciones de personalización integradas directamente en la interfaz de `qterminal`.
+
+
+#### 1. Ajustes en el archivo `bspwmrc`
+
+```bash
+cd .config
+```
+
+Modifica el archivo ubicado en `~/.config/bspwm/bspwmrc`.  
+
+Cambia los valores de las siguientes configuraciones para personalizar el entorno:  
+
+```bash
+bspc config border_width         1 # Por defecto: 2
+bspc config window_gap           1 # Por defecto: 12
+```
+
+**Descripción:**  
+- **`border_width`**: Ajusta el grosor del borde de las ventanas a un valor más delgado (1 píxel en lugar de 2).  
+- **`window_gap`**: Reduce el espacio entre las ventanas de 12 píxeles a 1 píxel, proporcionando un diseño más compacto.  
+
+#### 2. Cambios en el archivo `sxhkdrc`
+
+Modifica el archivo ubicado en `~/.config/sxhkd/sxhkdrc`.  
+
+Cambia las configuraciones relacionadas con el emulador de terminal para usar `qterminal` en lugar de la línea comentada:  
+
+```bash
+# terminal emulator
+super + Return
+#	~/.local/kitty.app/bin/kitty (línea comentada)
+	qterminal
+```
+
+**Descripción:**  
+- **`super + Return`**: Define el atajo de teclado para abrir el emulador de terminal (`qterminal` en este caso).  
+- La línea predeterminada para `kitty` se deja comentada, indicando que ahora se utilizará `qterminal` como alternativa.  
 
 ---
