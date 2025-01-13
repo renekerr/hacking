@@ -93,11 +93,14 @@ ls
 **Descripción:** Miniconda es una distribución mínima de Anaconda para crear entornos virtuales y gestionar paquetes.
 
 **Instalación:**  
-Seguir las instrucciones en el sitio oficial de [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+Seguir las instrucciones en el sitio oficial de [Miniconda](https://docs.anaconda.com/miniconda/install/). 
+
+Alternativamente se puede descargar de este [repositorio](https://repo.anaconda.com/miniconda/) la release que deseemos.
 
 **Cierre y reapertura de terminal:** Después de la instalación, cerrar y abrir nuevamente la terminal.
 
 **Configuración del entorno base:**
+Nota: si no aparece 'base', ejecutamos lo siguiente:
 
 ```bash
 echo 'export PATH="$HOME/miniconda3/bin:$PATH"' >> ~/.zshrc
@@ -114,6 +117,16 @@ conda config --set auto_activate_base false
 
 ```bash
 conda create -n "old_harvester" python=3.8.0 -c conda-forge
+```
+
+**Activar el nuevo entorno**
+```bash
+conda activate old_harvester
+```
+
+**Desactivar el nuevo entorno**
+```bash
+conda deactivate
 ```
 
 ---
