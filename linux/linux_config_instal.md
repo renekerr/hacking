@@ -190,4 +190,25 @@ super + Return
 - **`super + Return`**: Define el atajo de teclado para abrir el emulador de terminal (`qterminal` en este caso).  
 - La línea predeterminada para `kitty` se deja comentada, indicando que ahora se utilizará `qterminal` como alternativa.  
 
+### Comandos de BSPWM
+
+| **Comando**                     | **Descripción**                                                                 |
+|----------------------------------|---------------------------------------------------------------------------------|
+| **Clic derecho en Polybar**     | Cambia el tema de Polybar usando el menú del clic derecho.                      |
+| **Windows + 1,2,3,4**           | Navega entre escritorios.                                                       |
+| **Windows + Enter**             | Abre una nueva terminal.                                                       |
+| **Windows + Enter**             | Divide la terminal actual.                                                     |
+| **Windows + Flechas**           | Navega entre ventanas abiertas.                                                |
+| **Windows + Tab**               | Cambia entre los dos escritorios más recientes.                                |
+| **Windows + W**                 | Cierra la terminal actual.                                                     |
+| **Windows + Alt + R**           | Recarga el entorno de escritorio.                                              |
+| **Windows + Alt + Q**           | Reinicia BSPWM.                                                                |
+| **Windows + Alt + Flechas**     | Redimensiona la ventana actual.                                                |
+| **Windows + Shift + F**         | Abre Firefox.                                                                  |
+| **Windows + Shift + B**         | Abre Burp Suite.                                                               |
+| **Windows + Shift + 1,2,3,4**   | Mueve la ventana actual a otro escritorio.                                     |
+| **Windows + Shift + Flechas**   | Mueve la ventana actual.                                                       |
+| **Ctrl + Shift + -/+**          | Cambia el tamaño del texto en la terminal.                                     |
+| **Ctrl + T**                    | Abre un navegador avanzado desde la terminal.                                  |
+
 ---
