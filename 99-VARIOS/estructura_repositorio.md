@@ -1,5 +1,6 @@
 # Estructura de Repositorio para Hacking Ético y Ciberseguridad
 
+```plaintext
 └── hacking
     ├── .github                 # Directorio para configuración de GitHub (workflows, templates, etc.)
     │   └── workflows
@@ -37,11 +38,17 @@
     │  └── ...                  # Carpetas y archivos según vayas avanzando (Escalada de privilegios, persistencia, etc.)
     ├── 06-INFORMES-Y-DOCUMENTACION
     │  └── ...                  # Carpetas y archivos sobre cómo hacer informes y documentación
+    ├── 07-PRACTICAS-EJERCICIOS       # Carpeta para prácticas o ejercicios realizados
+    │   ├── retos                   # Subcarpeta para retos y CTFs
+    │   │   ├── 01-retos_plataforma.md    # Notas sobre retos en plataformas como Hack The Box, TryHackMe, etc.
+    │   │   ├── 02-competencias.md        # Información sobre competencias realizadas
+    │   │   └── 03-notas_generales.md     # Notas generales sobre estrategias o aprendizaje en CTFs
+    │   ├── ejemplos                # Subcarpeta para ejercicios prácticos
+    │   └── assets                  # Multimedia relacionado con las prácticas o ejercicios
     ├── 99-VARIOS               # Para notas misceláneas o archivos que no encajan en las categorías principales
     │   ├── 01-estructura_repositorio.md
     │   ├── 02-md_formatos.md
     │   ├── 03-notas.md
     │   └── 04-revisar.md
     └── assets                # (Nuevo) Para guardar imágenes o archivos multimedia usados en los .md
-
-
+```
