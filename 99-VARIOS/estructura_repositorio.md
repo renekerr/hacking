@@ -16,7 +16,7 @@
     │   │    ├── 03-principios_seguridad.md
     │   │    └── 04-seguridad_defensiva.md
     │   ├── 02-redes
-    │   │    └── 01-fundamentos_redes.md
+    │   │    └── 01-modelos_y_protocolos_comunicacion.md
     │   └── 03-linux  
     │        ├── 01-linux_config_instal.md
     │        └── 02-linux_notas.md
