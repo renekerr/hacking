@@ -1,6 +1,4 @@
 
----
-
 ### **Redes, Protocolos y Modelos de Comunicación**
 
 ---
@@ -31,7 +29,6 @@
 | Capa 2     | Internet (Internet Layer)                   | Enrutamiento de paquetes a través de redes. Ejemplo: IP. |
 | Capa 1     | Interfaz de Red (Network Interface Layer)   | Controla el acceso al medio físico, como Ethernet. |
 
-
 ---
 
 #### **3. Protocolo TCP (Transmission Control Protocol)**
@@ -52,7 +49,25 @@
 
 ---
 
-#### **4. Protocolo UDP (User Datagram Protocol)**
+#### **4. Encabezado de Paquetes TCP**
+
+Los paquetes TCP contienen varias secciones de información conocidas como **encabezados** que se añaden durante el proceso de **encapsulación**. A continuación se explica algunos de los encabezados más cruciales:
+
+| **Encabezado**          | **Descripción**                                                                                                                                                       |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Source Port**          | Este valor es el puerto abierto por el remitente para enviar el paquete TCP. Se elige aleatoriamente de los puertos disponibles (0-65535) que no están en uso en ese momento. |
+| **Destination Port**     | Es el número de puerto en el que una aplicación o servicio está ejecutándose en el host remoto (el que recibe los datos). Por ejemplo, un servidor web ejecutándose en el puerto 80. |
+| **Source IP**            | Dirección IP del dispositivo que está enviando el paquete.                                                                                                           |
+| **Destination IP**       | Dirección IP del dispositivo al que está destinado el paquete.                                                                                                       |
+| **Sequence Number**      | Número asignado aleatoriamente a la primera pieza de datos transmitida cuando se establece una conexión. Se explica con más detalle más adelante.                    |
+| **Acknowledgement Number**| Después de que una pieza de datos haya recibido un número de secuencia, el número para el siguiente dato será el número de secuencia +1. Se explicará más adelante.     |
+| **Checksum**             | Valor que otorga integridad a TCP. Se realiza un cálculo matemático y el resultado se recuerda. Cuando el dispositivo receptor realiza el cálculo, si el resultado no coincide con el enviado, los datos se consideran corruptos. |
+| **Data**                 | Aquí se almacena la información, es decir, los bytes de un archivo que se está transmitiendo.                                                                         |
+| **Flag**                 | Este encabezado determina cómo debe ser manejado el paquete por cada dispositivo durante el proceso de **handshake** (apretón de manos). Específicos valores de flags definen comportamientos específicos. |
+
+---
+
+#### **5. Protocolo UDP (User Datagram Protocol)**
 - **Descripción**: El **protocolo UDP** es más sencillo y rápido que TCP, pero no garantiza la entrega ni la integridad de los datos. Se utiliza cuando la velocidad es más crítica que la fiabilidad.
 - **Características**:
   - **Sin conexión**: No establece una conexión antes de enviar los datos.
@@ -66,7 +81,7 @@
 
 ---
 
-#### **5. Protocolo ARP (Address Resolution Protocol)**
+#### **6. Protocolo ARP (Address Resolution Protocol)**
 - **Descripción**: El **protocolo ARP** es utilizado para mapear una dirección IP a una dirección MAC en una red local.
 - **Funcionamiento**:
   - **ARP Request**: Un dispositivo solicita la dirección MAC asociada a una dirección IP.
@@ -74,7 +89,7 @@
   
 ---
 
-#### **6. Paquetes y Tramas**
+#### **7. Paquetes y Tramas**
 - **Definiciones**:
   - **Trama (Frame)**: Un **paquete** encapsulado en la capa de enlace de datos (**Data Link Layer**) para su transmisión física a través de la red. No incluye direcciones IP.
   - **Paquete (Packet)**: Una unidad de datos que se transmite a través de la capa de red (**Network Layer**), e incluye direcciones IP para la identificación de origen y destino.
@@ -82,7 +97,7 @@
 
 ---
 
-#### **7. Puertos**
+#### **8. Puertos**
 - **Definición**: Los **puertos** son valores numéricos que ayudan a identificar aplicaciones o servicios dentro de un dispositivo. Rango de puertos: **0-65535**.
   - **Puertos bien conocidos** (0-1024): Usados por protocolos comunes (por ejemplo, HTTP en puerto 80).
   - **Puertos registrados** (1025-49151) y **puertos dinámicos** (49152-65535).
@@ -98,7 +113,7 @@
 
 ---
 
-#### **8. Topologías de Redes LAN**
+#### **9. Topologías de Redes LAN**
 - **Descripción**: Las **topologías de red** definen la disposición física y lógica de los dispositivos en una red.
   
 1. **Topología Estrella (Star)**
@@ -118,7 +133,7 @@
 
 ---
 
-#### **9. Subnetting (Subredes)**
+#### **10. Subnetting (Subredes)**
 - **Descripción**: El **subnetting** es el proceso de dividir una red en subredes más pequeñas para mejorar la administración y seguridad.
 - **Propósitos**:
   - **Network Address**: Identifica la subred.
@@ -127,7 +142,7 @@
 
 ---
 
-#### **10. Estructura de un Paquete IP**
+#### **11. Estructura de un Paquete IP**
 - **Descripción**: Los paquetes **IP** tienen una estructura definida para transportar los datos a través de la red.
   
 | **Campo**              | **Descripción**                                  |
@@ -139,7 +154,7 @@
 
 ---
 
-#### **11. Proceso de Three-Way Handshake**
+#### **12. Proceso de Three-Way Handshake**
 - **Descripción**: El **Three-Way Handshake** es el proceso que utiliza **TCP** para establecer una conexión.
   
 | **Paso** | **Mensaje** | **Descripción**                                |
@@ -152,7 +167,7 @@
 
 ---
 
-#### **12. Asignación de Direcciones IP**
+#### **13. Asignación de Direcciones IP**
 - **Descripción**: La **asignación de direcciones IP** es el proceso mediante el cual un dispositivo obtiene una dirección IP para su comunicación dentro de una red. Existen dos métodos principales para la asignación de IP:
   - **Manual**: Se asigna la dirección IP de forma estática al dispositivo.
   - **Automática**: A través de un servidor **DHCP** (Dynamic Host Configuration Protocol), que asigna direcciones IP automáticamente.
@@ -168,5 +183,4 @@
 ### **Conclusión**
 El **modelo OSI** y los protocolos **TCP/IP** son fundamentales para la comunicación en redes. **TCP** proporciona una comunicación confiable y ordenada, mientras que **UDP** es más eficiente en velocidad, pero carece de garantías de entrega. Además, conceptos como **ARP**, **subnetting**, y la correcta gestión de **puertos** y **topologías de red** son esenciales para el diseño, mantenimiento y seguridad de las redes. La correcta implementación y entendimiento de estos modelos y protocolos permite optimizar el tráfico de red y asegurar una comunicación eficiente.
 
----
-
+--
