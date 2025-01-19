@@ -31,21 +31,49 @@
 
 ---
 
+
+
 #### **3. Protocolo TCP (Transmission Control Protocol)**
+
 - **Descripción**: El **protocolo TCP** es uno de los protocolos más utilizados para la transmisión confiable de datos. Está diseñado para asegurar que los datos lleguen a su destino de manera correcta y en orden.
+  
 - **Características**:
   - **Conexión orientada**: Establece una conexión antes de transmitir datos.
   - **Fiabilidad**: Utiliza **checksum**, **secuenciación** y **retransmisión** para garantizar que los datos sean entregados correctamente.
-  - **Three-Way Handshake**:
-    1. **SYN**: El cliente inicia la conexión.
-    2. **SYN/ACK**: El servidor responde.
-    3. **ACK**: El cliente confirma la conexión.
+
+---
+
+### **Three-Way Handshake**
+
+El **Three-Way Handshake** es el proceso que utiliza **TCP** para establecer una conexión. Este proceso asegura que ambos dispositivos estén de acuerdo sobre el orden de los datos y la comunicación pueda continuar de manera efectiva.
+
+| **Paso** | **Mensaje**  | **Descripción**                                                                                           |
+|----------|--------------|-----------------------------------------------------------------------------------------------------------|
+| 1        | **SYN**      | El cliente envía su **Número de Secuencia Inicial (ISN)** para sincronizar la conexión (ejemplo: ISN = 0). |
+| 2        | **SYN/ACK**  | El servidor responde con su propio ISN (ejemplo: ISN = 5,000) y confirma el ISN del cliente (0).            |
+| 3        | **ACK**      | El cliente confirma el ISN del servidor (5,000) y comienza a enviar datos, iniciando con ISN+1 (0 + 1 = 1).  |
+
+---
+
+### **Secuenciación de Datos**
+
+Una vez establecida la conexión, los datos se envían con números de secuencia incrementales, asegurando que se reciban correctamente y en el orden adecuado.
+
+| **Cliente (Emisor)** | **Número de Secuencia Inicial (ISN)** | **Primer Paquete** | **Segundo Paquete** | **Tercer Paquete** |
+|----------------------|---------------------------------------|--------------------|---------------------|--------------------|
+| Cliente              | 0                                     | 0 + 1 = 1          | 1 + 1 = 2           | 2 + 1 = 3          |
+
+---
+
 - **Ventajas**:
   - Alta fiabilidad, garantiza el orden y la integridad de los datos.
-  - Es utilizado en aplicaciones críticas, como **navegación web (HTTP)** y **correo electrónico**.
+  - Es utilizado en aplicaciones críticas como **navegación web (HTTP)** y **correo electrónico**.
+
 - **Desventajas**:
   - Más lento que UDP debido a la sobrecarga de verificación de datos.
   - Requiere más recursos del sistema debido al control de flujo y congestión.
+
+---
 
 ---
 
@@ -153,17 +181,17 @@ Los paquetes TCP contienen varias secciones de información conocidas como **enc
 | **Destination Address**| Dirección IP de destino.                        |
 
 ---
-
 #### **12. Proceso de Three-Way Handshake**
 - **Descripción**: El **Three-Way Handshake** es el proceso que utiliza **TCP** para establecer una conexión.
-  
+
 | **Paso** | **Mensaje** | **Descripción**                                |
 |----------|-------------|------------------------------------------------|
-| 1        | **SYN**     | Cliente inicia la sincronización.              |
-| 2        | **SYN/ACK** | Servidor responde.                             |
-| 3        | **ACK**     | Cliente confirma la conexión.                 |
-| 4        | **DATA**    | Inicia la transmisión de datos.                |
+| 1        | **SYN**     | El cliente inicia la sincronización.              |
+| 2        | **SYN/ACK** | El servidor responde.                             |
+| 3        | **ACK**     | El cliente o servidor confirma la conexión.      |
+| 4        | **DATA**    | Inicia la transmisión de datos.                  |
 | 5        | **FIN**     | Cierre de la conexión.                         |
+| 6        | **RST**     | Este paquete termina la conexión de manera abrupta si ocurre un problema.  |
 
 ---
 
