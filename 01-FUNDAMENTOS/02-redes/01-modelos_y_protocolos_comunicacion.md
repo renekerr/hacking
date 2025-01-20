@@ -1,4 +1,4 @@
-# Fundamentos de Redes: Modelo OSI, TCP/IP y Conceptos Clave
+# Fundamentos de Redes: Modelo OSI, TCP/IP
 
 ## 1. Modelo OSI (Open Systems Interconnection)
 
