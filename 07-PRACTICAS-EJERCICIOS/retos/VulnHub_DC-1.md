@@ -92,7 +92,3 @@ Este comando permite encontrar binarios SUID que podrían ser explotados para es
 find . -exec /bin/sh \; -quit
 ```
 
-Este resumen proporciona una estructura clara y concisa del contenido original, manteniendo los términos técnicos necesarios en inglés.
-
-Citations:
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/18241609/02e78621-af9b-4e68-bed8-be43e45c5ee4/b27e764d-0d77-40f3-8066-c10db4c2609f_DC-1_Vulhub__Write-Up.pdf
