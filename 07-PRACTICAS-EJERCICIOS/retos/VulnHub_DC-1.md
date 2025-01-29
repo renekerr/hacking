@@ -59,7 +59,7 @@ Para descubrir la dirección IP de la máquina del laboratorio, utilizaremos `ne
 
 4. Comprobamos que la máquina es accesible con `ping`:
    ```
-   ping <IP_DC-1>
+   ping 10.0.2.5
    ```
    ![imagen 5](https://github.com/user-attachments/assets/ccb60033-431d-4424-94e2-6d428ec5316b)
 
