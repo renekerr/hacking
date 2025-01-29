@@ -66,7 +66,7 @@ Para descubrir la dirección IP de la máquina del laboratorio, utilizaremos `ne
 ---
 
 
-## Escaneo de Red y Enumeración
+## Escaneo y enumeración de puertos.
 Ejecutaremos `nmap` para escanear puertos abiertos y detectar los servicios en ejecución:
 ```
 nmap -sC -sV -A 10.0.2.5
