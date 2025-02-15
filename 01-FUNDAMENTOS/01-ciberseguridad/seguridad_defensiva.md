@@ -2,74 +2,87 @@
 
 ## Roles en Ciberseguridad
 
-- **Probador de Penetración (Penetration Tester)**: Prueba productos tecnológicos para identificar vulnerabilidades de seguridad explotables.
-- **Equipo Rojo (Red Teamer)**: Simula ataques adversarios en una organización, proporcionando retroalimentación desde la perspectiva de un atacante.
-- **Ingeniero de Seguridad (Security Engineer)**: Diseña, monitorea y mantiene controles de seguridad, redes y sistemas para prevenir ciberataques.
+- **Especialista en Pruebas de Penetración (Penetration Tester)**: Profesional que realiza evaluaciones de seguridad simulando ataques reales para identificar vulnerabilidades en sistemas, aplicaciones y redes, con el objetivo de proporcionar recomendaciones para mejorar la defensa ante posibles amenazas.
+- **Equipo Rojo (Red Teamer)**: Simula ataques reales sobre una organización para poner a prueba sus defensas y mejorar la capacidad de respuesta ante incidentes de seguridad.
+- **Ingeniero de Seguridad (Security Engineer)**: Diseña, implementa y mantiene controles de seguridad, redes y sistemas para proteger contra ciberamenazas.
 
 ---
 
 ## Tareas de Seguridad Defensiva
 
 ### Responsabilidades Clave:
-- **Capacitación en Concientización del Usuario**: Educar a los usuarios sobre ciberseguridad para mitigar los riesgos de ataques dirigidos.
-- **Documentación y Gestión de Activos**: Mantener un inventario de sistemas y dispositivos para asegurar una protección adecuada.
-- **Actualizaciones y Parches del Sistema**: Asegurar que todos los sistemas, servidores y dispositivos estén actualizados y seguros contra vulnerabilidades conocidas.
-- **Configuración de Dispositivos de Seguridad Preventiva**:
-  - **Firewalls (Cortafuegos)**: Controlan el tráfico de red que entra y sale de los sistemas.
-  - **Sistemas de Prevención de Intrusiones (IPS)**: Bloquean el tráfico que coincide con firmas y reglas de ataque predefinidas.
-- **Configuración de Registro y Monitoreo**: Configurar adecuadamente los sistemas para detectar actividades maliciosas o dispositivos no autorizados en la red.
+- **Concientización en Ciberseguridad**: Educar a los usuarios para reducir los riesgos de ataques dirigidos como phishing o ingeniería social.
+- **Gestión de Activos**: Mantener un inventario actualizado de sistemas y dispositivos para aplicar políticas de seguridad adecuadas.
+- **Mantenimiento de Parches**: Asegurar que todos los sistemas estén al día con las últimas actualizaciones de seguridad.
+- **Configuración de Herramientas de Seguridad**:
+  - **Firewalls (Cortafuegos)**: Controlan el tráfico de red y bloquean posibles amenazas.
+  - **Sistemas de Prevención de Intrusiones (IPS)**: Detectan y bloquean ataques en tiempo real.
+- **Monitoreo y Registro de Seguridad**: Detectar comportamientos inusuales o no autorizados en la red.
 
-### Temas Adicionales en Seguridad Defensiva:
-- **Centro de Operaciones de Seguridad (SOC)**
-- **Inteligencia de Amenazas**
-- **Análisis Forense Digital y Respuesta a Incidentes (DFIR)**
-- **Análisis de Malware**
+### Metodologías de Evaluación en Ciberseguridad
+
+Las siguientes metodologías son fundamentales para evaluar la seguridad de sistemas, aplicaciones y redes:
+
+#### OSSTMM (Open Source Security Testing Methodology Manual)
+Proporciona un marco detallado para la evaluación de la seguridad de sistemas, redes y el aspecto humano, abarcando:
+- Telecomunicaciones (VoIP, redes móviles)
+- Redes cableadas e inalámbricas
+
+#### OWASP (Open Web Application Security Project)
+Enfocado en la seguridad de aplicaciones web, con un listado anual de las **10 vulnerabilidades más críticas** y mejores prácticas para mitigarlas.
+
+#### NIST Cybersecurity Framework 1.1
+Un marco estándar para mejorar las prácticas de ciberseguridad en infraestructuras críticas y organizaciones comerciales, centrándose en la gestión de riesgos cibernéticos.
+
+#### NCSC CAF (Cyber Assessment Framework)
+Evalúa la postura de seguridad de organizaciones críticas como proveedores de servicios financieros y de infraestructura, centrándose en áreas clave como resiliencia y monitoreo continuo.
 
 ---
 
 ## Centro de Operaciones de Seguridad (SOC)
 
-Un SOC es un equipo de profesionales de ciberseguridad responsables de monitorear redes y sistemas para detectar actividades maliciosas. Las áreas clave de enfoque incluyen:
+Un SOC está compuesto por expertos en ciberseguridad que supervisan continuamente redes y sistemas para detectar y responder a incidentes de seguridad.
 
-- **Vulnerabilidades**: Abordar las debilidades aplicando actualizaciones o tomando medidas preventivas si no hay una solución disponible.
-- **Violaciones de Políticas**: Detectar infracciones de las reglas de seguridad, como la carga de datos confidenciales en plataformas no autorizadas.
-- **Actividad No Autorizada**: Identificar y detener rápidamente los inicios de sesión no autorizados u otras acciones maliciosas.
-- **Intrusiones en la Red**: Detectar y mitigar ataques como el phishing o la explotación de servidores para minimizar los daños.
+### Áreas de Enfoque:
+- **Vulnerabilidades**: Gestionar debilidades en los sistemas, aplicando parches o mitigaciones si no hay soluciones inmediatas.
+- **Violaciones de Políticas**: Detectar y responder a infracciones de las normas internas de seguridad.
+- **Accesos No Autorizados**: Identificar y bloquear inicios de sesión o actividades maliciosas.
+- **Intrusiones de Red**: Detectar ataques como phishing, malware y explotación de vulnerabilidades.
 
 ### Inteligencia de Amenazas
-La inteligencia de amenazas implica recopilar información sobre los adversarios para preparar mejor las defensas. Los puntos clave incluyen:
-- Recopilar, procesar y analizar datos de fuentes como registros de red y foros públicos.
-- Comprender las tácticas, técnicas y motivos de los adversarios.
-- Desarrollar pasos prácticos para mitigar los ataques y preparar estrategias de respuesta.
+La inteligencia de amenazas involucra la recopilación de información sobre adversarios potenciales para reforzar las defensas. Implica:
+- Analizar registros de red y fuentes externas.
+- Estudiar tácticas y motivaciones de los atacantes.
+- Desarrollar estrategias de mitigación adaptadas.
 
 ---
 
 ## Análisis Forense Digital y Respuesta a Incidentes (DFIR)
 
 ### Análisis Forense Digital
-Se centra en la investigación y el análisis de la evidencia de los ataques. Las áreas clave incluyen:
-- **Sistemas de Archivos**: Examinar los datos de almacenamiento, incluidos los archivos eliminados y parcialmente sobrescritos.
-- **Memoria del Sistema**: Capturar y analizar el contenido de la memoria para identificar programas maliciosos.
-- **Registros del Sistema y de la Red**: Investigar las actividades y descubrir rastros de las acciones del atacante.
+Se centra en la recolección y análisis de evidencia digital tras un ataque. Las áreas clave incluyen:
+- **Sistemas de Archivos**: Investigación de archivos eliminados y datos corrompidos.
+- **Memoria del Sistema**: Análisis de la RAM para identificar procesos maliciosos en ejecución.
+- **Registros de Red**: Estudio de logs para rastrear el origen y la extensión de los ataques.
 
 ### Respuesta a Incidentes
-La respuesta a incidentes implica abordar las filtraciones de datos, los ciberataques y otros eventos de seguridad utilizando un enfoque estructurado:
-1. **Preparación**: Capacitar a los equipos e implementar medidas preventivas.
-2. **Detección y Análisis**: Identificar y evaluar la gravedad de los incidentes.
-3. **Contención, Erradicación y Recuperación**: Detener la propagación del problema, eliminarlo y restaurar los sistemas afectados.
-4. **Actividad Posterior al Incidente**: Documentar las lecciones aprendidas y prevenir futuros incidentes.
+La respuesta estructurada a incidentes incluye las siguientes fases:
+1. **Preparación**: Desarrollar planes y capacitar a equipos para prevenir futuros incidentes.
+2. **Detección y Análisis**: Identificar rápidamente y evaluar la naturaleza del ataque.
+3. **Contención, Erradicación y Recuperación**: Limitar los daños, eliminar la amenaza y restaurar los sistemas.
+4. **Revisión Post-Incidente**: Analizar las lecciones aprendidas para fortalecer la seguridad.
 
 ---
 
 ## Análisis de Malware
 
-El malware incluye programas como virus, troyanos y ransomware diseñados para interrumpir los sistemas. Tipos clave:
-- **Virus**: Se adjuntan a los programas, se propagan y causan daños.
-- **Troyanos (Caballos de Troya)**: Se disfrazan de programas legítimos mientras realizan actividades maliciosas.
-- **Ransomware**: Cifran archivos y exigen un pago para el descifrado.
+El malware (virus, troyanos, ransomware) se utiliza para dañar o tomar control de sistemas. Algunas de las formas más comunes incluyen:
+- **Virus**: Programas que se replican y dañan archivos y sistemas.
+- **Troyanos**: Programas maliciosos que se camuflan como legítimos, permitiendo el acceso remoto.
+- **Ransomware**: Cifra archivos importantes y solicita un rescate para su liberación.
 
 ### Técnicas de Análisis:
-- **Análisis Estático**: Inspeccionar el malware sin ejecución, lo que requiere conocimientos del lenguaje ensamblador.
-- **Análisis Dinámico**: Ejecutar el malware en un entorno controlado para observar su comportamiento.
+- **Análisis Estático**: Inspección sin ejecutar el malware, analizando el código y las firmas.
+- **Análisis Dinámico**: Ejecutar el malware en un entorno controlado para estudiar su comportamiento en tiempo real.
 
-El análisis de malware ayuda a comprender el software malicioso para mejorar las defensas y las estrategias de respuesta.
+---
