@@ -91,11 +91,22 @@
 ### Executive Summary (Resumen Ejecutivo)
 **Definición:** Descripción breve y concisa de los resultados clave de la prueba.
 
-## Términos Adicionales
+## Otros Términos Importantes
 
-- **APT (Advanced Persistent Threat):** Ataques dirigidos y sostenidos.
-- **DDoS (Distributed Denial of Service):** Ataque para saturar un servicio o red.
-- **MitM (Man in the Middle):** Intercepta y posiblemente altera la comunicación.
-- **Spoofing:** Suplantación de identidad o de dispositivos.
-- **Sniffing:** Escucha pasiva de tráfico en una red para capturar información.
-- **Rogue AP (Punto de Acceso Malicioso):** Puntos de acceso maliciosos para robar datos.
+### APT (Advanced Persistent Threat)
+**Definición:** Ataques dirigidos y sostenidos.
+
+### DDoS (Distributed Denial of Service)
+**Definición:** Ataque para saturar un servicio o red.
+
+### MitM (Man in the Middle)
+**Definición:** Intercepta y posiblemente altera la comunicación.
+
+### Spoofing
+**Definición:** Suplantación de identidad o de dispositivos.
+
+### Sniffing
+**Definición:** Escucha pasiva de tráfico en una red para capturar información.
+
+### Rogue AP (Punto de Acceso Malicioso)
+**Definición:** Puntos de acceso maliciosos para robar datos.
