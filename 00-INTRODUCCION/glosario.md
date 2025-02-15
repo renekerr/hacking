@@ -40,53 +40,62 @@
 ### Enumeration
 **Definición:** Proceso de identificación de recursos disponibles en un sistema.
 
-### Passive Reconnaissance
+### Passive Reconnaissance (Reconocimiento Pasivo)
 **Definición:** Recopilación de información sin interactuar directamente con el sistema objetivo.
 
-### Active Reconnaissance
+### Active Reconnaissance (Reconocimiento Activo)
 **Definición:** Recopilación de información mediante la interacción controlada con el sistema objetivo.
 
-### Scanning
+### Scanning (Escaneo)
 **Definición:** Proceso de explorar un sistema en busca de vulnerabilidades.
 
-### Vulnerability Scanning
+### Vulnerability Scanning (Escaneo de Vulnerabilidades)
 **Definición:** Proceso automatizado de identificar vulnerabilidades conocidas en un sistema.
 
-### Mapping
+### Mapping (Mapeo)
 **Definición:** Proceso de crear un mapa de la infraestructura y los servicios de un sistema objetivo.
 
-### Exploitation
+### Exploitation (Explotación)
 **Definición:** Proceso de aprovechar las vulnerabilidades para obtener acceso a un sistema.
 
 ### Footholding
 **Definición:** Proceso de obtener acceso inicial a un sistema comprometido.
 
-### Gaining Access
+### Gaining Access (Obtención de Acceso)
 **Definición:** Objetivo de la explotación de vulnerabilidades para obtener control sobre un sistema.
 
-### Post-Exploitation
+### Post-Exploitation (Post-Explotación)
 **Definición:** Acciones realizadas después de obtener acceso inicial a un sistema comprometido.
 
-### Maintaining Access
+### Maintaining Access (Mantenimiento de Acceso)
 **Definición:** Técnicas utilizadas para mantener el acceso a un sistema comprometido.
 
-### Privilege Escalation
+### Privilege Escalation (Escalamiento de Privilegios)
 **Definición:** Proceso de obtener mayores privilegios dentro de un sistema.
 
-### Lateral Movement
+### Lateral Movement (Movimiento Lateral)
 **Definición:** Técnica de moverse entre diferentes sistemas en una red.
 
-### Internal Reconnaissance
+### Internal Reconnaissance (Reconocimiento Interno)
 **Definición:** Recopilación de información sobre la red interna después de obtener acceso inicial.
 
-### Reporting
+### Reporting (Informe)
 **Definición:** Fase final del proceso de pruebas de seguridad para documentar hallazgos.
 
-### Remediation
+### Remediation (Remediación)
 **Definición:** Acciones recomendadas para corregir vulnerabilidades encontradas.
 
-### Findings
+### Findings (Hallazgos)
 **Definición:** Vulnerabilidades y problemas de seguridad descubiertos durante una prueba.
 
-### Executive Summary
+### Executive Summary (Resumen Ejecutivo)
 **Definición:** Descripción breve y concisa de los resultados clave de la prueba.
+
+## Términos Adicionales
+
+- **APT (Advanced Persistent Threat):** Ataques dirigidos y sostenidos.
+- **DDoS (Distributed Denial of Service):** Ataque para saturar un servicio o red.
+- **MitM (Man in the Middle):** Intercepta y posiblemente altera la comunicación.
+- **Spoofing:** Suplantación de identidad o de dispositivos.
+- **Sniffing:** Escucha pasiva de tráfico en una red para capturar información.
+- **Rogue AP (Punto de Acceso Malicioso):** Puntos de acceso maliciosos para robar datos.
