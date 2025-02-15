@@ -15,8 +15,8 @@
 - **Documentación y Gestión de Activos**: Mantener un inventario de sistemas y dispositivos para asegurar una protección adecuada.
 - **Actualizaciones y Parches del Sistema**: Asegurar que todos los sistemas, servidores y dispositivos estén actualizados y seguros contra vulnerabilidades conocidas.
 - **Configuración de Dispositivos de Seguridad Preventiva**:
-  - **Firewalls (Cortafuegos)**: Controlan el tráfico de red que entra y sale de los sistemas.
-  - **Sistemas de Prevención de Intrusiones (IPS)**: Bloquean el tráfico que coincide con firmas y reglas de ataque predefinidas.
+  - **Firewalls (Cortafuegos)**: Controlan el tráfico de red que entra y sale de los sistemas.
+  - **Sistemas de Prevención de Intrusiones (IPS)**: Bloquean el tráfico que coincide con firmas y reglas de ataque predefinidas.
 - **Configuración de Registro y Monitoreo**: Configurar adecuadamente los sistemas para detectar actividades maliciosas o dispositivos no autorizados en la red.
 
 ### Temas Adicionales en Seguridad Defensiva:
