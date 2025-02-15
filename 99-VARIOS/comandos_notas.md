@@ -265,3 +265,8 @@ Usa el hash generado para obtener información relacionada con malware en bases 
 
 **¿Quieres que te muestre el contenido completo y actualizado del archivo `99-VARIOS/comandos_utiles.md` con estas adiciones?**
 
+### Enviar solicitud GET con salida detallada
+
+```bash
+curl http://10.10.245.129/ -v
+
