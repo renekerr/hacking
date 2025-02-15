@@ -30,3 +30,5 @@
 *   [John Hammond (YouTube)](https://www.youtube.com/@_JohnHammond): Análisis de retos de seguridad y guías.
 *   [El lado del mal (Blog)](https://www.elladodelmal.com/): Blog en español sobre hacking y ciberseguridad.
 *   [Hacking Articles](https://www.hackingarticles.in/ctf-challenges-walkthrough/): Tutoriales para resolver retos CTF.
+
+
