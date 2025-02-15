@@ -29,3 +29,10 @@ Escaneo de servicios.
 Identificación de sistemas operativos.
 
 El texto concluye que se profundizará en estas técnicas en las siguientes secciones del curso.
+
+## Reconocimiento Activo
+
+### Enviar solicitud GET con salida detallada
+
+```bash
+curl http://10.10.245.129/ -v
