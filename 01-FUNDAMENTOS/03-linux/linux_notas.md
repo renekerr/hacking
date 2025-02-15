@@ -166,3 +166,99 @@
 - `r-x`: Acceso normal de sólo lectura.
 - `rwx`: Acceso normal de lectura y escritura.
 
+
+
+
+## Atajos útiles en Linux
+*   CTRL+L: Limpia la pantalla rápidamente.
+*   Flecha arriba: Recupera el último comando escrito.
+*   2>/dev/null: Excluye archivos/directorios sin permisos al ejecutar find.
+
+## Procesos en Linux
+
+*   **ps**: Ver procesos.
+    
+
+bash
+    ps aux
+
+
+*   **top**: Monitorizar procesos en tiempo real.
+*   **kill**: Terminar un proceso.
+    
+
+bash
+    kill <PID>
+
+
+*   **systemctl**: Gestionar servicios.
+    
+
+bash
+    systemctl start apache2
+    systemctl enable apache2
+
+
+*   **comando &**: Ejecutar en segundo plano.
+*   **fg**: Traer proceso al primer plano.
+*   **cron**: Programar tareas.
+    
+
+bash
+    crontab -e
+
+
+
+## Búsqueda y Administración de Archivos en Linux
+
+*   **find**: Buscar archivos.
+    
+
+bash
+    find [ruta] -type f -name [nombre]
+
+
+*   **cp**: Copiar archivos.
+    
+
+bash
+    cp [archivo/carpeta] [directorio]
+
+
+*   **mv**: Mover/renombrar archivos.
+    
+
+bash
+    mv [archivo] [directorio]
+
+
+*   **touch**: Crear archivos.
+    
+
+bash
+    touch [nombre]
+
+
+*   **mkdir**: Crear directorios.
+    
+
+bash
+    mkdir [nombre]
+
+
+*   **nano/cat**: Editar/Ver archivos.
+    
+
+bash
+    nano [archivo]
+    cat [archivo]
+
+
+*   **scp**: Subir archivos a remoto.
+    
+
+bash
+    scp [archivo] [usuario]@[IP]:/[directorio]
+
+
+*   **./[script]**: Ejecutar script Bash.
