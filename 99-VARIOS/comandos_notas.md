@@ -397,9 +397,9 @@ sha256sum <nombre_del_archivo>
 
     ```bash
     #!/bin/bash
-    echo "Hola, ¿cómo te llamas?"
-    read name
-    echo "Bienvenido, $name"
+    echo "Por favor, ingresa tu nombre:"
+    read usuario
+    echo "Hola, $usuario!"
     ```
 
 *   **Bucles (Loops):** Repiten un bloque de código.
@@ -407,8 +407,8 @@ sha256sum <nombre_del_archivo>
 
     ```bash
     #!/bin/bash
-    for i in {1..10}; do
-        echo $i
+    for i in {1..5}; do
+        echo "Iteración número: $i"
     done
     ```
 
@@ -417,12 +417,12 @@ sha256sum <nombre_del_archivo>
 
     ```bash
     #!/bin/bash
-    echo "Por favor, introduce tu nombre:"
-    read name
-    if [ "$name" = "Stewart" ]; then
-        echo "Bienvenido, Stewart! Aquí está el secreto: THM_Script"
+    echo "Ingresa un número:"
+    read numero
+    if [ "$numero" -gt 10 ]; then
+        echo "El número es mayor que 10."
     else
-        echo "¡Lo siento! No estás autorizado a acceder al secreto."
+        echo "El número es menor o igual que 10."
     fi
     ```
 
@@ -431,19 +431,19 @@ sha256sum <nombre_del_archivo>
     ```bash
     #!/bin/bash
 
-    # Preguntando al usuario que introduzca un valor.
-    echo "Por favor, introduce tu nombre:"
+    # Pide al usuario que ingrese un número.
+    echo "Ingresa un número:"
 
-    # Almacenando el valor introducido por el usuario en una variable.
-    read name
+    # Almacena el número ingresado en una variable.
+    read numero
 
-    # Comprobando si el nombre que introdujo el usuario es igual a nuestro nombre requerido.
-    if [ "$name" = "Stewart" ]; then
-        # Si es igual al nombre requerido, se mostrará la siguiente línea.
-        echo "Bienvenido Stewart! Aquí está el secreto: THM_Script"
-    # Definiendo la frase que se mostrará si la condición falla.
+    # Comprueba si el número es mayor que cero.
+    if [ "$numero" -gt 0 ]; then
+        # Si es mayor que cero, muestra el mensaje.
+        echo "El número es positivo."
+    # Define la acción si la condición no se cumple.
     else
-        echo "¡Lo siento! No estás autorizado a acceder al secreto."
+        echo "El número es cero o negativo."
     fi
     ```
 
@@ -452,39 +452,38 @@ sha256sum <nombre_del_archivo>
 *   **`Get-Alias`**: Muestra la lista de alias definidos en la sesión actual.
     *   **Descripción:** Recupera los alias disponibles. Un alias es un nombre alternativo (más corto) para un cmdlet o comando.
     *   `Get-Alias` (Lista todos los alias.)
-    *   `Get-Alias -Name ls` (Muestra el cmdlet al que apunta el alias `ls`, que normalmente es `Get-ChildItem`.)
+    *   `Get-Alias -Name <alias>` (Muestra el cmdlet al que apunta el alias especificado, por ejemplo `ls`, `cat`, `rm`.)
 *   **`Get-Command`**: Obtiene información sobre comandos (cmdlets, funciones, alias, etc.).
     *   **Descripción:** Permite buscar y obtener detalles sobre comandos disponibles en PowerShell.
     *   `Get-Command` (Lista todos los comandos disponibles.)
     *   `Get-Command -CommandType "Cmdlet"` (Lista solo los cmdlets.)
     *   `Get-Command -CommandType "Function"` (Lista solo las funciones.)
-    *   `Get-Command -Name "*Content"` (Busca cmdlets que contengan "Content" en su nombre.)
-    *   `Get-Command -Name "*Item*"` (Busca cmdlets que contengan "Item" en su nombre.)
+    *   `Get-Command -Name "*<palabraClave>*"` (Busca cmdlets que contengan `<palabraClave>` en su nombre, por ejemplo "*Process*", "*Service*".)
+    *   `Get-Command -Name "<nombreParcial>*"` (Busca cmdlets que comiencen con `<nombreParcial>`).
 *   **`Get-Content`**: Obtiene el contenido de un archivo.
     *   **Descripción:** Lee el contenido de un archivo y lo muestra en la consola.
-    *   `Get-Content file.txt` (Muestra el contenido de file.txt.)
-    *   `Get-Content -Path .\ship-flag.txt` (Muestra el contenido del archivo ship-flag.txt en el directorio actual.)
+    *   `Get-Content <nombreArchivo>.txt` (Muestra el contenido de `<nombreArchivo>.txt`.)
+    *   `Get-Content -Path .\<nombreArchivo>.txt` (Muestra el contenido del archivo `<nombreArchivo>.txt` en el directorio actual.)
 *   **`Get-ChildItem`**: Lista los archivos y directorios en una ubicación específica.
     *   **Descripción:** Similar al comando `ls` en Linux, muestra los elementos (archivos y directorios) en una ruta dada.
     *   `Get-ChildItem` (Lista los archivos y directorios en el directorio actual.)
-    *   `Get-ChildItem -Path C:\` (Lista los archivos y directorios en la unidad C:\.)
-    *   `Get-ChildItem -Path C:\Users\captain\Documents\captain-cabin\` (Lista los archivos y directorios en la ruta especificada.)
+    *   `Get-ChildItem -Path <ruta>` (Lista los archivos y directorios en la ruta especificada, por ejemplo `C:\Windows\`.)
 *   **`Get-Location`**: Muestra la ubicación actual.
     *   **Descripción:** Imprime el directorio actual.
     *   `Get-Location` (Muestra la ruta del directorio actual.)
 *   **`Set-Location`**: Cambia el directorio actual.
     *   **Descripción:** Similar al comando `cd` en Linux.
-    *   `Set-Location C:\Users\captain\Documents\captain-cabin\` (Cambia al directorio especificado.)
+    *   `Set-Location <ruta>` (Cambia al directorio especificado, por ejemplo `C:\Program Files\`.)
     *   `Set-Location ..` (Sube un nivel en la jerarquía de directorios.)
 *   **`Sort-Object`**: Ordena los objetos según una o más propiedades.
     *   **Descripción:** Ordena los objetos que recibe como entrada según las propiedades especificadas.
     *   `Get-ChildItem | Sort-Object Length` (Lista los archivos y directorios ordenados por tamaño, de menor a mayor.)
-    *   `Get-ChildItem -Path C:\Users\captain\Documents\captain-cabin\ | Sort-Object Length -Descending` (Lista los archivos y directorios en el directorio especificado, ordenados por tamaño de mayor a menor.)
-    *   `Get-ChildItem -Path C:\Users\captain\Documents\captain-cabin\ | Sort-Object Length | Select-Object -First 1` (Muestra el archivo o directorio más pequeño en el directorio especificado.)
+    *   `Get-ChildItem -Path <ruta> | Sort-Object Length -Descending` (Lista los archivos y directorios en el directorio especificado, ordenados por tamaño de mayor a menor.)
+    *   `Get-ChildItem -Path <ruta> | Sort-Object Length | Select-Object -First 1` (Muestra el archivo o directorio más pequeño en el directorio especificado.)
 *   **`Where-Object`**: Filtra los objetos según una condición.
     *   **Descripción:** Permite filtrar una colección de objetos basándose en una condición específica.
-    *   `Get-ChildItem | Where-Object -Property "Extension" -eq ".txt"` (Lista solo los archivos con la extensión ".txt" en el directorio actual.)
-    *   `Get-ChildItem | Where-Object -Property "Length" -gt 100` (Lista los archivos cuyo tamaño es mayor que 100 bytes.)
+    *   `Get-ChildItem | Where-Object -Property "Extension" -eq ".<extension>"` (Lista solo los archivos con la extensión `.extension` en el directorio actual.)
+    *   `Get-ChildItem | Where-Object -Property "Length" -gt <tamaño>` (Lista los archivos cuyo tamaño es mayor que `<tamaño>` bytes.)
     *   **Operadores de comparación:**
         *   `-eq`: Igual a.
         *   `-ne`: No igual a.
@@ -492,29 +491,28 @@ sha256sum <nombre_del_archivo>
         *   `-ge`: Mayor o igual que.
         *   `-lt`: Menor que.
         *   `-le`: Menor o igual que.
-        *   `-like`: Comodín (ej., `"*flag*"` para buscar nombres que contengan "flag").
+        *   `-like`: Comodín (ej., `"*<texto>*"` para buscar nombres que contengan `<texto>`).
 *   **`Select-Object`**: Selecciona propiedades específicas de los objetos.
     *   **Descripción:** Permite elegir qué propiedades de los objetos se mostrarán en la salida.
     *   `Get-ChildItem | Select-Object Name, Length` (Muestra solo el nombre y el tamaño de los archivos y directorios.)
     *   `Get-ChildItem | Select-Object Name, Mode` (Muestra solo el nombre y el modo de los archivos y directorios.)
 *   **`Get-Help`**: Muestra la ayuda de un comando.
     *   **Descripción:** Proporciona información sobre cómo utilizar un cmdlet, incluyendo su sintaxis, parámetros y ejemplos.
-    *   `Get-Help Get-Command` (Muestra la ayuda del cmdlet Get-Command.)
-    *   `Get-Help Sort-Object -Examples` (Muestra ejemplos de uso del cmdlet Sort-Object.)
-    *   `Get-Help Sort-Object -Full` (Muestra la ayuda completa del cmdlet Sort-Object.)
+    *   `Get-Help <comando>` (Muestra la ayuda del cmdlet `<comando>`.)
+    *   `Get-Help <comando> -Examples` (Muestra ejemplos de uso del cmdlet `<comando>`.)
+    *   `Get-Help <comando> -Full` (Muestra la ayuda completa del cmdlet `<comando>`.)
 *   **`Get-FileHash`**: Calcula el hash de un archivo.
     *   **Descripción:** Calcula el hash criptográfico de un archivo, útil para verificar su integridad.
-    *   `Get-FileHash -Path .\ship-flag.txt` (Calcula el hash del archivo ship-flag.txt en el directorio actual.)
-    *   `Get-FileHash -Path .\big-treasure.txt` (Calcula el hash del archivo big-treasure.txt en el directorio actual.)
+    *   `Get-FileHash -Path .\<archivo>.txt` (Calcula el hash del archivo `<archivo>.txt` en el directorio actual.)
 *   **`Get-Service`**: Obtiene información sobre los servicios.
     *   **Descripción:** Enumera los servicios instalados en el sistema, incluyendo su estado (en ejecución, detenido, etc.).
     *   `Get-Service` (Lista todos los servicios.)
-    *   `Get-Service | Where-Object -Property DisplayName -like '*merry*'` (Lista los servicios cuyo nombre para mostrar contiene "merry".)
+    *   `Get-Service | Where-Object -Property DisplayName -like '*<palabraClave>*'` (Lista los servicios cuyo nombre para mostrar contiene `<palabraClave>`.)
 *   **`Invoke-Command`**: Ejecuta comandos en un equipo remoto.
     *   **Descripción:** Permite ejecutar comandos o scripts en uno o más equipos remotos.
-    *   `Invoke-Command -ComputerName RoyalFortune -ScriptBlock { Get-Service }` (Ejecuta el cmdlet `Get-Service` en el equipo llamado RoyalFortune.)
-    *   `Invoke-Command -FilePath c:\\scripts\\test.ps1 -ComputerName Server01` (Ejecuta el script test.ps1 en el equipo llamado Server01.)
-    *   `Invoke-Command -ComputerName Server01 -Credential Domain01\\User01 -ScriptBlock { Get-Culture }` (Ejecuta el cmdlet `Get-Culture` en el equipo llamado Server01 utilizando las credenciales del usuario Domain01\User01.)
+    *   `Invoke-Command -ComputerName <nombreEquipo> -ScriptBlock { Get-Service }` (Ejecuta el cmdlet `Get-Service` en el equipo llamado `<nombreEquipo>`.)
+    *   `Invoke-Command -FilePath <rutaScript> -ComputerName <nombreEquipo>` (Ejecuta el script en la ruta especificada en el equipo llamado `<nombreEquipo>`.)
+    *   `Invoke-Command -ComputerName <nombreEquipo> -Credential <dominio>\<usuario> -ScriptBlock { Get-Culture }` (Ejecuta el cmdlet `Get-Culture` en el equipo llamado `<nombreEquipo>` utilizando las credenciales del usuario `<dominio>\<usuario>`.)
 
 ### Otros Comandos PowerShell
 
@@ -525,10 +523,10 @@ sha256sum <nombre_del_archivo>
 *   **`Get-Process`**: Obtiene información sobre los procesos en ejecución.
 *   **`Get-NetTCPConnection`**: Obtiene información sobre las conexiones TCP.
 *   **`Find-Module`**: Encuentra módulos disponibles en el PowerShell Gallery.
-    *   `Find-Module -name "*Active*"` (Busca módulos que contengan "Active" en su nombre.)
-    *   `Find-Module -name "Powershell*"` (Busca módulos que comiencen con "Powershell".)
+    *   `Find-Module -name "*<palabraClave>*"` (Busca módulos que contengan `<palabraClave>` en su nombre.)
+    *   `Find-Module -name "<nombreParcial>*"` (Busca módulos que comiencen con `<nombreParcial>`.)
 *   **`Install-Module`**: Instala un módulo desde el PowerShell Gallery.
-    *   `Install-Module -Name "powershellGet"` (Instala el módulo "powershellGet".)
+    *   `Install-Module -Name "<nombreModulo>"` (Instala el módulo `<nombreModulo>`.)
 *   **`Select-String`**: Busca texto en cadenas y archivos.
-    *   `Select-String -Pattern 'hat' -Path .\captain-hat.txt` (Busca la cadena "hat" en el archivo captain-hat.txt.)
-
+    *   `Select-String -Pattern '<patron>' -Path <archivo>` (Busca el patrón `<patron>` dentro del archivo `<archivo>`.)
+    *   `Get-Content <archivo> | Select-String -Pattern '<patron>'` (Lee el archivo y busca líneas que coincidan con el patrón `<patron>`.)
