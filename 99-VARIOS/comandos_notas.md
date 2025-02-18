@@ -258,3 +258,277 @@ Transforma direcciones para evitar ejecuciones accidentales. Ejemplo:
 ```bash
 sha256sum <nombre_del_archivo>
 ```
+
+## Sistemas Operativos
+
+### Windows
+
+#### Herramientas y Comandos
+
+*   **`shutdown`**: Apaga o reinicia el sistema.
+    *   **Descripción:** Permite apagar o reiniciar el equipo con diferentes opciones.
+    *   `shutdown /r /t 0` (Reinicia el equipo inmediatamente)
+    *   `shutdown /s /t 3600` (Apaga el equipo en una hora)
+*   **`netstat`**: Muestra las conexiones de red activas.
+    *   **Descripción:** Muestra las conexiones TCP activas, los puertos en los que el equipo está escuchando, las estadísticas de Ethernet, la tabla de enrutamiento IP, las estadísticas de IPv4 (para los protocolos IP, ICMP, UDP y TCP) y las estadísticas de IPv6 (para los protocolos IPv6, ICMPv6, UDPv6 y TCPv6).
+    *   `netstat -a` (Muestra todas las conexiones y puertos de escucha.)
+    *   `netstat -b` (Muestra el ejecutable involucrado en la creación de cada conexión o puerto de escucha. Requiere permisos de administrador.)
+*   **`msconfig`**: Utilidad de configuración del sistema.
+    *   **Descripción:** Abre la herramienta de configuración del sistema, que permite modificar las opciones de inicio, servicios, etc.
+    *   Simplemente escribir `msconfig` en la línea de comandos.
+    *   No tiene opciones de línea de comandos comunes, se usa principalmente de forma interactiva.
+*   **`xfreerdp`**: Cliente de escritorio remoto para sistemas Unix/Linux (pero mencionado aquí en el contexto de Windows).
+    *   **Descripción:** Permite conectarse a un servidor de escritorio remoto (RDP).
+    *   `xfreerdp /v:192.168.1.100` (Conecta a la dirección IP 192.168.1.100)
+    *   `xfreerdp /u:usuario /p:contraseña /v:servidor` (Conecta con un usuario y contraseña específicos.)
+*   **`tracert`**: Traza la ruta a un destino de red.
+    *   **Descripción:** Muestra la ruta que siguen los paquetes para llegar a un host remoto.
+    *   `tracert google.com` (Traza la ruta a google.com)
+    *   `tracert 192.168.1.1` (Traza la ruta a la dirección IP 192.168.1.1)
+*   **`tasklist`**: Muestra la lista de procesos en ejecución.
+    *   **Descripción:** Muestra una lista de las aplicaciones y procesos en ejecución en el sistema, permitiendo filtrar por diferentes criterios.
+    *   `tasklist /?` (Muestra la ayuda del comando tasklist.)
+    *   `tasklist /FI "imagename eq notepad.exe"` (Muestra todos los procesos cuyo nombre de imagen es notepad.exe)
+*   **`taskkill`**: Termina un proceso.
+    *   **Descripción:** Termina uno o más procesos en ejecución.
+    *   `taskkill /PID 1516` (Termina el proceso con el ID 1516)
+    *   `taskkill /IM notepad.exe` (Termina todos los procesos con el nombre de imagen notepad.exe)
+*   **`chkdsk`**: Comprueba el sistema de archivos y los volúmenes del disco en busca de errores y sectores defectuosos.
+    *   **Descripción:** Examina un disco y muestra un informe de estado. También puede corregir errores lógicos del sistema de archivos.
+    *   `chkdsk C:` (Comprueba la unidad C:)
+    *   `chkdsk D: /f` (Comprueba y corrige errores en la unidad D:)
+*   **`driverquery`**: Muestra una lista de los controladores de dispositivo instalados.
+    *   **Descripción:** Enumera todos los controladores de dispositivo instalados en el sistema, incluyendo información como el nombre del módulo, tipo de controlador, y fecha de enlace.
+    *   Simplemente escribir `driverquery` en la línea de comandos.
+    *   `driverquery /v` (Muestra información detallada.)
+*   **`sfc /scannow`**: Analiza los archivos del sistema en busca de corrupción y los repara si es posible.
+    *   **Descripción:** Analiza la integridad de todos los archivos protegidos del sistema y reemplaza las versiones incorrectas con las versiones correctas de Microsoft.
+    *   Simplemente escribir `sfc /scannow` en la línea de comandos (requiere privilegios de administrador).
+    *   `sfc /verifyonly` (Solo verifica la integridad, no repara.)
+*   **`more`**: Muestra archivos de texto.
+    *   **Descripción:** Muestra el contenido de un archivo de texto, permitiendo la visualización página por página.
+    *   `more file.txt` (Muestra el contenido de file.txt)
+    *   `some_command | more` (Envía la salida de un comando a `more` para visualizarla página por página)
+
+### Linux
+
+#### Permisos
+
+*   **`chmod`**: Modifica los permisos de archivos y directorios.
+    *   **Descripción:** Cambia los permisos de acceso a archivos y directorios, controlando quién puede leer, escribir o ejecutar.
+
+    *   **Modificación con notación octal:**
+        *   `chmod 664 fichero.txt` (Establece permisos de lectura y escritura para el propietario y el grupo, y solo lectura para otros.)
+        *   `chmod 755 archivo.sh` (Establece permisos de lectura, escritura y ejecución para el propietario, y lectura y ejecución para el grupo y otros.)
+
+    *   **Modificación con notación simbólica:**
+        *   `u` (usuario/propietario), `g` (grupo), `o` (otros), `a` (todos)
+        *   `+` (añade permiso), `-` (quita permiso), `=` (establece permiso)
+        *   `r` (lectura), `w` (escritura), `x` (ejecución)
+        *   `chmod a=r fichero.txt` (Establece permiso de solo lectura para todos.)
+        *   `chmod u+w,g+w fichero.txt` (Añade permiso de escritura al propietario y al grupo.)
+        *   `chmod o=rwx fichero.txt` (Establece permiso de lectura, escritura y ejecución para otros.)
+        *   `chmod g-w fichero.txt` (Quita permiso de escritura al grupo.)
+        *   `chmod u+x,g+wx,o+w fichero.txt` (Añade permiso de ejecución al propietario, lectura, escritura y ejecución al grupo, y escritura a otros.)
+
+*   **`umask`**: Establece la máscara de creación de archivos.
+    *   **Descripción:** Define los permisos que se *restringen* al crear nuevos archivos y directorios. Funciona sustrayendo los bits de la máscara de los permisos por defecto (666 para archivos, 777 para directorios). No encontré ejemplos claros en tus notas, pero es importante saber para qué sirve. Un valor común es `022`, que previene que el grupo y otros tengan permisos de escritura por defecto.
+*   **`sudo`**: Ejecuta un comando como superusuario.
+    *   **Descripción:** Permite a un usuario ejecutar comandos con los privilegios del superusuario (root).
+    *   `sudo apt update` (Actualiza la lista de paquetes disponibles.)
+    *   `sudo nano /etc/hosts` (Edita el archivo hosts con privilegios de administrador.)
+*   **`su`**: Cambia de usuario.
+    *   **Descripción:** Permite cambiar al usuario root o a otro usuario especificado.
+    *   `su` (Cambia al usuario root.)
+    *   `su usuario` (Cambia al usuario especificado.)
+*   **`root`**: Cuenta de superusuario con privilegios ilimitados. No es un comando en sí, sino el nombre de la cuenta.
+    *   **Descripción:** El usuario con los máximos privilegios en el sistema Linux.
+*   **`setuid`, `setgid`, `sticky bit`**: Mecanismos especiales de permisos.
+    *   **Descripción:** Estos son bits de permisos especiales que modifican la forma en que se ejecutan los archivos y se acceden a los directorios.
+        *   `setuid`: Cuando se establece en un ejecutable, este se ejecuta con los privilegios del *propietario* del archivo, no del usuario que lo ejecuta.
+        *   `setgid`: Cuando se establece en un ejecutable, este se ejecuta con los privilegios del *grupo* del archivo. Cuando se establece en un directorio, los nuevos archivos creados en ese directorio heredarán el grupo del directorio.
+        *   `sticky bit`: Cuando se establece en un directorio, solo el propietario del archivo, el propietario del directorio y el usuario root pueden eliminar o renombrar archivos dentro de ese directorio.
+    *   `chmod u+s archivo` (Establece el bit setuid en el archivo.)
+    *   `chmod g+s directorio` (Establece el bit setgid en el directorio.)
+    *   `chmod +t directorio` (Establece el sticky bit en el directorio.)
+
+### Linux Shells (Intérpretes de Comandos)
+
+*   **`echo $SHELL`**: Muestra el shell actual.
+    *   **Descripción:** Imprime en la terminal el shell que está actualmente en uso.
+    *   `echo $SHELL` (Muestra la ruta del shell actual, por ejemplo, `/bin/bash`)
+*   **`cat /etc/shells`**: Muestra la lista de shells disponibles en el sistema.
+    *   **Descripción:** Lista los shells instalados que están permitidos para ser usados por los usuarios del sistema.
+    *   `cat /etc/shells` (Muestra la lista de shells instalados.)
+*   **`chsh`**: Cambia el shell de inicio de sesión.
+    *   **Descripción:** Permite a un usuario cambiar su shell de inicio de sesión predeterminado.
+    *   `chsh -s /usr/bin/zsh` (Cambia el shell a Zsh.)
+    *   `chsh` (Cambia el shell, solicitando la nueva ruta al usuario.)
+*   Shells comunes:
+    *   **Bash (Bourne Again Shell):** El shell predeterminado en muchas distribuciones de Linux. Ofrece scripting, finalización con tabulador e historial de comandos.
+    *   **Fish (Friendly Interactive Shell):** Se centra en la facilidad de uso, con una sintaxis simple, corrección ortográfica automática y resaltado de sintaxis.
+    *   **Zsh (Z Shell):** Un shell moderno con finalización con tabulador avanzada, scripting y amplias opciones de personalización.
+
+| Característica           | Bash                                                                                                                                                                                                                                                                       | Fish                                                                                                                                                 | Zsh                                                                                                                                                                                                                                                                                       |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Nombre Completo          | Bourne Again Shell                                                                                                                                                                                                                                                        | Friendly Interactive Shell                                                                                                                            | Z Shell                                                                                                                                                                                                                                                                                     |
+| Scripting                | Ampliamente compatible, extensa documentación disponible.                                                                                                                                                                                                                 | Características de scripting limitadas.                                                                                                                | Excelente nivel de scripting, combina las capacidades tradicionales de Bash con características adicionales.                                                                                                                                                                                      |
+| Finalización con Tabulador | Básica.                                                                                                                                                                                                                                                                    | Avanzada, ofrece sugerencias basadas en comandos anteriores.                                                                                             | Muy extendible mediante plugins.                                                                                                                                                                                                                                                               |
+| Personalización          | Nivel básico.                                                                                                                                                                                                                                                              | Buena personalización a través de herramientas interactivas.                                                                                              | Personalización avanzada a través del framework oh-my-zsh.                                                                                                                                                                                                                                   |
+| Facilidad de Uso         | Menos amigable para el usuario, pero los usuarios están familiarizados con él.                                                                                                                                                                                               | El más amigable para el usuario.                                                                                                                      | Puede ser muy amigable para el usuario con la personalización adecuada.                                                                                                                                                                                                                       |
+| Resaltado de Sintaxis      | No disponible.                                                                                                                                                                                                                                                             | Incorporado.                                                                                                                                          | Se puede añadir con plugins.                                                                                                                                                                                                                                                                |
+
+### Linux Shell Scripting (Creación de Scripts)
+
+*   **Creación de un script:**
+    1.  Abrir un editor de texto (ej., `nano`).
+    2.  Crear un archivo con la extensión `.sh` (ej., `nano first_script.sh`).
+    3.  Añadir el shebang al principio del archivo: `#!/bin/bash` (indica el intérprete a utilizar).
+    4.  Escribir los comandos del script.
+    5.  Guardar el archivo.
+*   **Ejecución de un script:**
+    1.  Dar permisos de ejecución al script: `chmod +x nombre_del_script.sh`.
+    2.  Ejecutar el script: `./nombre_del_script.sh`. Es necesario usar `./` para indicar que el script se encuentra en el directorio actual.
+
+#### Elementos fundamentales de un script:
+
+*   **Variables:** Almacenan valores.
+    *   **Ejemplo:**
+
+    ```bash
+    #!/bin/bash
+    echo "Hola, ¿cómo te llamas?"
+    read name
+    echo "Bienvenido, $name"
+    ```
+
+*   **Bucles (Loops):** Repiten un bloque de código.
+    *   **Ejemplo:**
+
+    ```bash
+    #!/bin/bash
+    for i in {1..10}; do
+        echo $i
+    done
+    ```
+
+*   **Sentencias condicionales:** Ejecutan código según una condición.
+    *   **Ejemplo:**
+
+    ```bash
+    #!/bin/bash
+    echo "Por favor, introduce tu nombre:"
+    read name
+    if [ "$name" = "Stewart" ]; then
+        echo "Bienvenido, Stewart! Aquí está el secreto: THM_Script"
+    else
+        echo "¡Lo siento! No estás autorizado a acceder al secreto."
+    fi
+    ```
+
+*   **Comentarios:** Añaden explicaciones al código. Se inician con `#`.
+
+    ```bash
+    #!/bin/bash
+
+    # Preguntando al usuario que introduzca un valor.
+    echo "Por favor, introduce tu nombre:"
+
+    # Almacenando el valor introducido por el usuario en una variable.
+    read name
+
+    # Comprobando si el nombre que introdujo el usuario es igual a nuestro nombre requerido.
+    if [ "$name" = "Stewart" ]; then
+        # Si es igual al nombre requerido, se mostrará la siguiente línea.
+        echo "Bienvenido Stewart! Aquí está el secreto: THM_Script"
+    # Definiendo la frase que se mostrará si la condición falla.
+    else
+        echo "¡Lo siento! No estás autorizado a acceder al secreto."
+    fi
+    ```
+
+### PowerShell
+
+*   **`Get-Alias`**: Muestra la lista de alias definidos en la sesión actual.
+    *   **Descripción:** Recupera los alias disponibles. Un alias es un nombre alternativo (más corto) para un cmdlet o comando.
+    *   `Get-Alias` (Lista todos los alias.)
+    *   `Get-Alias -Name ls` (Muestra el cmdlet al que apunta el alias `ls`, que normalmente es `Get-ChildItem`.)
+*   **`Get-Command`**: Obtiene información sobre comandos (cmdlets, funciones, alias, etc.).
+    *   **Descripción:** Permite buscar y obtener detalles sobre comandos disponibles en PowerShell.
+    *   `Get-Command` (Lista todos los comandos disponibles.)
+    *   `Get-Command -CommandType "Cmdlet"` (Lista solo los cmdlets.)
+    *   `Get-Command -CommandType "Function"` (Lista solo las funciones.)
+    *   `Get-Command -Name "*Content"` (Busca cmdlets que contengan "Content" en su nombre.)
+    *   `Get-Command -Name "*Item*"` (Busca cmdlets que contengan "Item" en su nombre.)
+*   **`Get-Content`**: Obtiene el contenido de un archivo.
+    *   **Descripción:** Lee el contenido de un archivo y lo muestra en la consola.
+    *   `Get-Content file.txt` (Muestra el contenido de file.txt.)
+    *   `Get-Content -Path .\ship-flag.txt` (Muestra el contenido del archivo ship-flag.txt en el directorio actual.)
+*   **`Get-ChildItem`**: Lista los archivos y directorios en una ubicación específica.
+    *   **Descripción:** Similar al comando `ls` en Linux, muestra los elementos (archivos y directorios) en una ruta dada.
+    *   `Get-ChildItem` (Lista los archivos y directorios en el directorio actual.)
+    *   `Get-ChildItem -Path C:\` (Lista los archivos y directorios en la unidad C:\.)
+    *   `Get-ChildItem -Path C:\Users\captain\Documents\captain-cabin\` (Lista los archivos y directorios en la ruta especificada.)
+*   **`Get-Location`**: Muestra la ubicación actual.
+    *   **Descripción:** Imprime el directorio actual.
+    *   `Get-Location` (Muestra la ruta del directorio actual.)
+*   **`Set-Location`**: Cambia el directorio actual.
+    *   **Descripción:** Similar al comando `cd` en Linux.
+    *   `Set-Location C:\Users\captain\Documents\captain-cabin\` (Cambia al directorio especificado.)
+    *   `Set-Location ..` (Sube un nivel en la jerarquía de directorios.)
+*   **`Sort-Object`**: Ordena los objetos según una o más propiedades.
+    *   **Descripción:** Ordena los objetos que recibe como entrada según las propiedades especificadas.
+    *   `Get-ChildItem | Sort-Object Length` (Lista los archivos y directorios ordenados por tamaño, de menor a mayor.)
+    *   `Get-ChildItem -Path C:\Users\captain\Documents\captain-cabin\ | Sort-Object Length -Descending` (Lista los archivos y directorios en el directorio especificado, ordenados por tamaño de mayor a menor.)
+    *   `Get-ChildItem -Path C:\Users\captain\Documents\captain-cabin\ | Sort-Object Length | Select-Object -First 1` (Muestra el archivo o directorio más pequeño en el directorio especificado.)
+*   **`Where-Object`**: Filtra los objetos según una condición.
+    *   **Descripción:** Permite filtrar una colección de objetos basándose en una condición específica.
+    *   `Get-ChildItem | Where-Object -Property "Extension" -eq ".txt"` (Lista solo los archivos con la extensión ".txt" en el directorio actual.)
+    *   `Get-ChildItem | Where-Object -Property "Length" -gt 100` (Lista los archivos cuyo tamaño es mayor que 100 bytes.)
+    *   **Operadores de comparación:**
+        *   `-eq`: Igual a.
+        *   `-ne`: No igual a.
+        *   `-gt`: Mayor que.
+        *   `-ge`: Mayor o igual que.
+        *   `-lt`: Menor que.
+        *   `-le`: Menor o igual que.
+        *   `-like`: Comodín (ej., `"*flag*"` para buscar nombres que contengan "flag").
+*   **`Select-Object`**: Selecciona propiedades específicas de los objetos.
+    *   **Descripción:** Permite elegir qué propiedades de los objetos se mostrarán en la salida.
+    *   `Get-ChildItem | Select-Object Name, Length` (Muestra solo el nombre y el tamaño de los archivos y directorios.)
+    *   `Get-ChildItem | Select-Object Name, Mode` (Muestra solo el nombre y el modo de los archivos y directorios.)
+*   **`Get-Help`**: Muestra la ayuda de un comando.
+    *   **Descripción:** Proporciona información sobre cómo utilizar un cmdlet, incluyendo su sintaxis, parámetros y ejemplos.
+    *   `Get-Help Get-Command` (Muestra la ayuda del cmdlet Get-Command.)
+    *   `Get-Help Sort-Object -Examples` (Muestra ejemplos de uso del cmdlet Sort-Object.)
+    *   `Get-Help Sort-Object -Full` (Muestra la ayuda completa del cmdlet Sort-Object.)
+*   **`Get-FileHash`**: Calcula el hash de un archivo.
+    *   **Descripción:** Calcula el hash criptográfico de un archivo, útil para verificar su integridad.
+    *   `Get-FileHash -Path .\ship-flag.txt` (Calcula el hash del archivo ship-flag.txt en el directorio actual.)
+    *   `Get-FileHash -Path .\big-treasure.txt` (Calcula el hash del archivo big-treasure.txt en el directorio actual.)
+*   **`Get-Service`**: Obtiene información sobre los servicios.
+    *   **Descripción:** Enumera los servicios instalados en el sistema, incluyendo su estado (en ejecución, detenido, etc.).
+    *   `Get-Service` (Lista todos los servicios.)
+    *   `Get-Service | Where-Object -Property DisplayName -like '*merry*'` (Lista los servicios cuyo nombre para mostrar contiene "merry".)
+*   **`Invoke-Command`**: Ejecuta comandos en un equipo remoto.
+    *   **Descripción:** Permite ejecutar comandos o scripts en uno o más equipos remotos.
+    *   `Invoke-Command -ComputerName RoyalFortune -ScriptBlock { Get-Service }` (Ejecuta el cmdlet `Get-Service` en el equipo llamado RoyalFortune.)
+    *   `Invoke-Command -FilePath c:\\scripts\\test.ps1 -ComputerName Server01` (Ejecuta el script test.ps1 en el equipo llamado Server01.)
+    *   `Invoke-Command -ComputerName Server01 -Credential Domain01\\User01 -ScriptBlock { Get-Culture }` (Ejecuta el cmdlet `Get-Culture` en el equipo llamado Server01 utilizando las credenciales del usuario Domain01\User01.)
+
+### Otros Comandos PowerShell
+
+*   **`Get-ComputerInfo`**: Obtiene información sobre el equipo.
+*   **`Get-LocalUser`**: Obtiene información sobre los usuarios locales.
+*   **`Get-NetIPConfiguration`**: Obtiene información sobre la configuración de red IP.
+*   **`Get-NetIPAddress`**: Obtiene información sobre las direcciones IP.
+*   **`Get-Process`**: Obtiene información sobre los procesos en ejecución.
+*   **`Get-NetTCPConnection`**: Obtiene información sobre las conexiones TCP.
+*   **`Find-Module`**: Encuentra módulos disponibles en el PowerShell Gallery.
+    *   `Find-Module -name "*Active*"` (Busca módulos que contengan "Active" en su nombre.)
+    *   `Find-Module -name "Powershell*"` (Busca módulos que comiencen con "Powershell".)
+*   **`Install-Module`**: Instala un módulo desde el PowerShell Gallery.
+    *   `Install-Module -Name "powershellGet"` (Instala el módulo "powershellGet".)
+*   **`Select-String`**: Busca texto en cadenas y archivos.
+    *   `Select-String -Pattern 'hat' -Path .\captain-hat.txt` (Busca la cadena "hat" en el archivo captain-hat.txt.)
+
