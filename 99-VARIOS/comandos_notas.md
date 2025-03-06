@@ -281,7 +281,7 @@ sha256sum <nombre_del_archivo>
     *   **Descripción:** Permite conectarse a un servidor de escritorio remoto (RDP).
     *   `xfreerdp /v:192.168.1.100` (Conecta a la dirección IP 192.168.1.100)
     *   `xfreerdp /u:usuario /p:contraseña /v:servidor` (Conecta con un usuario y contraseña específicos.)
-    *   .xfreerdp3 /dynamic-resolution +clipboard /cert:ignore /v:<IP> /u:<user_name> /p:<password>
+    *   `xfreerdp3 /dynamic-resolution +clipboard /cert:ignore /v:<IP> /u:<user_name> /p:<password>`
 *   **`tracert`**: Traza la ruta a un destino de red.
     *   **Descripción:** Muestra la ruta que siguen los paquetes para llegar a un host remoto.
     *   `tracert google.com` (Traza la ruta a google.com)
