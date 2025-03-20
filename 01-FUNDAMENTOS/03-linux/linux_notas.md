@@ -55,6 +55,7 @@
 - `find /usr/bin -type f -name "*[[:digit:]]" 2>/dev/null`
 - `find / -type f -name "*_*_*.txt" 2>/dev/null`
 - `find /var/log/ -type f -not -name "*.log" 2>/dev/null`
+- `find . -type f -size 1033c 2>/dev/null`
 
 ### Filtros
 - `sort`: Ordena líneas de texto
