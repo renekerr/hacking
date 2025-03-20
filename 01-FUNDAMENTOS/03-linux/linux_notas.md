@@ -56,6 +56,7 @@
 - `find / -type f -name "*_*_*.txt" 2>/dev/null`
 - `find /var/log/ -type f -not -name "*.log" 2>/dev/null`
 - `find . -type f -size 1033c 2>/dev/null`
+- `find /your/path -type f -user myusernane -group mygroup -size 33c`
 
 ### Filtros
 - `sort`: Ordena líneas de texto
