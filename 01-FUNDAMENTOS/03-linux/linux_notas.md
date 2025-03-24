@@ -264,3 +264,43 @@ bash
 
 
 *   **./[script]**: Ejecutar script Bash.
+
+
+** Comandos para Revisar Uso de Espacio en Disco**
+
+| Comando       | Descripción                                                                      | Ejemplo           |
+|---------------|----------------------------------------------------------------------------------|-------------------|
+| `df -h`       | Muestra espacio libre por sistema de archivos (human-readable).               | `df -h`            |
+| `df -Th`      | Muestra espacio libre + tipo de sistema de archivos (human-readable).          | `df -Th`           |
+| `df -i`       | Muestra información sobre el uso de inodos.                                       | `df -i`            |
+| `du -sh <dir>`| Tamaño total de un directorio (human-readable).                               | `du -sh /home`     |
+| `du -h --max-depth=1 <dir>` | Tamaño de subdirectorios directos (human-readable).                             | `du -h --max-depth=1 /home`|
+| `btrfs filesystem df /` | Información detallada de uso de espacio en sistemas Btrfs (requiere Btrfs).   |  `sudo btrfs filesystem df /` |
+| `lsblk`       | Lista los dispositivos de bloque (discos, particiones).                        | `lsblk`           |
+
+**`less` Cheat Sheet**
+
+| Acción        | Comando | Descripción                                                                              |
+|----------------|---------|------------------------------------------------------------------------------------------|
+| **Navegación** |         |                                                                                          |
+| Avanzar Página   | `SPACE` | Moverse una ventana hacia adelante.                                                        |
+| Retroceder Página  | `b`       | Moverse una ventana hacia atrás.                                                        |
+| Avanzar Media Página | `d`       | Moverse media ventana hacia adelante.                                                     |
+| Retroceder Media Página| `u`       | Moverse media ventana hacia atrás.                                                     |
+| Línea Siguiente  | `j`       | Moverse una línea hacia adelante.                                                        |
+| Línea Anterior  | `k`       | Moverse una línea hacia atrás.                                                        |
+| Ir al Final     | `G`       | Ir al final del archivo.                                                                |
+| Ir al Inicio    | `g`       | Ir al principio del archivo.                                                             |
+| Salir          | `q` o `ZZ`| Salir del visor `less`.                                                                |
+| **Búsqueda**  |         |                                                                                          |
+| Buscar Siguiente  | `/pattern`| Buscar la siguiente ocurrencia de "pattern".                                                  |
+| Buscar Anterior  | `?pattern`| Buscar la ocurrencia anterior de "pattern".                                                  |
+| Siguiente Coincidencia| `n`       | Ir a la siguiente coincidencia (en la dirección de búsqueda).                                    |
+| Anterior Coincidencia| `N`       | Ir a la coincidencia anterior (en la dirección de búsqueda).                                    |
+| **Otros**      |         |                                                                                          |
+| Tail -f        | `F`       | Simular el comportamiento de `tail -f` (mostrar actualizaciones en tiempo real).                    |
+| Marcar Posición  | `ma`      | Marcar la posición actual con la letra 'a' (reemplaza 'a' con cualquier letra).                         |
+| Ir a Posición Marcada | `'a`     | Ir a la posición marcada con la letra 'a' (reemplaza 'a' con la letra de la marca).                  |
+| Filtrar Líneas  | `&pattern`| Mostrar solo las líneas que coincidan con "pattern".                                              |
+| Editar Archivo   | `v`       | Abrir el archivo en el editor de texto configurado.                                          |
+| Estadísticas     | `CTRL+G` | Mostrar el nombre del archivo, número de línea, byte y porcentaje del archivo que se está viendo. |
