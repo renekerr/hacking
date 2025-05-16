@@ -53,6 +53,7 @@ netdiscover   # para descubrir la IP de DC-1
 
 ![Netdiscover](https://github.com/user-attachments/assets/d4216175-c2d5-4b7e-b89d-759be256a5cd)
 ![Interfaz](https://github.com/user-attachments/assets/9b5164fd-fa1b-4199-be3b-f37e07b7f67f)
+
 ![IP Descubierta](https://github.com/user-attachments/assets/5445bfb9-fea9-47a4-9354-292de0fa9a34)
 
 Verificamos conectividad:
