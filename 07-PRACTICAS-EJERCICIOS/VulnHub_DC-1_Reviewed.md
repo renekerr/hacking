@@ -63,6 +63,7 @@ Descubrimos la máquina DC-1
 ![image](https://github.com/user-attachments/assets/5445bfb9-fea9-47a4-9354-292de0fa9a34)
 
 Comprobamos que la máquina está accesible: 
+
 ![image](https://github.com/user-attachments/assets/d5bcc1cb-3439-4e31-9bad-c72e4db1cff3)
 
 ## **Escaneo** de red (nmap) y enumeración.
