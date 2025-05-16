@@ -180,7 +180,11 @@ Este comando permite encontrar binarios SUID que podrían ser explotados para es
 
 find . -exec /bin/sh \; -quit
 
+
+Finalmente, realizamos un cat thefinalflag.txt
 ![image](https://github.com/user-attachments/assets/b47a0750-880a-4637-b8e8-6bbce24a4b30)
+
+
 
 
 
