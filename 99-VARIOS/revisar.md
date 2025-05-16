@@ -1288,3 +1288,778 @@ Este documento resume los conceptos y técnicas esenciales para obtener acceso r
 *   Intentar usar un método nativo (SSH, RDP, etc.) para acceder a la máquina.
 
 //////////////////////////////////////////////////////////////////////
+
+Resumen de Herramientas por Fase
+
+1. Reconocimiento:
+    - Nmap (nmap -p- -Pn -sV -T5 $TARGET)
+    - Modificación de `/etc/hosts` (echo “ip webname.com” | tee a /etc/hosts)
+2. Escaneo y Enumeración:
+    - Análisis del sitio web (parámetros vulnerables)
+    - whatweb
+3. Obtención de Acceso Inicial:
+    - Explotación de LFI
+    - Responder
+4. Escalada de Privilegios:
+    - John the Ripper
+    - john -w=/usr/share/wordlists/rockyou.txt hash_found.txt
+5. Movimiento Lateral y Acceso al Sistema:
+    - Evil-WinRM evil-winrm -i $TARGET -u administrator -p badminton
+6. Post-Explotación:
+    - Navegación por el sistema de archivos (comandos de Windows)
+  
+/////////////////////////////////////////////////////////////////////
+
+# Print working directory
+pwd
+
+# Open directory
+open /Users/renek/
+
+# List items within a directory
+ls 
+
+#Change directory
+cd Movies
+
+# Move one level up in the directory
+cd ..
+
+# Navigate to home directory ( alt + ñ )
+cd ~ 
+
+# Clear screen
+clear
+
+# Create a file
+touch sample_one.txt
+
+# Create a folder/directory
+mkdir sample_two.txt
+
+
+# Delete folder and it content
+rm -r sample_folder
+
+# Open a file
+open sample_one.txt 
+nano sample.txt 
+
+
+
+https://afsh4ck.gitbook.io/ethical-hacking-cheatsheet/sistemas-basicos/linux
+
+
+# List files and directories in the current directory
+ls
+
+# Listing items with various options
+ls -ltr
+ls -l  # Long format listing, showing file permissions, owner, group, size, and modification time
+ls -a  # Show all files, including hidden files (those starting with a dot)
+ls -R  # Recursively list subdirectories
+ls -1  # One file per line
+ls -m  # Comma-separated output
+ls -S  # Sort by file size
+ls -t  # Sort by modification time
+ls -r  # Reverse the sort order
+ls --sort=size
+ls --sort=time
+ls -F  # Append indicator (one of */=>@|) to entries
+ls --color=auto  # Colorize the output
+ls -h  # Print sizes in human-readable format (e.g., 1.2M instead of 1234567)
+ls -c  # Use time of file creation for sorting/listing
+ls -u  # Use time of last access for sorting/listing
+ls -d  # List directories themselves, not their contents
+ls -i  # Print the index number of each file
+ls -n  # List numeric UIDs and GIDs instead of names
+ls -p  # Append a slash (/) to directory entries
+
+# Count the number of items in the current directory
+ls | wc -l
+
+# Show the current working directory
+pwd
+
+# Change directory
+cd /path/to/directory
+
+# Move to the previous directory
+cd ..
+
+# Create a new directory
+mkdir new_directory
+
+# Create a new empty file
+touch new_file.txt
+
+# Copy files or directories
+cp source_file.txt destination_file.txt
+
+# Move or rename files or directories
+mv source_file.txt new_name.txt
+
+# Delete files or directories
+rm file_to_delete.txt
+
+# Display the contents of a file
+cat file.txt
+
+# Display the first lines of a file
+head file.txt
+
+# Display the last lines of a file
+tail file.txt
+
+# View paginated file content
+less file.txt
+
+# Display running processes
+ps
+
+# Terminate processes
+kill 1234
+
+# Show available disk space
+df -h
+
+# Show disk space usage of files and directories
+du -h --max-depth=1 /path/to/directory
+
+# Compress and decompress files and directories
+tar -czvf archive.tar.gz directory
+
+# Change file and directory permissions
+chmod 755 file.txt
+
+# Change file and directory owner
+chown user:group file.txt
+
+# Run commands with superuser privileges
+sudo command
+
+# Manage packages on Debian-based systems (or other distributions)
+sudo apt-get install package_name
+
+# Update the package list
+sudo apt-get update
+
+# Download files from the web
+wget http://example.com/file.zip
+
+# Connect to a remote server via SSH
+ssh user@server
+
+# Securely copy files between systems via SSH
+scp file.txt user@server:/path/to/destination
+
+# Show all system users
+cat /etc/passwd
+
+# Extract only the username from passwd
+cut -d: -f1 /etc/passwd
+
+# Show only human users
+awk -F: '$3 >= 1000 && $3 < 65534 {print $1}' /etc/passwd
+
+# Information about users and services
+getent passwd
+
+# Search patterns in text files
+grep "pattern" file.txt
+
+# Search files and directories
+find /path -name "filename"
+
+# See the type of a document
+file document.txt
+
+# Show real-time system information
+top
+
+# Reboot the server
+reboot
+
+# Information about the last system boot time
+who -b 
+
+# Display information about the users currently logged into the system
+who -a
+
+# Extended CPU information
+lscpu -e
+
+# System memory usage
+du -bhsc *
+
+# Check swap memory
+swapon -s
+
+# RAM usage
+free -h
+
+# CPU usage
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+
+# Database status for DB2
+ps -ef | grep db2sysc
+
+# Hardware information
+lscpu
+
+# Disk usage by directory
+du -sh /path/to/directory
+
+# List connected users
+w
+who
+
+# Calculate the disk usage of a directory and its immediate contents
+du -h --max-depth=1
+du -h --max-depth=1 /path/to/directory
+
+# View paginated file content
+less example_file.log
+
+# Move through the file using 'less'
+# Move forward one line: Down Arrow, Enter, e, or j
+# Move backward one line: Up Arrow, y, or k
+# Move forward one page: Space bar or Page Down
+# Move backward one page: Page Up or b
+# Scroll right: Right Arrow
+# Scroll left: Left Arrow
+# Jump to top of file: Home or g
+# Jump to end of file: End or G
+# Jump to a specific line: Type the line number and then hit "g"
+# Jump to a percentage through the file: Type the percentage and then hit "p" or "%"
+
+# Searching within 'less'
+# Search forward: Hit "/" and type your search, then press Enter
+# Search backward: Hit "?" and type your search, then press Enter
+# Go to next matching search item: n
+# Go to previous matching search item: N
+
+# Display the last 1000 lines of a file
+tail -n 1000 filename.txt 
+
+# Display the total number of lines and then print the last 1000 lines
+sed -n -e '$=' filename.txt | sed -e '1,1000p'
+
+# Open the file in 'less' and show the last 1000 lines
+less +F filename.txt 
+
+# Display the contents of the filesystem table
+cat /etc/fstab
+
+# Mount all filesystems defined in /etc/fstab
+mount -a
+
+
+///////////////////////////////////////////////////////////
+
+DB2
+
+# Memoria por Base de Datos
+db2pd -dbptnmem
+db2pd -db
+
+# Listar utulidades
+db2 list utilities show detail
+
+# Comprobar si db2 está levantado
+ps -ef | grep db2sysc
+ps -eo pid,lstart,cmd | grep db2sysc | awk '{print "DB2 está levantado desde:", $3, $4, $5, $6, $7}'
+
+
+# Conexión a la Instancia de Bases de Datos
+su - <usuario_instancia> # Nota: Para averiguar el usuario, usar `ps -ef | grep db2` o ir a `cd /home`. El usuario de DB2 que gestiona la instancia será aquel que tenga la carpeta `sqllib` en su directorio `/home`.
+
+# Conexión a una Base de Datos
+db2 connect to <database>
+
+# Directorio de Bases de Datos
+db2 list database directory
+
+# Bases de Datos Activas
+db2 list active databases
+
+# Activar/Desactivar Bases de Datos
+db2 activate db <database>
+db2 deactivate db <database>
+db2 terminate db <database>
+
+# Activar una Base de Datos
+db2 activate db <dbname> # Nota: Es importante ejecutar este comando al realizar una conexión. Si no se activa la base de datos manualmente, DB2 la activará automáticamente, lo que puede impactar en la respuesta de la query/conexión. Siempre se debe activar la base de datos, haya o no conexiones a la misma.
+
+# Eliminar una Sesión
+db2 kill <spid>
+
+
+///////////////////////////////////////////////
+
+# Python
+
+```python
+# TODO: Retrieve a list of all servers within our Organizational Unit (OU)
+# TODO: From this list, create a subset of all cluster objects
+# TODO: Create a separate subset from the remaining servers
+
+# Expected lists:
+#   - All servers in the OU
+#   - Cluster objects
+#   - Remaining servers
+
+# TODO: Retrieve servers that are already tracked and saved in the database
+# TODO: Compare the list of remaining servers with the tracked servers to identify untracked servers
+# TODO: Add the untracked list of servers to the database
+# TODO: Complete the necessary data fields and generate an INSERT statement for database entry
+
+# VARs
+# Variable suggestions for each step:
+
+# For the list of all servers in the Organizational Unit (OU)
+# all_servers_in_ou
+# servers_in_ou
+# ou_servers
+# ou_server_list
+# all_ou_servers
+# ou_server_inventory
+
+# For the list of cluster objects
+# cluster_servers
+# cluster_objects
+# cluster_server_list
+# clusters_in_ou
+# ou_clusters
+# cluster_inventory
+
+# For the list of remaining servers (excluding clusters)
+# remaining_servers
+# non_cluster_servers
+# standalone_servers
+# remaining_server_list
+# ou_non_clustered_servers
+# unclustered_servers
+
+# For servers already tracked in the database
+# tracked_servers
+# db_tracked_servers
+# existing_servers_in_db
+# saved_servers
+# tracked_server_list
+# database_tracked_servers
+
+# For the list of untracked servers
+# untracked_servers
+# new_servers_to_track
+# servers_to_add_to_db
+# unregistered_servers
+# untracked_server_list
+# untagged_servers
+
+# For the database insert statement
+# insert_statement
+# insert_query
+# db_insert_command
+# server_insert_statement
+# add_untracked_servers_query
+# insert_new_servers
+```
+
+Pasos para Conectarse a una Instancia de SQL Server Usando Python:
+
+1. Importación de Bibliotecas:
+    - Importar la biblioteca necesaria (pyodbc) para establecer la conexión y ejecutar consultas SQL.
+2. Definición de Parámetros de Conexión:
+    - Especificar los parámetros de conexión, como el controlador de SQL Server, el nombre del servidor, la base de datos y las credenciales.
+    - Configurar opciones adicionales, como la autenticación (conexión confiable o con usuario y contraseña).
+3. Establecimiento de la Conexión:
+    - Utilizar la función de conexión proporcionada por la biblioteca (pyodbc.connect()) con la cadena de conexión definida.
+    - Manejar posibles excepciones que puedan ocurrir durante el intento de conexión.
+4. Creación de un Cursor:
+    - Crear un objeto cursor a partir de la conexión establecida.
+    - El cursor permite ejecutar comandos SQL y recuperar resultados de las consultas.
+5. Ejecución de Consultas SQL:
+    - Utilizar el cursor para ejecutar consultas SQL que devuelvan información de interés (ejemplo: versión de SQL Server, lista de bases de datos).
+    - Recuperar los resultados de las consultas utilizando métodos como fetchone() o fetchall().
+6. Procesamiento de Resultados:
+    - Procesar los datos obtenidos de las consultas para extraer la información necesaria (como nombre de la base de datos, versión del servidor).
+    - Manejar casos especiales, como la ausencia de resultados o errores en las consultas.
+7. Cierre de la Conexión:
+    - Asegurarse de cerrar el cursor y la conexión a la base de datos una vez completadas todas las operaciones.
+    - Esto libera los recursos utilizados y previene posibles fugas de memoria.
+8. Manejo de Excepciones (opcional):
+    - Implementar un manejo de excepciones para capturar y gestionar cualquier error que pueda ocurrir durante la conexión o ejecución de consultas.
+
+- ~~Review disabled/enabled jobs in all servers~~
+- Add sp_who to all servers
+- ~~Update table responsible contacts~~
+- Change function to get user’s email
+- Organize and rename files and folders
+- Modules to perform different tasks
+
+echo "# python_db_management" >> [README.md](http://readme.md/)
+git init
+git add [README.md](http://readme.md/)
+git commit -m "first commit"
+git branch -M main
+git remote add origin [https://github.com/renekerr/python_db_management.git](https://github.com/renekerr/python_db_management.git)
+git push -u origin main
+
+### …or push an existing repository from the command line
+
+```
+git remote add origin https://github.com/renekerr/python_db_management.gitgit branch -M main
+git push -u origin main
+```
+
+Connecting to several SQL Server instances and executing queries in a modularized way involves creating reusable functions for establishing connections, executing queries, and handling results. Below is an example using Python with the pyodbc library, which is a common choice for interacting with SQL Server.
+
+First, ensure you have the pyodbc library installed:
+
+pip install pyodbc
+
+Here’s the Python code with a modularized structure:
+
+import pyodbc
+
+def create_connection(server, database, username, password):
+"""
+Create a database connection to a SQL Server instance.
+
+```python
+:param server: SQL Server address
+:param database: Database name
+:param username: Username
+:param password: Password
+:return: Connection object or None
+"""
+try:
+    connection_string = (
+        f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+        f"SERVER={server};"
+        f"DATABASE={database};"
+        f"UID={username};"
+        f"PWD={password}"
+    )
+    connection = pyodbc.connect(connection_string)
+    print(f"Connection to {server} successful")
+    return connection
+except pyodbc.Error as e:
+    print(f"Error connecting to {server}: {e}")
+    return None
+
+```
+
+def execute_query(connection, query):
+"""
+Execute a query on the connected database.
+
+```python
+:param connection: Connection object
+:param query: SQL query string
+:return: Query result or None
+"""
+try:
+    cursor = connection.cursor()
+    cursor.execute(query)
+    result = cursor.fetchall()
+    print(f"Query executed successfully: {query}")
+    return result
+except pyodbc.Error as e:
+    print(f"Error executing query: {e}")
+    return None
+
+```
+
+def close_connection(connection):
+"""
+Close the database connection.
+
+```python
+:param connection: Connection object
+"""
+try:
+    connection.close()
+    print("Connection closed")
+except pyodbc.Error as e
+
+```
+
+A SQL Server DBA (Database Administrator) can leverage Python to perform a wide range of tasks. Here are some specific examples:
+
+```
+1.	Database Connection and Query Execution:
+•	Use libraries like pyodbc, pymssql, or sqlalchemy to connect to SQL Server databases and execute queries.
+•	Automate routine queries, such as monitoring database health or retrieving reports.
+2.	Backup and Restore Operations:
+•	Write scripts to automate backup and restore processes using T-SQL commands executed via Python.
+•	Schedule these scripts to run at specified intervals using a task scheduler.
+3.	Database Monitoring and Alerts:
+•	Monitor database performance metrics (e.g., CPU usage, memory usage, I/O stats) and set up alerts for thresholds using Python scripts.
+•	Integrate with monitoring tools or services to send notifications (e.g., email, SMS) when certain conditions are met.
+4.	Data Migration and ETL Processes:
+•	Perform data extraction, transformation, and loading (ETL) using libraries like pandas for data manipulation.
+•	Automate data migration tasks between different databases or servers.
+5.	Database Maintenance:
+•	Automate maintenance tasks such as index rebuilding, statistics updates, and database integrity checks.
+•	Schedule maintenance scripts to run during off-peak hours.
+6.	Log Analysis and Reporting:
+•	Parse and analyze SQL Server logs to identify errors or performance issues.
+•	Generate reports from log data and send them via email or save them to a file.
+7.	Database Security and User Management:
+•	Automate the creation and management of database users and roles.
+•	Monitor and enforce security policies by scripting checks for unauthorized access or configuration changes.
+8.	Database Schema Changes:
+•	Use Python to manage and deploy database schema changes in a controlled and automated manner.
+•	Track schema changes using version control systems integrated with Python scripts.
+9.	Data Analysis and Visualization:
+•	Perform data analysis directly on SQL Server data using Python’s data analysis libraries.
+•	Create visualizations with libraries like matplotlib or seaborn and embed them in reports.
+10.	Integration with Other Tools:
+•	Integrate SQL Server with other systems and applications (e.g., web services, APIs) using Python.
+•	Automate workflows that involve multiple systems.
+
+```
+
+Here is a simple example of a Python script using pyodbc to connect to a SQL Server database, execute a query, and print the results:
+
+import pyodbc
+
+# Define connection parameters
+
+server = 'your_server'
+database = 'your_database'
+username = 'your_username'
+password = 'your_password'
+
+# Establish the connection
+
+conn = pyodbc.connect(f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}')
+
+# Create a cursor object
+
+cursor = conn.cursor()
+
+# Define a SQL query
+
+query = "SELECT TOP 10 * FROM your_table"
+
+# Execute the query
+
+cursor.execute(query)
+
+# Fetch and print the results
+
+rows = cursor.fetchall()
+for row in rows:
+print(row)
+
+# Close the connection
+
+cursor.close()
+conn.close()
+
+This script demonstrates connecting to a SQL Server database, executing a query, and fetching the results. Similar scripts can be extended to include more complex logic for various DBA tasks.
+
+---
+
+---
+
+---
+
+---
+
+To connect to a remote SQL Server and launch a PowerShell command using Python, you can use the following approach:
+
+```
+1.	Connect to the Remote SQL Server: Utilize libraries such as pyodbc or pymssql to establish a connection to the SQL Server.
+2.	Launch PowerShell Commands: Use the subprocess module to execute PowerShell commands from Python.
+
+```
+
+Here’s a step-by-step example demonstrating how to achieve this:
+
+Step 1: Connect to the Remote SQL Server
+
+First, you’ll need to establish a connection to your remote SQL Server using pyodbc.
+
+import pyodbc
+
+# Define connection parameters
+
+server = 'your_remote_server'
+database = 'your_database'
+username = 'your_username'
+password = 'your_password'
+
+# Establish the connection
+
+conn = pyodbc.connect(f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}')
+
+# Create a cursor object
+
+cursor = conn.cursor()
+
+# Define a SQL query
+
+query = "SELECT TOP 10 * FROM your_table"
+
+# Execute the query
+
+cursor.execute(query)
+
+# Fetch and print the results
+
+rows = cursor.fetchall()
+for row in rows:
+print(row)
+
+# Close the connection
+
+cursor.close()
+conn.close()
+
+Step 2: Launch PowerShell Command
+
+To launch a PowerShell command, you can use the subprocess module. Here’s an example of how to run a simple PowerShell command from Python:
+
+import subprocess
+
+# Define the PowerShell command
+
+powershell_command = 'Get-Process'
+
+# Execute the PowerShell command
+
+result = subprocess.run(['powershell', '-Command', powershell_command], capture_output=True, text=True)
+
+# Print the output of the command
+
+print(result.stdout)
+
+Combining Both Steps
+
+To combine both steps, you might want to execute a PowerShell command after performing some operations on the SQL Server. Here’s a full example:
+
+import pyodbc
+import subprocess
+
+# Define connection parameters
+
+server = 'your_remote_server'
+database = 'your_database'
+username = 'your_username'
+password = 'your_password'
+
+# Establish the connection
+
+conn = pyodbc.connect(f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}')
+
+# Create a cursor object
+
+cursor = conn.cursor()
+
+# Define a SQL query
+
+query = "SELECT TOP 10 * FROM your_table"
+
+# Execute the query
+
+cursor.execute(query)
+
+# Fetch and print the results
+
+rows = cursor.fetchall()
+for row in rows:
+print(row)
+
+# Close the connection
+
+cursor.close()
+conn.close()
+
+# Define the PowerShell command
+
+powershell_command = 'Get-Process'
+
+# Execute the PowerShell command
+
+result = subprocess.run(['powershell', '-Command', powershell_command], capture_output=True, text=True)
+
+# Print the output of the command
+
+print(result.stdout)
+
+Additional Considerations
+
+```
+•	Error Handling: Add appropriate error handling for database connection and PowerShell command execution.
+•	Security: Ensure that credentials are stored securely and not hard-coded in the script.
+•	Environment Configuration: Ensure that the necessary drivers for SQL Server (ODBC Driver 17 for SQL Server) and PowerShell are installed and configured on your machine.
+
+```
+
+Example with Error Handling
+
+Here’s an improved example with basic error handling:
+
+import pyodbc
+import subprocess
+
+def run_sql_query():
+try:
+# Define connection parameters
+server = 'your_remote_server'
+database = 'your_database'
+username = 'your_username'
+password = 'your_password'
+
+```python
+    # Establish the connection
+    conn = pyodbc.connect(f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}')
+    cursor = conn.cursor()
+
+    # Define a SQL query
+    query = "SELECT TOP 10 * FROM your_table"
+
+    # Execute the query
+    cursor.execute(query)
+
+    # Fetch and print the results
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+
+except pyodbc.Error as e:
+    print(f"Error connecting to SQL Server: {e}")
+finally:
+    if cursor:
+        cursor.close()
+    if conn:
+        conn.close()
+
+```
+
+def run_powershell_command():
+try:
+# Define the PowerShell command
+powershell_command = 'Get-Process'
+
+```python
+    # Execute the PowerShell command
+    result = subprocess.run(['powershell', '-Command', powershell_command], capture_output=True, text=True)
+
+    # Print the output of the command
+    print(result.stdout)
+except subprocess.SubprocessError as e:
+    print(f"Error executing PowerShell command: {e}")
+
+```
+
+if **name** == "**main**":
+run_sql_query()
+run_powershell_command()
+
+This example separates the SQL query and PowerShell command into functions and includes basic error handling.
+
