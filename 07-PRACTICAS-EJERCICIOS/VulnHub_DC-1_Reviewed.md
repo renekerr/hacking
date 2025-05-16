@@ -38,7 +38,8 @@ Archivo > Herramientas > Administrador de red > Redes NAT y creamos una nueva re
 
 ![image](https://github.com/user-attachments/assets/fe4b3f3b-b818-4b2e-ac77-cfc508431d23)
 
-Y ambas máquinas van a utilizar esta red NAT creada previamente: 
+Y ambas máquinas van a utilizar esta red NAT creada previamente:
+
 ![image](https://github.com/user-attachments/assets/f797b7a9-8bf9-45b9-8fd6-15f7d8d473cf)
 ![image](https://github.com/user-attachments/assets/2a17293e-8a4d-47d2-b7c2-fe206dc8f7be)
 
@@ -69,13 +70,16 @@ Comprobamos que la máquina está accesible:
 ## **Escaneo** de red (nmap) y enumeración.
 
 Ejecutaremos nmap  para escanear los puertos abiertos, detectar los servicios en ejecución y obtener información adicional, como el sistema operativo.
+
 ![image](https://github.com/user-attachments/assets/34146c67-11b3-4512-8536-b76f5f671931)
 
-En el puerto 80 tenemos corriendo Drupal y con whatweb confirmamos versión
+En el puerto 80 tenemos corriendo Drupal y con whatweb confirmamos versión:
+
 ![image](https://github.com/user-attachments/assets/b9c0fc4c-e269-40f1-9b6a-651217142999)
 
 
 Navegación por el puerto HTTPS (80) e identificación del CMS Drupal.
+
 ![image](https://github.com/user-attachments/assets/d6a7ac26-e1ca-4320-b0a7-9524d1dee144)
 
 Al buscar en Google ("drupal 7 site:exploit-db.com") o usar searchsploit, se encuentran múltiples vulnerabilidades documentadas de Drupal 7 en Exploit-DB, destacando especialmente Drupalgeddon. 
@@ -94,6 +98,7 @@ Usaremos el exploit 1, indicando la ip de la máquina objetivo
 ![image](https://github.com/user-attachments/assets/b6808ecc-5e97-486f-b168-2ba1c390eca7)
 
 Lanzamos un ls desde meterpreter y vemos que tenemos la primera bandera (flag1.txt)
+
 ![image](https://github.com/user-attachments/assets/51394ced-c002-42d2-a14b-9c7b631998d5)
 
 **Flag1**
@@ -117,9 +122,11 @@ Para obtener un bash del sistema, usamos el comando **shell** de Meterpreter y, 
 `python -c "import pty; pty.spawn('/bin/bash')"`
 
 Esto nos da acceso al prompt del sistema:
+
 ![image](https://github.com/user-attachments/assets/25cdfe8a-c8fd-4b6f-a8e0-e051f456ab12)
 
 Aprovechamos la información anterior para acceder  a la base de datos:
+
 ![image](https://github.com/user-attachments/assets/f6d1baa5-ce6e-413f-837b-d91f16b4941c)
 ![image](https://github.com/user-attachments/assets/bc1c9f0e-5a14-4977-9ed3-eeb8fa02695b)
 
@@ -127,14 +134,17 @@ Aprovechamos la información anterior para acceder  a la base de datos:
 Para obtener la contraseña del usuario admin podemos usar hashcat o john the ripper. 
 
 Sin embargo, con searchsploit descubrimos un exploit para crear un usuario administrador, que utilizaremos para acceder al CMS.
+
 ![image](https://github.com/user-attachments/assets/46a1aab8-1b36-41e4-88af-39106ef628e2)
 ![image](https://github.com/user-attachments/assets/94d5bedb-3317-4293-950d-1ca94a56b37b)
 ![image](https://github.com/user-attachments/assets/7376d17d-d4ed-44e2-99c1-c414b84ae73d)
 
 Probamos y comprobamos que podemos acceder:
+
 ![image](https://github.com/user-attachments/assets/d8764dba-030d-4ba4-af85-f1d9c2b2ebb1)
 
 Si vamos a ‘Content’ obtendremos la bandera 3 (flag3.txt)
+
 ![image](https://github.com/user-attachments/assets/d601f63b-04b3-4213-b57c-3cf23069627d)
 ![image](https://github.com/user-attachments/assets/78a5fd74-d4a5-48f8-b976-02702bcc3582)
 
@@ -145,6 +155,7 @@ Permisos especiales ayudarán a encontrar la **passwd**, pero necesitarás usar 
 Si consultamos `/etc/passwd` que contiene información sobre los usuarios del sistema, nos encontramos con que existe un usuario llamado flag4, y que además se encuentra en /home.
 
 Esto nos llevará a la bandera 4 (flag4.txt)
+
 ![image](https://github.com/user-attachments/assets/93fff86b-1d07-4541-add7-fdee7623cde6)
 
 **Flag4**
@@ -168,7 +179,10 @@ find / -perm -u=s 2>/dev/null
 Este comando permite encontrar binarios SUID que podrían ser explotados para escalar privilegios y obtener acceso de root. En la lista vemos que se encuentra find. Si consultamos GTFOBins, vemos que, por ejemplo, podemos usar el comando siguiente para escalar privilegios y obtener una shell como root
 
 find . -exec /bin/sh \; -quit
+
 ![image](https://github.com/user-attachments/assets/b47a0750-880a-4637-b8e8-6bbce24a4b30)
+
+
 
 
 
