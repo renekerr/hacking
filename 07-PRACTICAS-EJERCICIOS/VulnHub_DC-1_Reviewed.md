@@ -15,17 +15,17 @@ DC-1 es un laboratorio vulnerable diseñado específicamente para que principian
 
 - Conocimientos básicos de Linux.
 - Familiaridad con la línea de comandos de Linux.
-- Experiencia con herramientas básicas de pruebas de penetración, como las disponibles en **Kali Linux** o **Parrot Security OS**.
+- Experiencia con herramientas básicas de pruebas de penetración, como las disponibles en Kali Linux o Parrot Security OS.
 
 #### **Objetivo principal**
 
-El objetivo es encontrar y leer la bandera ubicada en el directorio de inicio de **root**. Aunque no es necesario ser root para acceder a la bandera, sí se requieren privilegios de root.
+El objetivo es encontrar y leer la bandera ubicada en el directorio de inicio de **root**. Aunque no es necesario iniciar sesión como root para acceder a la bandera, sí se requieren privilegios de root para ello.
 
 #### **Detalles adicionales**
 
 - **Número de banderas:** 5  
   Estas banderas contienen pistas útiles para principiantes.
-- **Opcional:** Los usuarios más avanzados pueden optar por saltar las banderas intermedias e ir directamente por root.
+- **Opcional:** Los usuarios más avanzados pueden optar por saltarse las banderas intermedias e ir directamente por root.
 
 ---
 
@@ -98,12 +98,12 @@ Buscamos `settings.php`:
 ### **Flag2**
 
 ```
-Los ataques de fuerza bruta y de diccionario no son las únicas formas de obtener acceso (y lo necesitará). Qué puede hacer con estas credenciales?
+Los ataques de fuerza bruta y de diccionario no son las únicas formas de obtener acceso (y lo necesitarás). ¿Qué puedes hacer con estas credenciales?
 ```
 
 ![Flag2 y base de datos](https://github.com/user-attachments/assets/9f28438c-5000-493a-b463-ec0ba295aec2)
 
-Elevamos a shell:
+Elevamos la sesión a shell:
 
 ![PTY Bash](https://github.com/user-attachments/assets/25cdfe8a-c8fd-4b6f-a8e0-e051f456ab12)
 
