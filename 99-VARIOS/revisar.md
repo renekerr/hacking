@@ -2814,6 +2814,12 @@ The password for the next level is stored in the file data.txt, which is a hexdu
 
 
 
+///
+Enumarating subdomains
+OSINT - SSL/TLS Certificateshttps://crt.sh/
+OSINT: site:*.domain.com -site:www.domain.com 
+./sublist3r.py
+DNS Bruteforce: dnsrecon
 
 
 
