@@ -1,4 +1,3 @@
-```markdown
 # RootMe - Guía Rápida de Pasos y Comandos
 IP: 10.10.XXX.XXX
 
