@@ -1,4 +1,4 @@
-# Sala RootMe - Guía Rápida de Pasos y Comandos
+# RootMe - Guía Rápida de Pasos y Comandos
 
 Pasos para completar la sala "RootMe" de TryHackMe.
 
