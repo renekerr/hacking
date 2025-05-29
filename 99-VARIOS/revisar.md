@@ -7,6 +7,7 @@ https://github.com/topics/osint
 https://github.com/The-Art-of-Hacking/h4cker
 https://github.com/edoardottt/awesome-hacker-search-engines
 https://github.com/Hack-with-Github/Awesome-Hacking
+https://github.com/BananaB0y/Most-Common-Passwords/blob/main/100000-passwords.txt
 ```
 
                                                                                                                                                                             
