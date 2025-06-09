@@ -57,6 +57,15 @@
 - `find /var/log/ -type f -not -name "*.log" 2>/dev/null`
 - `find . -type f -size 1033c 2>/dev/null`
 - `find /your/path -type f -user myusernane -group mygroup -size 33c`
+- `find ~/project/files/ -type f \( -name "*.txt" -o -name "*.pdf" \)`
+- `find ~/project/files -type f ! -name "*.txt"`
+- `find ~/project/files -type f \( -name "*.jpg" -o -name "*.png" \) -size +0c`
+- `find ~/project/files -type f \( -name "*.jpg" -o -name "*.png" \) -size +0c`
+- `find ~/project/files/documents -type f ! -name "*.pdf"`
+- `find ~/project/files/documents -type f ! -name "*.pdf"`
+- `find ~/project/files/images -type f \( -name "*.jpg" -o -name "*.png" \) \( -size 0 -o -size +1k \)`
+- 
+
 
 ### Filtros
 - `sort`: Ordena líneas de texto
